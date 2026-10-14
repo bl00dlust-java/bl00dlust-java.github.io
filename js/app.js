@@ -183,3 +183,22 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   panel.querySelector("#kernel-close").focus();
  });
 })();
+
+
+/* Desktop-only subtle blue cursor trail */
+(()=> {
+ if(window.matchMedia("(min-width: 761px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches){
+  let last=0;
+  window.addEventListener("pointermove",e=>{
+   const now=performance.now();
+   if(now-last<24)return;
+   last=now;
+   const dot=document.createElement("span");
+   dot.className="cursor-trail";
+   dot.style.left=e.clientX+"px";
+   dot.style.top=e.clientY+"px";
+   document.body.appendChild(dot);
+   dot.addEventListener("animationend",()=>dot.remove(),{once:true});
+  },{passive:true});
+ }
+})();
