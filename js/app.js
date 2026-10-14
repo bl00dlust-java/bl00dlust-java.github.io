@@ -88,7 +88,7 @@ $("backLesson").addEventListener("click",()=>{if(step>0){step--;showStep()}});
 $("closeLesson").addEventListener("click",()=>$("lessonDialog").close());
 $("lessonDialog").addEventListener("click",e=>{if(e.target===$("lessonDialog"))$("lessonDialog").close()});
 }
-$("theme").addEventListener("click",(event)=>{const root=document.documentElement;const rect=event.currentTarget.getBoundingClientRect();const x=event.clientX||rect.left+rect.width/2;const y=event.clientY||rect.top+rect.height/2;const oldBg=getComputedStyle(root).getPropertyValue("--bg").trim()||(state.theme==="light"?"#f7f4f1":"#101010");root.style.setProperty("--wave-x",x+"px");root.style.setProperty("--wave-y",y+"px");root.style.setProperty("--wave-from",oldBg);const nextTheme=state.theme==="light"?"dark":"light";root.style.setProperty("--wave-to",nextTheme==="light"?"#f7f4f1":"#101010");root.classList.remove("theme-wave");void root.offsetWidth;state.theme=nextTheme;theme();root.classList.add("theme-wave");window.setTimeout(()=>root.classList.remove("theme-wave"),1000);save()});
+$("theme").addEventListener("click",()=>{const root=document.documentElement;root.classList.remove("theme-switching");void root.offsetWidth;state.theme=state.theme==="light"?"dark":"light";theme();root.classList.add("theme-switching");window.setTimeout(()=>root.classList.remove("theme-switching"),720);save()});
 design();liteMode();$("liteToggle").addEventListener("click",()=>{state.lite=!state.lite;liteMode();save()});
 if ($("print")) $("print").addEventListener("click",()=>window.print());
 theme();if ($("modules")) renderModules();
