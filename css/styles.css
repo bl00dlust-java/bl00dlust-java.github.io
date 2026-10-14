@@ -432,3 +432,68 @@ main>.hero{animation:heroEnter .9s .12s cubic-bezier(.16,1,.3,1) both}
 @keyframes diamondPulse{0%,100%{filter:drop-shadow(0 0 2px rgba(255,106,42,.2))}50%{filter:drop-shadow(0 0 7px rgba(255,106,42,.8))}}
 @keyframes logoHalo{0%{transform:scale(.82);opacity:.65}100%{transform:scale(1.35);opacity:0}}
 @media(prefers-reduced-motion:reduce){body:before,body:after,.brand,.brand .logo,.brand .logo:before,.brand .logo:after,.header nav,.header>#theme,main>.hero{animation:none!important}}
+
+
+/* BLUE NEON REDESIGN — final override */
+:root{
+ color-scheme:dark;
+ --bg:#07111f!important;--panel:#0d1b2e!important;--panel2:#122641!important;
+ --text:#eaf4ff!important;--muted:#9bb2cc!important;--line:rgba(82,157,255,.22)!important;
+ --accent:#4da3ff!important;--accent2:#8bc5ff!important;--glow:rgba(49,137,255,.24)!important;
+ --shadow:0 22px 65px rgba(0,0,0,.36)!important;
+ --blue-neon:#53a9ff;--blue-soft:rgba(57,145,255,.16)
+}
+:root[data-theme="light"]{
+ color-scheme:light;
+ --bg:#f2f7ff!important;--panel:#fff!important;--panel2:#e6f0ff!important;
+ --text:#122541!important;--muted:#536b8a!important;--line:rgba(30,100,190,.2)!important;
+ --accent:#176fe5!important;--accent2:#3e91ff!important;--glow:rgba(32,119,240,.15)!important;
+ --shadow:0 18px 55px rgba(26,75,140,.1)!important
+}
+body{position:relative;background-color:var(--bg)!important;background-image:linear-gradient(rgba(65,145,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(65,145,255,.045) 1px,transparent 1px),radial-gradient(ellipse at 50% 0%,rgba(31,116,230,.17),transparent 58%)!important;background-size:42px 42px,42px 42px,100% 100%!important}
+body:before{content:"";display:block;position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:.68!important;background:radial-gradient(ellipse 48% 17% at 50% 50%,transparent 96%,rgba(67,157,255,.32) 98%,transparent 100%),radial-gradient(ellipse 38% 32% at 50% 50%,transparent 96%,rgba(88,181,255,.21) 98%,transparent 100%),radial-gradient(ellipse at 18% 25%,rgba(35,112,255,.16),transparent 30%),radial-gradient(ellipse at 82% 70%,rgba(42,177,255,.12),transparent 28%)!important;animation:blueOrbitDrift 24s ease-in-out infinite alternate!important}
+body:after{content:"";display:block;position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4!important;background:radial-gradient(circle at 12% 22%,#8bc5ff 0 1px,transparent 2px),radial-gradient(circle at 73% 16%,#4da3ff 0 1.5px,transparent 3px),radial-gradient(circle at 86% 72%,#b5ddff 0 1px,transparent 2px),radial-gradient(circle at 31% 83%,#4da3ff 0 1.5px,transparent 3px),radial-gradient(circle at 55% 46%,#fff 0 .7px,transparent 1.7px)!important;animation:blueStars 4.8s ease-in-out infinite alternate!important}
+body>*{position:relative;z-index:1}
+@keyframes blueOrbitDrift{0%{transform:rotate(-7deg) scale(.96)}50%{transform:rotate(4deg) scale(1.035)}100%{transform:rotate(10deg) scale(.98)}}
+@keyframes blueStars{from{opacity:.16;filter:blur(0)}to{opacity:.55;filter:blur(.7px)}}
+.brand{gap:10px!important;font-size:12px!important;letter-spacing:.12em!important;color:var(--text)!important;animation:brandTextIn .9s .12s cubic-bezier(.16,1,.3,1) both!important}
+.brand .logo{display:grid!important;place-items:center;width:38px!important;height:38px!important;flex:0 0 38px!important;font-size:0!important;border:1px solid rgba(83,169,255,.72)!important;border-radius:12px!important;background:linear-gradient(145deg,rgba(56,143,255,.22),var(--panel))!important;box-shadow:0 0 24px rgba(49,137,255,.2),inset 0 0 16px rgba(49,137,255,.12)!important;animation:logoBlueIn .85s cubic-bezier(.16,1,.3,1) both!important}
+.brand .logo:before{content:""!important;display:block;width:13px;height:13px;border:2px solid #68b5ff;transform:rotate(45deg);box-shadow:0 0 13px rgba(83,169,255,.7);animation:blueDiamondPulse 3.2s ease-in-out infinite}
+.brand .logo:after{content:""!important;position:absolute;inset:-5px;border:1px solid rgba(83,169,255,.35);border-radius:15px;animation:blueHalo 2.8s ease-out infinite}
+.brand .brand-name{display:inline-block;color:var(--text)!important;font-weight:900;letter-spacing:.14em;text-shadow:0 0 20px rgba(83,169,255,.18)}
+.brand .brand-name em{font-style:normal;color:var(--accent)!important}
+@keyframes brandTextIn{from{opacity:0;transform:translateY(12px);filter:blur(5px);letter-spacing:.22em}to{opacity:1;transform:translateY(0);filter:blur(0);letter-spacing:.12em}}
+@keyframes logoBlueIn{from{opacity:0;transform:rotate(-50deg) scale(.45);filter:blur(4px)}to{opacity:1;transform:rotate(0) scale(1);filter:blur(0)}}
+@keyframes blueDiamondPulse{0%,100%{filter:drop-shadow(0 0 2px rgba(83,169,255,.25))}50%{filter:drop-shadow(0 0 9px rgba(83,169,255,.95))}}
+@keyframes blueHalo{0%{transform:scale(.78);opacity:.75}100%{transform:scale(1.38);opacity:0}}
+.header,.header nav,.header button{border-color:var(--line)!important}
+.header{background:color-mix(in srgb,var(--bg) 82%,transparent)!important}
+nav a:hover,.header button:hover,.order-controls button:hover{color:var(--accent)!important;border-color:var(--accent)!important}
+.hero-shell{border-color:rgba(83,169,255,.4)!important;background:linear-gradient(130deg,rgba(5,17,34,.98),rgba(10,31,58,.96))!important;box-shadow:0 25px 90px rgba(0,0,0,.3),inset 0 0 70px rgba(37,127,255,.07)!important}
+:root[data-theme="light"] .hero-shell{background:linear-gradient(130deg,#fff,#e9f3ff)!important}
+.hero-navline{border-bottom-color:rgba(83,169,255,.2)!important}
+.hero-navline .eyebrow{color:#9bcaff!important}
+.status-dot{background:#53a9ff!important;box-shadow:0 0 12px #53a9ff!important}
+.hero-top-link{border-color:rgba(83,169,255,.6)!important}
+.hero-top-link span,.hero-top-link:hover{color:var(--accent)!important}
+.hero-top-link:hover{background:rgba(83,169,255,.12)!important;box-shadow:0 0 22px rgba(83,169,255,.12)}
+.hero .art{border-color:rgba(83,169,255,.38)!important;background:radial-gradient(ellipse at 50% 55%,rgba(39,133,255,.2),transparent 47%),linear-gradient(145deg,#10233e,#081321)!important;box-shadow:inset 0 0 50px rgba(49,137,255,.09),0 18px 45px rgba(0,0,0,.24)!important}
+.hero .art:before,.hero .art:after{border-color:rgba(83,169,255,.36)!important;box-shadow:0 0 40px rgba(49,137,255,.1)!important}
+.orbit-animation i,.orbit-core{border-color:#53a9ff!important;color:#8bc5ff!important;box-shadow:0 0 25px rgba(49,137,255,.28)!important}
+.eyebrow,.hero h1 em,.cta h2 em,.section-head h2 span,.art-label,.feature-icon,.illustration{color:var(--accent)!important}
+.button,.btn,.hero .button{background:linear-gradient(110deg,#267de8,#59b1ff)!important;color:#06162b!important;border-color:#53a9ff!important;box-shadow:0 8px 26px rgba(49,137,255,.25)!important}
+.button:hover,.btn:hover,.hero .button:hover{background:linear-gradient(110deg,#4b9bff,#9bd1ff)!important;box-shadow:0 0 0 1px rgba(130,195,255,.4),0 12px 38px rgba(49,137,255,.38)!important}
+.button.light{background:#e7f2ff!important;color:#12325a!important;border-color:#b5d7ff!important}
+.cta{background:linear-gradient(120deg,#103f79,#0b1d36)!important;border-color:rgba(83,169,255,.3)!important}
+.cta .eyebrow,.cta h2 em{color:#b7dcff!important}
+.card,.cards article,.module-card,.lesson-card,.panel,.hero-feature{border-color:var(--line)}
+a:not(.button):not(.brand),button,.hero-top-link,.card,.cards article,.module-card,.lesson-card,.order-controls button{transition:color .25s,background-color .25s,border-color .25s,box-shadow .25s,transform .25s}
+a:not(.button):not(.brand):hover,button:hover{filter:drop-shadow(0 0 7px rgba(83,169,255,.28))}
+.cards article:hover,.card:hover,.module-card:hover,.lesson-card:hover{border-color:rgba(83,169,255,.55)!important;box-shadow:0 14px 40px rgba(24,104,213,.13)!important}
+:root[data-theme="light"] body:before{opacity:.28!important}
+:root[data-theme="light"] body:after{opacity:.16!important}
+.cursor-trail{position:fixed!important;z-index:99999!important;width:7px;height:7px;border-radius:50%;pointer-events:none!important;background:#75bbff;box-shadow:0 0 10px #53a9ff,0 0 22px rgba(49,137,255,.55);transform:translate(-50%,-50%);animation:cursorTrailFade .62s ease-out forwards}
+@keyframes cursorTrailFade{0%{opacity:.72;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.1)}}
+@media(max-width:760px){.cursor-trail{display:none!important}}
+@media(hover:none),(prefers-reduced-motion:reduce){.cursor-trail{display:none!important}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.brand,.brand .logo,.brand .logo:before,.brand .logo:after{animation:none!important}}
