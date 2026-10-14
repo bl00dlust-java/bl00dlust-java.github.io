@@ -544,3 +544,86 @@ body:after{background:radial-gradient(circle at 12% 22%,#9ee8ff 0 1px,transparen
 @keyframes dataSweep{0%{transform:translateX(-38%)}100%{transform:translateX(38%)}}@keyframes nodePulse{from{opacity:.45}to{opacity:1}}@keyframes coreFrame{from{transform:rotate(45deg) scale(.74)}to{transform:rotate(405deg) scale(.74)}}@keyframes coreRing{from{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes coreBreathe{0%,100%{transform:scale(.96);box-shadow:0 0 18px rgba(0,142,255,.25),inset 0 0 20px rgba(0,142,255,.12)}50%{transform:scale(1.04);box-shadow:0 0 34px rgba(0,142,255,.48),inset 0 0 28px rgba(0,142,255,.2)}}@keyframes nodeOrbit{0%{transform:rotate(0) translateX(72px)}100%{transform:rotate(360deg) translateX(72px)}}
 @media(max-width:760px){.hero .art{min-height:220px!important;height:220px!important}.hero .art .orbit-animation{width:150px!important;height:150px!important}.hero .art .orbit-animation i{animation-duration:12s!important}}
 @media(prefers-reduced-motion:reduce){.hero .art,.hero .art:before,.hero .art:after,.hero .art .orbit-animation:before,.hero .art .orbit-animation:after,.hero .art .orbit-core,.hero .art .orbit-animation i{animation:none!important}}:root[data-lite="true"] .hero .art,:root[data-lite="true"] .hero .art:before,:root[data-lite="true"] .hero .art:after,:root[data-lite="true"] .hero .art .orbit-animation:before,:root[data-lite="true"] .hero .art .orbit-animation:after,:root[data-lite="true"] .hero .art .orbit-core,:root[data-lite="true"] .hero .art .orbit-animation i{animation:none!important}
+
+
+/* Restore subtle orbital motion to the hero background; redesign only the right-side illustration */
+.hero-shell{
+  background-image:
+    radial-gradient(ellipse at 82% 42%,transparent 0 150px,rgba(49,151,255,.09) 151px,transparent 153px),
+    radial-gradient(ellipse at 82% 42%,transparent 0 205px,rgba(49,151,255,.065) 206px,transparent 208px),
+    radial-gradient(ellipse at 82% 42%,transparent 0 260px,rgba(49,151,255,.045) 261px,transparent 263px),
+    linear-gradient(130deg,#06172b,#07182b 55%,#041225)!important;
+  background-size:100% 100%!important;
+}
+.hero-shell:after{
+  content:"";position:absolute;right:7%;top:9%;width:390px;height:390px;border:1px solid rgba(64,160,255,.13);
+  border-radius:50%;pointer-events:none;opacity:.7;z-index:0;
+  box-shadow:0 0 45px rgba(0,130,255,.045),inset 0 0 45px rgba(0,130,255,.035);
+  animation:backgroundOrbit 36s linear infinite;
+}
+.hero-grid,.hero-navline,.hero-bottom{position:relative;z-index:1}
+@keyframes backgroundOrbit{from{transform:rotate(0deg) scaleX(.72)}to{transform:rotate(360deg) scaleX(.72)}}
+
+/* New right-side animation: a scanning cyber shield, not orbit rings */
+.hero .art{
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  min-height:340px!important;border:1px solid rgba(65,166,255,.32)!important;border-radius:22px!important;
+  background:
+    linear-gradient(rgba(45,147,255,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(45,147,255,.055) 1px,transparent 1px),
+    radial-gradient(ellipse at 50% 52%,rgba(0,128,255,.2),transparent 56%),
+    linear-gradient(145deg,#061a32,#030d1c 78%)!important;
+  background-size:26px 26px,26px 26px,100% 100%,100% 100%!important;
+  animation:shieldPanelGlow 6s ease-in-out infinite alternate!important;
+}
+.hero .art:before{
+  content:"";position:absolute!important;inset:0!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;transform:none!important;
+  background:linear-gradient(180deg,transparent 0%,rgba(38,155,255,.02) 40%,rgba(55,177,255,.24) 50%,rgba(38,155,255,.02) 60%,transparent 100%)!important;
+  animation:shieldScan 4.5s ease-in-out infinite!important;z-index:1!important;pointer-events:none;
+}
+.hero .art:after{
+  content:"";position:absolute!important;inset:12%!important;width:auto!important;height:auto!important;border:1px solid rgba(73,170,255,.28)!important;border-radius:50%!important;transform:scaleX(.78)!important;
+  background:radial-gradient(circle at 50% 50%,transparent 0 46%,rgba(60,160,255,.04) 47%,transparent 48%)!important;
+  box-shadow:0 0 34px rgba(0,126,255,.09),inset 0 0 34px rgba(0,126,255,.06)!important;
+  animation:shieldRadar 18s linear infinite!important;z-index:0!important;pointer-events:none;
+}
+.hero .art .orbit-animation{
+  position:relative!important;z-index:2!important;width:clamp(150px,22vw,220px)!important;height:clamp(150px,22vw,220px)!important;
+  display:grid!important;place-items:center!important;
+}
+.hero .art .orbit-animation:before{
+  content:"";position:absolute;inset:8%!important;border:1px solid rgba(67,172,255,.5)!important;border-radius:28%!important;
+  transform:rotate(45deg)!important;box-shadow:0 0 35px rgba(0,128,255,.13),inset 0 0 28px rgba(0,128,255,.08)!important;
+  animation:shieldDiamond 12s linear infinite!important;
+}
+.hero .art .orbit-animation:after{
+  content:"";position:absolute;inset:20%!important;border:1px dashed rgba(89,190,255,.45)!important;border-radius:50%!important;
+  transform:scaleX(.78)!important;animation:shieldRadar 14s linear infinite reverse!important;
+}
+.hero .art .orbit-core{
+  display:grid!important;place-items:center!important;position:relative!important;z-index:3!important;
+  width:88px!important;height:100px!important;border:0!important;border-radius:0!important;
+  clip-path:polygon(50% 0,91% 16%,86% 65%,50% 100%,14% 65%,9% 16%)!important;
+  color:#c3e9ff!important;font-size:48px!important;
+  background:linear-gradient(145deg,rgba(35,139,255,.55),rgba(3,25,51,.95))!important;
+  box-shadow:none!important;filter:drop-shadow(0 0 14px rgba(45,159,255,.8))!important;
+  animation:shieldCorePulse 3.4s ease-in-out infinite!important;
+}
+.hero .art .orbit-animation i{
+  position:absolute!important;z-index:4!important;top:calc(50% - 3px)!important;left:calc(50% - 3px)!important;
+  width:6px!important;height:6px!important;border:0!important;border-radius:50%!important;background:#9cddff!important;
+  box-shadow:0 0 13px #53a9ff!important;transform-origin:3px 3px!important;animation:shieldSignal 6s linear infinite!important;
+}
+.hero .art .orbit-animation i:nth-of-type(2){animation-duration:8s!important;animation-delay:-2s!important}
+.hero .art .orbit-animation i:nth-of-type(3){animation-duration:10s!important;animation-delay:-4s!important}
+.hero .art .orbit-animation i:nth-of-type(4){animation-duration:7s!important;animation-delay:-1s!important}
+.hero .art .art-label{position:relative;z-index:3;color:#8bcaff!important;letter-spacing:.2em!important}
+@keyframes shieldPanelGlow{from{box-shadow:inset 0 0 35px rgba(0,117,255,.06),0 18px 45px rgba(0,0,0,.2)}to{box-shadow:inset 0 0 65px rgba(0,117,255,.16),0 18px 45px rgba(0,0,0,.2)}}
+@keyframes shieldScan{0%,100%{transform:translateY(-48%)}50%{transform:translateY(48%)}}
+@keyframes shieldRadar{from{transform:rotate(0deg) scaleX(.78)}to{transform:rotate(360deg) scaleX(.78)}}
+@keyframes shieldDiamond{from{transform:rotate(45deg)}to{transform:rotate(405deg)}}
+@keyframes shieldCorePulse{0%,100%{transform:scale(.96);filter:drop-shadow(0 0 8px rgba(45,159,255,.55))}50%{transform:scale(1.05);filter:drop-shadow(0 0 22px rgba(45,159,255,.95))}}
+@keyframes shieldSignal{from{transform:rotate(0deg) translateX(76px)}to{transform:rotate(360deg) translateX(76px)}}
+@media(max-width:760px){.hero-shell:after{right:-90px;top:20%;width:300px;height:300px}.hero .art{min-height:220px!important;height:220px!important}.hero .art .orbit-animation{width:150px!important;height:150px!important}.hero .art .orbit-animation i{animation-duration:10s!important}}
+@media(prefers-reduced-motion:reduce){.hero-shell:after,.hero .art,.hero .art:before,.hero .art:after,.hero .art .orbit-animation:before,.hero .art .orbit-animation:after,.hero .art .orbit-core,.hero .art .orbit-animation i{animation:none!important}}
+:root[data-lite="true"] .hero-shell:after,:root[data-lite="true"] .hero .art,:root[data-lite="true"] .hero .art:before,:root[data-lite="true"] .hero .art:after,:root[data-lite="true"] .hero .art .orbit-animation:before,:root[data-lite="true"] .hero .art .orbit-animation:after,:root[data-lite="true"] .hero .art .orbit-core,:root[data-lite="true"] .hero .art .orbit-animation i{animation:none!important}
