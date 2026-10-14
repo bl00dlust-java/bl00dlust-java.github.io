@@ -345,3 +345,34 @@ body:after{opacity:.07;background:repeating-linear-gradient(0deg,transparent 0 3
 @keyframes coreFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
 :root[data-lite="true"] .orbit-animation:before,:root[data-lite="true"] .orbit-animation:after,:root[data-lite="true"] .orbit-animation i,:root[data-lite="true"] .orbit-core{animation:none!important}
 @media(prefers-reduced-motion:reduce){.orbit-animation *,.orbit-animation:before,.orbit-animation:after{animation:none!important}}
+
+/* Unified orange palette — override legacy teal/matrix rules on every page */
+:root{
+ color-scheme:dark;--bg:#101010;--panel:#1b1b1b;--panel2:#24201e;--text:#f4f1ed;--muted:#b8b0a8;
+ --line:#403832;--accent:#ff6a2a;--accent2:#ff9a62;--glow:rgba(255,106,42,.18);--shadow:0 22px 65px rgba(0,0,0,.34)
+}
+:root[data-theme="light"]{
+ color-scheme:light;--bg:#f7f4f1;--panel:#fffdfb;--panel2:#f4e8df;--text:#261b15;--muted:#786b62;
+ --line:#e2d2c6;--accent:#f05e24;--accent2:#ff8b50;--glow:rgba(240,94,36,.14);--shadow:0 18px 55px rgba(86,48,25,.09)
+}
+:root,:root[data-theme="light"]{--accent:#ff6a2a}
+:root[data-theme="light"]{--accent:#f05e24}
+:root[data-design="matrix"]{--accent:#ff6a2a!important;--accent2:#ff9a62!important;--glow:rgba(255,106,42,.18)!important}
+:root[data-design="matrix"][data-theme="light"]{--accent:#f05e24!important;--accent2:#ff8b50!important;--glow:rgba(240,94,36,.14)!important}
+:root[data-design="matrix"],:root[data-design="neon"]{--bg:#101010;--panel:#1b1b1b;--panel2:#24201e;--text:#f4f1ed;--muted:#b8b0a8;--line:#403832}
+:root[data-design="matrix"][data-theme="light"],:root[data-design="neon"][data-theme="light"]{--bg:#f7f4f1;--panel:#fffdfb;--panel2:#f4e8df;--text:#261b15;--muted:#786b62;--line:#e2d2c6}
+.hero .art{background:radial-gradient(ellipse at 50% 55%,rgba(255,106,42,.13),transparent 46%),linear-gradient(145deg,#241a15,#100f0e)!important;border-color:rgba(255,126,65,.36)!important;transition:background 1s ease,border-color 1s ease,box-shadow 1s ease}
+:root[data-theme="light"] .hero .art{background:radial-gradient(ellipse at 50% 55%,rgba(255,106,42,.1),transparent 46%),linear-gradient(145deg,#fff2e8,#f1e7de)!important;border-color:rgba(240,94,36,.38)!important;box-shadow:inset 0 0 40px rgba(240,94,36,.04),0 18px 45px rgba(86,48,25,.12)!important}
+.hero .art:before,.hero .art:after{border-color:rgba(255,130,70,.34)!important;box-shadow:0 0 35px rgba(255,106,42,.08)!important}
+:root[data-theme="light"] .hero .art:before,:root[data-theme="light"] .hero .art:after{border-color:rgba(240,94,36,.28)!important}
+.art-label{color:var(--muted)!important}
+.hero .orbit-core{color:#ff6a2a!important;border-color:rgba(255,106,42,.8)!important;background:radial-gradient(circle,rgba(255,106,42,.18),var(--panel) 72%)!important;box-shadow:0 0 30px rgba(255,106,42,.16),inset 0 0 22px rgba(255,106,42,.1)!important}
+.option.correct{border-color:#ff6a2a!important;background:rgba(255,106,42,.12)!important}
+.finish-check{background:var(--accent)!important;color:#20130d!important}
+.hero .button,.button,.btn,.module-open:hover{color:#20130d}
+.cta{background:linear-gradient(120deg,#713019,#2c1b15)!important;color:#fff4ed}
+.cta .eyebrow{color:#ffbd9a!important}.cta h2 em{color:#ff9a62!important}.button.light{background:#211510!important;color:#fff4ed!important;border-color:#211510!important}
+body,.header,.cards article,.module,.progress,.statement,.lesson-card,.lesson-aside,.lesson-copy .tip,.option,.module-open{transition:background-color .65s ease,color .65s ease,border-color .65s ease,box-shadow .65s ease}
+html.theme-wave::before{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:var(--wave-from,#101010);clip-path:circle(150vmax at var(--wave-x,50%) var(--wave-y,50%));animation:themeWaveReveal .95s cubic-bezier(.7,0,.2,1) forwards}
+@keyframes themeWaveReveal{from{clip-path:circle(150vmax at var(--wave-x,50%) var(--wave-y,50%));opacity:1}to{clip-path:circle(0 at var(--wave-x,50%) var(--wave-y,50%));opacity:1}}
+@media(prefers-reduced-motion:reduce){html.theme-wave::before{animation:none;display:none}}
