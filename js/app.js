@@ -45,13 +45,15 @@ let active=null,step=0,answered=false;
 function openModule(id){active=modules.find(m=>m.id===id);step=0;answered=false;showStep();$("lessonDialog").showModal()}
 function showStep(){const total=active.lessons.length,lesson=active.lessons[step],isQuiz=!!lesson.q;$("lessonKicker").textContent="МОДУЛЬ 0"+(modules.indexOf(active)+1);$("lessonStep").textContent=isQuiz?"ПРОВЕРЬ СЕБЯ":"ТЕОРИЯ";$("lessonCounter").textContent=(step+1)+" / "+total;$("lessonTrackFill").style.width=((step+1)/total*100)+"%";$("lessonTitle").textContent=lesson.title;$("lessonContent").innerHTML=lesson.html||"";$("lessonContent").hidden=isQuiz;$("quizArea").hidden=!isQuiz;$("quizFeedback").textContent="";$("quizOptions").innerHTML="";answered=false;if(isQuiz){$("quizQuestion").textContent=lesson.q;lesson.opts.forEach((option,i)=>{const b=document.createElement("button");b.className="option";b.type="button";b.textContent=option;b.addEventListener("click",()=>answer(i,b));$("quizOptions").appendChild(b)})}$("backLesson").disabled=step===0;$("nextLesson").textContent=step===total-1?"Завершить модуль ✓":"Далее →";$("nextLesson").disabled=isQuiz}
 function answer(i,button){if(answered)return;answered=true;const lesson=active.lessons[step];[...$("quizOptions").children].forEach((b,j)=>{b.disabled=true;if(j===lesson.correct)b.classList.add("correct")});if(i!==lesson.correct)button.classList.add("wrong");$("quizFeedback").textContent=(i===lesson.correct?"Верно! ":"Не совсем. ")+lesson.why;$("nextLesson").disabled=false}
+if ($("nextLesson")) {
 $("nextLesson").addEventListener("click",()=>{if(step<active.lessons.length-1){step++;showStep();return}if(!state.completed.includes(active.id))state.completed.push(active.id);save();renderModules();$("lessonDialog").close()});
 $("backLesson").addEventListener("click",()=>{if(step>0){step--;showStep()}});
 $("closeLesson").addEventListener("click",()=>$("lessonDialog").close());
 $("lessonDialog").addEventListener("click",e=>{if(e.target===$("lessonDialog"))$("lessonDialog").close()});
+}
 $("theme").addEventListener("click",()=>{state.theme=state.theme==="light"?"dark":"light";theme();save()});
-$("print").addEventListener("click",()=>window.print());
-theme();renderModules();
+if ($("print")) $("print").addEventListener("click",()=>window.print());
+theme();if ($("modules")) renderModules();
 if (location.pathname.endsWith("/module.html")) {
   const requestedId = new URLSearchParams(location.search).get("id");
   if (modules.some(m => m.id === requestedId)) openModule(requestedId);
