@@ -411,3 +411,24 @@ body{background-color:var(--bg);background-image:radial-gradient(ellipse at 12% 
 @font-face{font-family:"Evolt";src:url("../assets/fonts/evolt.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
 h1,h2,h3,h4,h5,h6,.hero-title,.statement,.section-head,.brand,.number,.metric,.big-text,.hero .intro h2,.hero .headline,.hero h1,.cta h2,.module-title{font-family:"Cheharda",sans-serif}
 body,p,li,label,input,textarea,select,button,.eyebrow,.art-label,.nav,.intro,.description,.muted,.small,.caption,.module-description,.lesson-copy,.lesson-aside,.hero-feature span{font-family:"Evolt",sans-serif}
+
+
+/* Animated stellar-orbit background inspired by the reference image */
+body{background-color:var(--bg);background-image:radial-gradient(ellipse at 50% 38%,rgba(255,106,42,.055),transparent 42%),radial-gradient(circle,rgba(255,164,105,.16) .7px,transparent 1px);background-size:100% 100%,28px 28px;background-attachment:fixed}
+body:before{content:"";position:fixed;inset:-18%;z-index:-2;pointer-events:none;opacity:.72;background:radial-gradient(ellipse 34% 15% at 50% 50%,transparent 97%,rgba(255,126,66,.24) 98%,transparent 99%),radial-gradient(ellipse 44% 22% at 50% 50%,transparent 97%,rgba(255,170,120,.16) 98%,transparent 99%),radial-gradient(ellipse 27% 48% at 50% 50%,transparent 97%,rgba(255,106,42,.13) 98%,transparent 99%);animation:stellarDrift 38s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;background:radial-gradient(circle at 17% 28%,#ffd0a0 0 1px,transparent 2px),radial-gradient(circle at 73% 22%,#ff9a58 0 1.5px,transparent 3px),radial-gradient(circle at 84% 67%,#ffc18c 0 1px,transparent 2px),radial-gradient(circle at 29% 77%,#ff7b3c 0 1.5px,transparent 3px);animation:starPulse 5s ease-in-out infinite alternate}
+@keyframes stellarDrift{0%{transform:rotate(-9deg) scale(.94)}50%{transform:rotate(4deg) scale(1.04)}100%{transform:rotate(12deg) scale(.98)}}
+@keyframes starPulse{from{opacity:.13;filter:blur(0)}to{opacity:.48;filter:blur(1px)}}
+/* Brand mark: a clean, glowing orange diamond */
+.brand .logo{position:relative;width:35px;height:35px;flex:0 0 35px;font-size:0;border:1px solid rgba(255,106,42,.62);border-radius:11px;background:linear-gradient(145deg,rgba(255,106,42,.12),var(--panel));box-shadow:0 0 20px rgba(255,106,42,.1);animation:logoEnter .8s cubic-bezier(.16,1,.3,1) both}
+.brand .logo:before{content:"";width:10px;height:10px;border:2px solid #ff6a2a;transform:rotate(45deg);box-shadow:0 0 10px rgba(255,106,42,.38);animation:diamondPulse 4s ease-in-out infinite}
+.brand .logo:after{content:"";position:absolute;inset:-5px;border:1px solid rgba(255,106,42,.24);border-radius:14px;animation:logoHalo 3.5s ease-out infinite}
+.brand{animation:brandEnter .8s .08s cubic-bezier(.16,1,.3,1) both}
+.header nav,.header>#theme{animation:brandEnter .75s .18s cubic-bezier(.16,1,.3,1) both}
+main>.hero{animation:heroEnter .9s .12s cubic-bezier(.16,1,.3,1) both}
+@keyframes logoEnter{from{opacity:0;transform:rotate(-35deg) scale(.55)}to{opacity:1;transform:rotate(0) scale(1)}}
+@keyframes brandEnter{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroEnter{from{opacity:0;transform:translateY(18px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes diamondPulse{0%,100%{filter:drop-shadow(0 0 2px rgba(255,106,42,.2))}50%{filter:drop-shadow(0 0 7px rgba(255,106,42,.8))}}
+@keyframes logoHalo{0%{transform:scale(.82);opacity:.65}100%{transform:scale(1.35);opacity:0}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.brand,.brand .logo,.brand .logo:before,.brand .logo:after,.header nav,.header>#theme,main>.hero{animation:none!important}}
