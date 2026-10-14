@@ -130,3 +130,17 @@ function renderSeparateLesson(){
  draw();
 }
 if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
+
+
+// Accessible scroll reveals and subtle page transitions
+(function initSiteMotion(){
+ const root=document.documentElement;
+ if(root.dataset.lite==="true"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const targets=[...document.querySelectorAll(".section-head,.cards article,.statement,.row,.hero-feature,.progress,.module,.cta,.footer,.hero .intro,.hero .art")];
+ if(!targets.length)return;
+ root.classList.add("motion-ready");
+ targets.forEach((el,i)=>{el.classList.add("reveal");if(el.matches(".hero .intro,.section-head,.statement"))el.classList.add("reveal-left");else if(el.matches(".hero .art"))el.classList.add("reveal-scale");if(el.matches(".cards article,.module,.hero-feature"))el.style.setProperty("--reveal-delay",(i%4)*85+"ms");});
+ if(!("IntersectionObserver" in window)){targets.forEach(el=>el.classList.add("is-visible"));return;}
+ const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target);}});},{threshold:.12,rootMargin:"0px 0px -35px 0px"});
+ targets.forEach(el=>observer.observe(el));
+})();
