@@ -135,7 +135,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
 // Accessible scroll reveals and subtle page transitions
 (function initSiteMotion(){
  const root=document.documentElement;
- if(root.dataset.lite==="true"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  const targets=[...document.querySelectorAll(".section-head,.cards article,.statement,.row,.hero-feature,.progress,.module,.cta,.footer,.hero .intro,.hero .art")];
  if(!targets.length)return;
  root.classList.add("motion-ready");
