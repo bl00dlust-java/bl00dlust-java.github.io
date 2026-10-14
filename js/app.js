@@ -141,3 +141,45 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target);}});},{threshold:.12,rootMargin:"0px 0px -35px 0px"});
  targets.forEach(el=>observer.observe(el));
 })();
+
+
+/* Hidden easter egg: enter the classic Konami code */
+(()=>{
+ const sequence=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+ let progress=0;
+ document.addEventListener("keydown",event=>{
+  if(event.ctrlKey||event.altKey||event.metaKey||event.target.matches("input,textarea,select,[contenteditable=true]"))return;
+  const key=event.key.length===1?event.key.toLowerCase():event.key;
+  progress=key===sequence[progress]?progress+1:(key===sequence[0]?1:0);
+  if(progress!==sequence.length)return;
+  progress=0;
+  if(document.getElementById("hidden-kernel"))return;
+  const style=document.createElement("style");
+  style.id="hidden-kernel-style";
+  style.textContent=`
+   #hidden-kernel{position:fixed;inset:0;z-index:100001;display:grid;place-items:center;padding:24px;background:rgba(5,5,6,.88);backdrop-filter:blur(12px);animation:kernelFade .25s ease-out}
+   #hidden-kernel .kernel-card{width:min(560px,100%);padding:clamp(24px,5vw,42px);border:1px solid #ff6a2a;border-radius:14px;background:#111113;color:#f5f0eb;box-shadow:0 0 50px rgba(255,106,42,.2);font:14px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+   #hidden-kernel .kernel-tag{color:#ff6a2a;font-size:11px;letter-spacing:.18em}
+   #hidden-kernel h2{margin:14px 0;color:#fff;font-size:clamp(24px,5vw,36px);letter-spacing:-.04em}
+   #hidden-kernel p{color:#c7c0b9}
+   #hidden-kernel button{margin-top:16px;padding:10px 14px;border:1px solid #ff6a2a;border-radius:6px;background:transparent;color:#ff9a70;font:inherit;cursor:pointer}
+   #hidden-kernel .kernel-cursor{display:inline-block;width:8px;height:1em;margin-left:4px;vertical-align:middle;background:#ff6a2a;animation:kernelBlink .8s steps(2) infinite}
+   @keyframes kernelFade{from{opacity:0}to{opacity:1}}@keyframes kernelBlink{50%{opacity:0}}
+   @media(prefers-reduced-motion:reduce){#hidden-kernel,#hidden-kernel .kernel-cursor{animation:none}}
+  `;
+  const panel=document.createElement("div");
+  panel.id="hidden-kernel";
+  panel.setAttribute("role","dialog");
+  panel.setAttribute("aria-modal","true");
+  panel.setAttribute("aria-labelledby","kernel-title");
+  panel.innerHTML='<div class="kernel-card"><div class="kernel-tag">/// СКРЫТЫЙ СЛОЙ · ДОСТУП РАЗРЕШЁН</div><h2 id="kernel-title">Любопытство — это уязвимость? <span style="color:#ff6a2a">Нет.</span></h2><p>Ты нашёл пасхалку. В кибербезопасности именно любопытство помогает заметить странность — а привычка проверять не даёт попасться на уловку.</p><p style="color:#ff8c5b">STATUS: HUMAN FIREWALL ONLINE<span class="kernel-cursor"></span></p><button type="button" id="kernel-close">Закрыть терминал [ESC]</button></div>';
+  document.head.appendChild(style);
+  document.body.appendChild(panel);
+  const close=()=>{panel.remove();style.remove();document.removeEventListener("keydown",escapeClose)};
+  const escapeClose=e=>{if(e.key==="Escape")close()};
+  document.addEventListener("keydown",escapeClose);
+  panel.addEventListener("click",e=>{if(e.target===panel)close()});
+  panel.querySelector("#kernel-close").addEventListener("click",close);
+  panel.querySelector("#kernel-close").focus();
+ });
+})();
