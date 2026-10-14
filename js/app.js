@@ -80,7 +80,7 @@ function liteMode(){document.documentElement.dataset.lite=state.lite?"true":"fal
 function design(){
  const root=document.documentElement;
  const variants=[
-  {id:"neon",name:"Neon blue",desc:"Неоновая сеть"},
+  {id:"neon",name:"Неон",desc:"Неоновая сеть"},
   {id:"minimal",name:"Минимализм",desc:"Чистый и спокойный"},
   {id:"matrix",name:"Кибер-сетка",desc:"Потоки данных"},
   {id:"arctic",name:"Арктика",desc:"Светлый лёд"}
@@ -89,7 +89,7 @@ function design(){
  let wrap=$("designMenu");
  if(!wrap){
   wrap=document.createElement("div");wrap.id="designMenu";wrap.className="design-menu";
-  const trigger=document.createElement("button");trigger.type="button";trigger.className="design-trigger";trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-haspopup","true");trigger.innerHTML='<span class="design-spark" aria-hidden="true">✳</span><span class="design-current">Neon blue</span><span aria-hidden="true">⌄</span>';
+  const trigger=document.createElement("button");trigger.type="button";trigger.className="design-trigger";trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-haspopup","true");trigger.innerHTML='<span class="design-spark" aria-hidden="true">✳</span><span class="design-current">Неон</span><span aria-hidden="true">⌄</span>';
   const menu=document.createElement("div");menu.className="design-options";menu.setAttribute("role","group");menu.setAttribute("aria-label","Варианты оформления сайта");
   menu.innerHTML='<div class="design-menu-title">ВЫБЕРИ СТИЛЬ</div>'+variants.map(v=>'<button type="button" class="design-option" data-variant="'+v.id+'" aria-pressed="false"><span class="variant-preview variant-'+v.id+'" aria-hidden="true"><i></i><i></i><i></i></span><span class="variant-copy"><b>'+v.name+'</b><small>'+v.desc+'</small></span><span class="variant-check" aria-hidden="true">✓</span></button>').join("");
   wrap.append(trigger,menu);$("theme").insertAdjacentElement("beforebegin",wrap);
