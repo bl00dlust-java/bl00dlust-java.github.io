@@ -726,3 +726,81 @@ input[type="text"]::placeholder,
   color:var(--muted);
   opacity:1;
 }
+
+
+/* Site-wide breathing blue glow around framed surfaces */
+@keyframes siteFrameGlow {
+  0%,100% {
+    box-shadow: 0 0 0 1px rgba(78,166,255,.08), 0 0 12px rgba(46,139,255,.08), inset 0 0 10px rgba(46,139,255,.025);
+    border-color: rgba(92,170,255,.34);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(90,177,255,.2), 0 0 26px rgba(46,139,255,.22), 0 0 46px rgba(46,139,255,.09), inset 0 0 18px rgba(46,139,255,.055);
+    border-color: rgba(105,190,255,.72);
+  }
+}
+:root {
+  --frame-glow-blue: rgba(65,153,255,.2);
+}
+.header,
+.cards article,
+.module,
+.progress,
+.completion,
+.lesson-card,
+.lesson-aside,
+.challenge-panel,
+.video-resources,
+.tool-card,
+.hero-shell,
+.statement,
+.cta,
+.checklist,
+.extra-section .panel,
+.lesson-error,
+.lesson-finish {
+  animation: siteFrameGlow 4.2s ease-in-out infinite;
+}
+.cards article:nth-child(3n),
+.module:nth-child(3n),
+.tool-card:nth-child(3n) { animation-delay: -1.4s; }
+.cards article:nth-child(3n + 1),
+.module:nth-child(3n + 1),
+.tool-card:nth-child(3n + 1) { animation-delay: -2.8s; }
+:root[data-theme="light"] .header,
+:root[data-theme="light"] .cards article,
+:root[data-theme="light"] .module,
+:root[data-theme="light"] .progress,
+:root[data-theme="light"] .completion,
+:root[data-theme="light"] .lesson-card,
+:root[data-theme="light"] .lesson-aside,
+:root[data-theme="light"] .challenge-panel,
+:root[data-theme="light"] .video-resources,
+:root[data-theme="light"] .tool-card,
+:root[data-theme="light"] .hero-shell,
+:root[data-theme="light"] .statement,
+:root[data-theme="light"] .cta,
+:root[data-theme="light"] .lesson-finish {
+  animation-name: siteFrameGlow;
+}
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .cards article,
+  .module,
+  .progress,
+  .completion,
+  .lesson-card,
+  .lesson-aside,
+  .challenge-panel,
+  .video-resources,
+  .tool-card,
+  .hero-shell,
+  .statement,
+  .cta,
+  .lesson-error,
+  .lesson-finish {
+    animation: none !important;
+    box-shadow: 0 0 16px rgba(46,139,255,.12);
+    border-color: var(--line);
+  }
+}
