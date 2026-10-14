@@ -94,7 +94,7 @@ function design(){
   menu.innerHTML='<div class="design-menu-title">ВЫБЕРИ СТИЛЬ</div>'+variants.map(v=>'<button type="button" class="design-option" data-variant="'+v.id+'" aria-pressed="false"><span class="variant-preview variant-'+v.id+'" aria-hidden="true"><i></i><i></i><i></i></span><span class="variant-copy"><b>'+v.name+'</b><small>'+v.desc+'</small></span><span class="variant-check" aria-hidden="true">✓</span></button>').join("");
   wrap.append(trigger,menu);$("theme").insertAdjacentElement("beforebegin",wrap);
   trigger.addEventListener("click",()=>{menu.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(menu.classList.contains("is-open")))});
-  menu.querySelectorAll("[data-variant]").forEach(button=>button.addEventListener("click",()=>{state.design=button.dataset.variant;apply();menu.classList.remove("is-open");save()}));
+  menu.querySelectorAll("[data-variant]").forEach(button=>button.addEventListener("click",()=>{state.design=button.dataset.variant;menu.classList.remove("is-open");apply();save()}));
   document.addEventListener("click",e=>{if(!wrap.contains(e.target)){menu.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"){menu.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}});
  }
