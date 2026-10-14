@@ -203,3 +203,24 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   },{passive:true});
  }
 })();
+
+
+/* Keep the current section visible in the sticky navigation */
+(function initSectionIndicator(){
+ const nav=document.querySelector(".site-nav");
+ if(!nav)return;
+ const links=[...nav.querySelectorAll('a[href^="#"]')];
+ const sections=links.map(link=>document.querySelector(link.getAttribute("href"))).filter(Boolean);
+ if(!sections.length)return;
+ const mark=id=>links.forEach(link=>{
+  if(link.getAttribute("href")==="#"+id){link.setAttribute("aria-current","location");}
+  else link.removeAttribute("aria-current");
+ });
+ if(!("IntersectionObserver" in window)){return;}
+ const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+  if(visible[0])mark(visible[0].target.id);
+ },{rootMargin:"-18% 0px -65% 0px",threshold:[0,.15,.35,.6]});
+ sections.forEach(section=>observer.observe(section));
+ links.forEach(link=>link.addEventListener("click",()=>mark(link.hash.slice(1))));
+})();
