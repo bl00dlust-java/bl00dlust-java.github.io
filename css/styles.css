@@ -627,3 +627,20 @@ body:after{background:radial-gradient(circle at 12% 22%,#9ee8ff 0 1px,transparen
 @media(max-width:760px){.hero-shell:after{right:-90px;top:20%;width:300px;height:300px}.hero .art{min-height:220px!important;height:220px!important}.hero .art .orbit-animation{width:150px!important;height:150px!important}.hero .art .orbit-animation i{animation-duration:10s!important}}
 @media(prefers-reduced-motion:reduce){.hero-shell:after,.hero .art,.hero .art:before,.hero .art:after,.hero .art .orbit-animation:before,.hero .art .orbit-animation:after,.hero .art .orbit-core,.hero .art .orbit-animation i{animation:none!important}}
 :root[data-lite="true"] .hero-shell:after,:root[data-lite="true"] .hero .art,:root[data-lite="true"] .hero .art:before,:root[data-lite="true"] .hero .art:after,:root[data-lite="true"] .hero .art .orbit-animation:before,:root[data-lite="true"] .hero .art .orbit-animation:after,:root[data-lite="true"] .hero .art .orbit-core,:root[data-lite="true"] .hero .art .orbit-animation i{animation:none!important}
+
+
+/* Fix: the main hero panel must follow the selected light theme */
+:root[data-theme="light"] .hero-shell{
+  background-color:#f2f8ff!important;
+  background-image:
+    radial-gradient(ellipse at 82% 42%,transparent 0 150px,rgba(35,125,225,.12) 151px,transparent 153px),
+    radial-gradient(ellipse at 82% 42%,transparent 0 205px,rgba(35,125,225,.09) 206px,transparent 208px),
+    radial-gradient(ellipse at 82% 42%,transparent 0 260px,rgba(35,125,225,.06) 261px,transparent 263px),
+    linear-gradient(130deg,#ffffff,#edf5ff 55%,#e4f0ff)!important;
+  border-color:rgba(45,130,225,.35)!important;
+  box-shadow:0 25px 75px rgba(30,90,160,.12),inset 0 0 60px rgba(60,140,230,.06)!important;
+}
+:root[data-theme="light"] .hero-shell:after{
+  border-color:rgba(35,125,225,.18)!important;
+  box-shadow:0 0 45px rgba(35,125,225,.07),inset 0 0 45px rgba(35,125,225,.045)!important;
+}
