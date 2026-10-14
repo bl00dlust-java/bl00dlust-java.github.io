@@ -168,3 +168,34 @@ body,button,input,textarea,select{font-family:"JetBrains Sans",Inter,ui-sans-ser
 .challenge-panel.challenge-profile .challenge-choice:has(input:checked),.challenge-panel.challenge-checklist .challenge-choice:has(input:checked),.challenge-panel.challenge-setup .challenge-choice:has(input:checked){border-color:var(--accent)}
 .challenge-panel .challenge-result{overflow-wrap:anywhere}
 @media(max-width:560px){.scenario-preview{padding:14px}.challenge-choice{padding:13px}.order-item{align-items:flex-start}.order-controls{gap:4px}.order-controls button{width:29px;height:29px}}
+
+/* Switchable animated visual systems: Neon Shield and Matrix Rain */
+body{isolation:isolate}
+body:before{content:"";position:fixed;inset:-8%;z-index:-2;pointer-events:none;opacity:.55;background:radial-gradient(ellipse at 8% 12%,rgba(30,222,191,.10),transparent 38%),radial-gradient(ellipse at 91% 65%,rgba(29,130,180,.08),transparent 36%);animation:ambientDrift 22s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(66,255,185,.07) 39px,transparent 40px),repeating-linear-gradient(0deg,transparent 0 57px,rgba(66,255,185,.035) 58px,transparent 59px);mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent);transition:opacity .5s}
+.header{position:sticky;top:0;z-index:30;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 82%,transparent)}
+.header button.design-toggle{border-color:color-mix(in srgb,var(--accent) 50%,var(--line));color:var(--accent);white-space:nowrap}
+.hero .art{isolation:isolate}
+.hero .art:before{width:70%;height:70%;border-radius:50%;border-color:rgba(80,255,219,.34);box-shadow:0 0 35px rgba(43,228,200,.08),inset 0 0 35px rgba(43,228,200,.05);animation:shieldOrbit 24s linear infinite}
+.hero .art:after{width:78%;height:78%;border-radius:50%;border:1px solid rgba(80,255,219,.15);animation:shieldWave 5.5s ease-out infinite}
+.hero .shield{isolation:isolate}
+.hero .shield:after{content:"";position:absolute;z-index:-2;inset:0;clip-path:polygon(50% 0,91% 20%,85% 68%,50% 100%,15% 68%,9% 20%);border:1px solid rgba(153,255,239,.85);background:rgba(57,246,209,.06);animation:shieldPulse 3.2s ease-out infinite}
+:root[data-design="matrix"]{--accent:#52ffad;--accent2:#a2ffd0;--glow:rgba(35,255,147,.14);--shadow:0 25px 90px rgba(0,0,0,.36)}
+:root[data-design="matrix"][data-theme="light"]{--accent:#087f51;--accent2:#16a56e;--glow:rgba(10,154,93,.12)}
+:root[data-design="matrix"] body:before{opacity:.42;background:repeating-linear-gradient(90deg,transparent 0 43px,rgba(39,255,145,.09) 44px,transparent 45px),repeating-linear-gradient(0deg,transparent 0 23px,rgba(39,255,145,.025) 24px,transparent 25px),radial-gradient(ellipse at 50% 10%,rgba(0,255,136,.12),transparent 65%);animation:matrixDrift 18s linear infinite}
+:root[data-design="matrix"] body:after{opacity:.6;background:repeating-linear-gradient(180deg,transparent 0 120px,rgba(66,255,185,.12) 121px,transparent 123px);animation:scanLines 9s linear infinite}
+:root[data-design="matrix"] .hero-shell{border-color:rgba(82,255,173,.4);background:linear-gradient(130deg,rgba(2,19,13,.98),rgba(2,34,24,.96));box-shadow:0 24px 100px rgba(0,0,0,.34),inset 0 0 80px rgba(0,255,130,.05)}
+:root[data-design="matrix"][data-theme="light"] .hero-shell{background:linear-gradient(130deg,#f4fff8,#dff8e9)}
+:root[data-design="matrix"] .hero .art{background:radial-gradient(ellipse at 50% 63%,rgba(17,255,145,.15),transparent 42%),linear-gradient(135deg,rgba(0,30,18,.15),transparent)}
+:root[data-design="matrix"] .hero .shield{color:#c0ffdc;text-shadow:0 0 18px #31ff9c,0 0 58px rgba(43,255,145,.72);filter:drop-shadow(0 0 28px rgba(43,255,145,.42))}
+:root[data-design="matrix"] .hero .art:before,:root[data-design="matrix"] .hero .art:after{border-color:rgba(82,255,173,.28)}
+:root[data-design="matrix"] .art-label{color:var(--accent)}
+:root[data-design="matrix"] .cards article:hover,:root[data-design="matrix"] .module:hover{box-shadow:0 0 24px rgba(40,255,150,.07)}
+@keyframes ambientDrift{0%{transform:translate3d(-1%,0,0) scale(1);filter:hue-rotate(0)}100%{transform:translate3d(1%,1%,0) scale(1.06);filter:hue-rotate(18deg)}}
+@keyframes shieldOrbit{to{transform:rotate(360deg)}}
+@keyframes shieldWave{0%{transform:scale(.68);opacity:.7}85%,100%{transform:scale(1.2);opacity:0}}
+@keyframes shieldPulse{0%{transform:scale(.94);opacity:.55}75%,100%{transform:scale(1.12);opacity:0}}
+@keyframes matrixDrift{from{background-position:0 -220px,0 0,center}to{background-position:0 220px,0 40px,center}}
+@keyframes scanLines{from{background-position:0 -100vh}to{background-position:0 100vh}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.hero .art:before,.hero .art:after,.hero .shield:after{animation:none!important}}
+@media(max-width:760px){.header{backdrop-filter:blur(14px)}.header button.design-toggle{padding:8px 10px;font-size:10px}}
