@@ -383,38 +383,28 @@ html.theme-wave::before{content:"";position:fixed;inset:0;z-index:99999;pointer-
 .hero-shell .hero-navline .eyebrow .status-dot{background:#ff6a2a!important;box-shadow:0 0 10px rgba(255,106,42,.6)!important}
 :root[data-theme="light"] .hero-shell .hero-navline .eyebrow,
 :root[data-theme="light"] .hero-shell .hero-navline .eyebrow *{color:#e9551d!important}
-/* Water-ripple theme transition: old theme remains inside the moving wave; new theme appears outside */
-html.theme-wave::before{
- content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;
- background:var(--wave-from,#101010);
- clip-path:circle(0 at var(--wave-x,50%) var(--wave-y,50%));
- animation:themeRippleFill 1.35s cubic-bezier(.18,.65,.25,1) forwards;
-}
-html.theme-wave::after{
- content:"";position:fixed;z-index:100000;pointer-events:none;
- left:var(--wave-x,50%);top:var(--wave-y,50%);
- width:clamp(90px,12vw,150px);height:clamp(90px,12vw,150px);
- border:2px solid #ff6a2a;border-radius:50%;
- box-shadow:0 0 8px rgba(255,106,42,.9),0 0 22px rgba(255,106,42,.48),inset 0 0 14px rgba(255,106,42,.14);
- transform:translate(-50%,-50%) scale(.05);
- animation:themeRippleRing 1.35s cubic-bezier(.18,.65,.25,1) forwards;
-}
-@keyframes themeRippleFill{
- 0%{clip-path:circle(0 at var(--wave-x,50%) var(--wave-y,50%));opacity:1}
- 75%{opacity:1}
- 100%{clip-path:circle(160vmax at var(--wave-x,50%) var(--wave-y,50%));opacity:0}
-}
-@keyframes themeRippleRing{
- 0%{transform:translate(-50%,-50%) scale(.05);opacity:0}
- 8%{opacity:1}
- 65%{opacity:.9}
- 100%{transform:translate(-50%,-50%) scale(35);opacity:0}
-}
+/* Simple, smooth theme swap with a brief orange light sweep */
+html.theme-switching::after{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:linear-gradient(110deg,transparent 25%,rgba(255,106,42,.12) 45%,rgba(255,190,150,.22) 50%,rgba(255,106,42,.12) 55%,transparent 75%);transform:translateX(-110%);animation:themeSweep .72s cubic-bezier(.2,.75,.25,1) forwards}
+@keyframes themeSweep{to{transform:translateX(110%)}}
+html.theme-switching body{animation:themePop .72s ease-out}
+@keyframes themePop{0%{filter:brightness(1)}28%{filter:brightness(1.08)}100%{filter:brightness(1)}}
+/* Ambient cyber atmosphere: drifting glow, fine grid, and slow-moving light */
+body{background-color:var(--bg);background-image:radial-gradient(ellipse at 12% 16%,rgba(255,106,42,.075),transparent 34%),radial-gradient(ellipse at 86% 34%,rgba(255,155,100,.045),transparent 32%),radial-gradient(circle,rgba(255,130,75,.12) .7px,transparent .9px);background-size:140% 140%,150% 150%,24px 24px;background-position:0% 0%,100% 100%,0 0;animation:ambientDrift 34s ease-in-out infinite alternate}
+@keyframes ambientDrift{0%{background-position:0% 0%,100% 100%,0 0}50%{background-position:35% 20%,65% 75%,12px 8px}100%{background-position:100% 55%,0% 15%,24px 16px}}
+.hero-shell{position:relative;isolation:isolate;overflow:hidden}
+.hero-shell::before{content:"";position:absolute;z-index:-1;inset:-35%;pointer-events:none;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,rgba(255,106,42,.08) 42deg,transparent 95deg,rgba(255,170,125,.05) 180deg,transparent 245deg,rgba(255,106,42,.07) 310deg,transparent 360deg);filter:blur(38px);animation:ambientOrbit 28s linear infinite}
+@keyframes ambientOrbit{to{transform:rotate(360deg)}}
+.hero .orbit-animation{animation:ambientFloat 7s ease-in-out infinite}
+@keyframes ambientFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.cards article,.module,.statement,.lesson-card{position:relative;overflow:hidden}
+.cards article::after,.module::after{content:"";position:absolute;top:0;left:-120%;width:70%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,130,75,.65),transparent);pointer-events:none;animation:cardScan 9s ease-in-out infinite}
+.cards article:nth-child(2n)::after,.module:nth-child(2n)::after{animation-delay:-4.5s}
+@keyframes cardScan{0%,65%{left:-120%;opacity:0}72%{opacity:1}100%{left:150%;opacity:0}}
 .hero .orbit-animation:before{inset:19px 7px;border-radius:48% 52% 46% 54% / 51% 44% 56% 49%;border-color:rgba(255,106,42,.68);box-shadow:0 0 7px rgba(255,106,42,.55),0 0 18px rgba(255,106,42,.2);animation:orbitWarp 8s ease-in-out infinite}
 .hero .orbit-animation:after{inset:-7px 20px;border-radius:52% 48% 57% 43% / 43% 57% 46% 54%;border-color:rgba(255,150,95,.45);box-shadow:0 0 9px rgba(255,106,42,.3);animation:orbitWarp 10s ease-in-out infinite reverse}
 @keyframes orbitWarp{0%,100%{transform:rotate(-18deg) scaleX(.92) scaleY(1.04)}50%{transform:rotate(18deg) scaleX(1.08) scaleY(.94)}}
 :root[data-lite="true"] html.theme-wave::before,:root[data-lite="true"] html.theme-wave::after{animation:none!important}
-@media(prefers-reduced-motion:reduce){html.theme-wave::before,html.theme-wave::after{animation:none!important;display:none!important}.hero .orbit-animation:before,.hero .orbit-animation:after{animation:none!important}}
+@media(prefers-reduced-motion:reduce){html.theme-switching::after{animation:none!important;display:none!important}body,.hero-shell::before,.hero .orbit-animation,.cards article::after,.module::after{animation:none!important}.hero .orbit-animation:before,.hero .orbit-animation:after{animation:none!important}}
 
 /* User-provided typography: Cheharda for display, Evolt for body copy */
 @font-face{font-family:"Cheharda";src:url("../assets/fonts/Cheharda.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
