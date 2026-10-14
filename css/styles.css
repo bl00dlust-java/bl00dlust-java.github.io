@@ -199,3 +199,18 @@ body:after{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;opac
 @keyframes scanLines{from{background-position:0 -100vh}to{background-position:0 100vh}}
 @media(prefers-reduced-motion:reduce){body:before,body:after,.hero .art:before,.hero .art:after,.hero .shield:after{animation:none!important}}
 @media(max-width:760px){.header{backdrop-filter:blur(14px)}.header button.design-toggle{padding:8px 10px;font-size:10px}}
+
+
+/* Matrix rain made of randomized characters; lightweight mode removes costly effects */
+#matrixRain{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0;transition:opacity .25s}
+:root[data-design="matrix"] #matrixRain{opacity:.34}
+:root[data-design="matrix"][data-theme="light"] #matrixRain{opacity:.16}
+:root[data-lite="true"] #matrixRain{display:none!important}
+:root[data-lite="true"] *, :root[data-lite="true"] *::before, :root[data-lite="true"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important;filter:none!important}
+:root[data-lite="true"] body:before,:root[data-lite="true"] body:after{display:none!important}
+:root[data-lite="true"] .module,:root[data-lite="true"] main{animation:none!important}
+:root[data-lite="true"] .cards article:hover,:root[data-lite="true"] .module:hover{transform:none!important}
+:root[data-lite="true"] .header{background:var(--bg)!important}
+.header button.lite-toggle{border-color:color-mix(in srgb,var(--accent) 50%,var(--line));white-space:nowrap}
+:root[data-lite="true"] .hero .art:before,:root[data-lite="true"] .hero .art:after,:root[data-lite="true"] .hero .shield:after{animation:none!important}
+@media(max-width:760px){.header button.lite-toggle{padding:8px 10px;font-size:10px}}
