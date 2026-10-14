@@ -98,3 +98,9 @@ body:after{opacity:.1;background-size:30px 30px}
 .cta{border-radius:28px;background:linear-gradient(120deg,#07594f,#073c4b)}
 @keyframes ambientGlow{0%{filter:hue-rotate(-5deg);transform:scale(1)}100%{filter:hue-rotate(9deg);transform:scale(1.04)}}
 @media(max-width:760px){.hero-shell{padding:20px 20px 0;border-radius:25px}.hero-grid{grid-template-columns:1fr;padding:26px 0 18px;gap:10px}.hero .intro{order:0}.hero .intro h1{font-size:clamp(39px,10vw,58px)}.hero .art{min-height:250px;order:1}.hero-bottom{grid-template-columns:1fr;padding:10px 0}.hero-feature,.hero-feature:first-child{padding:13px 0;border-right:0;border-bottom:1px solid rgba(114,232,208,.12)}.hero-feature:last-child{border-bottom:0}.hero-navline .eyebrow{font-size:9px}.hero-top-link{padding:8px 11px;font-size:10px}}
+
+/* JetBrains Sans — web font */
+@font-face{font-family:"JetBrains Sans";src:url("https://resources.jetbrains.com/storage/jetbrains-sans/google-fonts/v1.309/webfonts/JetBrainsSans-Regular.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"JetBrains Sans";src:url("https://resources.jetbrains.com/storage/jetbrains-sans/google-fonts/v1.309/webfonts/JetBrainsSans-SemiBold.woff2") format("woff2");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"JetBrains Sans";src:url("https://resources.jetbrains.com/storage/jetbrains-sans/google-fonts/v1.309/webfonts/JetBrainsSans-Bold.woff2") format("woff2");font-style:normal;font-weight:700;font-display:swap}
+body,button,input,textarea,select{font-family:"JetBrains Sans",Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
