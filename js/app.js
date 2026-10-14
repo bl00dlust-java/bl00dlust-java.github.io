@@ -71,37 +71,14 @@ function wireChallenge(container,task,nextButton){const result=container.querySe
 
 const $=id=>document.getElementById(id);
 const STORE="cyberhygiene-course-v2";
-let state={completed:[],theme:"dark",design:"neon",lite:false};
-try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.isArray(saved.completed))state.completed=saved.completed.filter(id=>modules.some(m=>m.id===id));if(saved&&saved.theme==="light")state.theme="light";if(saved&&["matrix","minimal","arctic"].includes(saved.design))state.design=saved.design;if(saved&&saved.lite===true)state.lite=true;}catch(e){}
+let state={completed:[],theme:"dark",design:"matrix",lite:false};
+try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.isArray(saved.completed))state.completed=saved.completed.filter(id=>modules.some(m=>m.id===id));if(saved&&saved.theme==="light")state.theme="light";state.design="matrix";if(saved&&saved.lite===true)state.lite=true;}catch(e){}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){if($("progressHint"))$("progressHint").textContent="Браузер не разрешил сохранить прогресс. Курс всё равно можно пройти."}}
 function renderModules(){if(!$("modules"))return;const base=location.pathname.includes("/pages/")?"":"pages/";$("modules").innerHTML=modules.map((m,i)=>{const done=state.completed.includes(m.id);return `<article class="module reveal" style="--delay:${i*45}ms"><div class="module-top"><span class="num">МОДУЛЬ ${String(i+1).padStart(2,"0")}</span><span class="module-status">${done?"✓ Пройден":"Не начат"}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div class="module-bottom"><span>◷ ${m.time}</span><a class="module-open" href="${base}module.html?id=${m.id}">${done?"Повторить":"Начать урок"} <span aria-hidden="true">↗</span></a></div></article>`}).join("");const n=state.completed.length;$("progressLabel").textContent=n+" из "+modules.length+" модулей";$("progressFill").style.width=(n/modules.length*100)+"%";$("progressBar").setAttribute("aria-valuenow",n);$("progressHint").textContent=n===modules.length?"Курс завершён — отлично справился!":n?"Продолжай: каждый модуль добавляет полезные привычки.":"Выбери первый модуль и начни обучение.";$("completion").hidden=n!==modules.length}
 function theme(){document.documentElement.dataset.theme=state.theme==="light"?"light":"dark";$("theme").textContent=state.theme==="light"?"☾ Тёмная":"☼ Светлая";$("theme").setAttribute("aria-pressed",state.theme==="light"?"true":"false")}
 function liteMode(){document.documentElement.dataset.lite=state.lite?"true":"false";let toggle=$("liteToggle");if(!toggle){toggle=document.createElement("button");toggle.id="liteToggle";toggle.type="button";toggle.className="lite-toggle";$("theme").insertAdjacentElement("beforebegin",toggle);}toggle.textContent=state.lite?"⚡ Лёгкий: вкл":"⚡ Лёгкий режим";toggle.setAttribute("aria-pressed",state.lite?"true":"false");toggle.setAttribute("aria-label","Включить или выключить облегчённый интерфейс");}
-function design(){
- const root=document.documentElement;
- const variants=[
-  {id:"neon",name:"Неон",desc:"Неоновая сеть"},
-  {id:"minimal",name:"Минимализм",desc:"Чистый и спокойный"},
-  {id:"matrix",name:"Кибер-сетка",desc:"Потоки данных"},
-  {id:"arctic",name:"Арктика",desc:"Светлый лёд"}
- ];
- if(!variants.some(v=>v.id===state.design))state.design="neon";
- let wrap=$("designMenu");
- if(!wrap){
-  wrap=document.createElement("div");wrap.id="designMenu";wrap.className="design-menu";
-  const trigger=document.createElement("button");trigger.type="button";trigger.className="design-trigger";trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-haspopup","true");trigger.innerHTML='<span class="design-spark" aria-hidden="true">✳</span><span class="design-current">Неон</span><span aria-hidden="true">⌄</span>';
-  const menu=document.createElement("div");menu.className="design-options";menu.setAttribute("role","group");menu.setAttribute("aria-label","Варианты оформления сайта");
-  menu.innerHTML='<div class="design-menu-title">ВЫБЕРИ СТИЛЬ</div>'+variants.map(v=>'<button type="button" class="design-option" data-variant="'+v.id+'" aria-pressed="false"><span class="variant-preview variant-'+v.id+'" aria-hidden="true"><i></i><i></i><i></i></span><span class="variant-copy"><b>'+v.name+'</b><small>'+v.desc+'</small></span><span class="variant-check" aria-hidden="true">✓</span></button>').join("");
-  wrap.append(trigger,menu);$("theme").insertAdjacentElement("beforebegin",wrap);
-  trigger.addEventListener("click",()=>{menu.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(menu.classList.contains("is-open")))});
-  menu.querySelectorAll("[data-variant]").forEach(button=>button.addEventListener("click",()=>{state.design=button.dataset.variant;menu.classList.remove("is-open");apply();save()}));
-  document.addEventListener("click",e=>{if(!wrap.contains(e.target)){menu.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"){menu.classList.remove("is-open");trigger.setAttribute("aria-expanded","false")}});
- }
- const trigger=wrap.querySelector(".design-trigger"),menu=wrap.querySelector(".design-options");
- function apply(){root.dataset.design=state.design;const label=variants.find(v=>v.id===state.design);menu.querySelectorAll("[data-variant]").forEach(b=>{const active=b.dataset.variant===state.design;b.setAttribute("aria-pressed",String(active));b.classList.toggle("is-active",active)});trigger.setAttribute("aria-expanded",String(menu.classList.contains("is-open")));trigger.querySelector(".design-current").textContent=label.name;}
- apply();
-}
+function design(){document.documentElement.dataset.design="matrix";state.design="matrix";save()}
+
 let active=null,step=0,answered=false,activeSteps=[];
 function openModule(id){active=modules.find(m=>m.id===id);activeSteps=lessonSteps(active);step=0;answered=false;showStep();$("lessonDialog").showModal()}
 function showStep(){const total=activeSteps.length,lesson=activeSteps[step],isQuiz=!!lesson.q,isChallenge=!!lesson.challenge;$("lessonKicker").textContent="МОДУЛЬ "+String(modules.indexOf(active)+1).padStart(2,"0");$("lessonStep").textContent=isChallenge?"ПРАКТИКА":isQuiz?"ПРОВЕРЬ СЕБЯ":"ТЕОРИЯ";$("lessonCounter").textContent=(step+1)+" / "+total;$("lessonTrackFill").style.width=((step+1)/total*100)+"%";$("lessonTitle").textContent=lesson.title;$("lessonContent").innerHTML=isChallenge?challengeMarkup(lesson.challenge):(lesson.html||"");$("lessonContent").hidden=isQuiz;$("quizArea").hidden=!isQuiz;$("quizFeedback").textContent="";$("quizOptions").innerHTML="";answered=false;if(isQuiz){$("quizQuestion").textContent=lesson.q;lesson.opts.forEach((option,i)=>{const b=document.createElement("button");b.className="option";b.type="button";b.textContent=option;b.addEventListener("click",()=>answer(i,b));$("quizOptions").appendChild(b)})}$("backLesson").disabled=step===0;$("nextLesson").textContent=step===total-1?"Завершить модуль ✓":"Далее →";$("nextLesson").disabled=isQuiz||isChallenge;if(isChallenge)wireChallenge($("lessonContent"),lesson.challenge,$("nextLesson"));}
