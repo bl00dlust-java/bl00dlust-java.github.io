@@ -805,3 +805,81 @@ input[type="text"]::placeholder,
     border-color: var(--line);
   }
 }
+
+
+/* Signature logo: animated digital shield with a rotating orbit and signal core */
+.brand .logo{
+  position:relative!important;
+  isolation:isolate;
+  display:grid!important;
+  place-items:center!important;
+  width:44px!important;
+  height:44px!important;
+  flex:0 0 44px!important;
+  overflow:visible!important;
+  border:1px solid rgba(100,184,255,.78)!important;
+  border-radius:15px!important;
+  background:radial-gradient(circle at 50% 42%,rgba(68,158,255,.24),rgba(6,25,49,.9) 72%)!important;
+  box-shadow:0 0 18px rgba(43,143,255,.2),inset 0 0 16px rgba(65,159,255,.14)!important;
+  color:transparent!important;
+  font-size:0!important;
+  animation:signatureLogoEnter .9s cubic-bezier(.16,1,.3,1) both!important;
+}
+.brand .logo:before{
+  content:""!important;
+  position:absolute!important;
+  inset:10px!important;
+  width:auto!important;
+  height:auto!important;
+  display:block!important;
+  border:2px solid #8bceff!important;
+  border-radius:5px!important;
+  background:linear-gradient(135deg,rgba(95,186,255,.2),rgba(10,50,100,.12))!important;
+  box-shadow:0 0 10px rgba(72,164,255,.65),inset 0 0 8px rgba(72,164,255,.2)!important;
+  transform:rotate(45deg)!important;
+  animation:signatureCore 3s ease-in-out infinite!important;
+}
+.brand .logo:after{
+  content:""!important;
+  position:absolute!important;
+  inset:-5px!important;
+  width:auto!important;
+  height:auto!important;
+  border:1px solid rgba(93,179,255,.5)!important;
+  border-radius:18px!important;
+  background:transparent!important;
+  box-shadow:0 0 0 4px rgba(49,137,255,.035)!important;
+  transform:rotate(0deg)!important;
+  animation:signatureOrbit 5s linear infinite!important;
+}
+.brand .logo{
+  outline:1px solid rgba(100,184,255,.14);
+  outline-offset:5px;
+}
+.brand .brand-name{letter-spacing:.13em}
+@keyframes signatureLogoEnter{
+  from{opacity:0;transform:translateY(8px) scale(.72) rotate(-18deg);filter:blur(4px)}
+  to{opacity:1;transform:translateY(0) scale(1) rotate(0);filter:blur(0)}
+}
+@keyframes signatureCore{
+  0%,100%{transform:rotate(45deg) scale(.88);filter:drop-shadow(0 0 2px rgba(100,190,255,.45))}
+  50%{transform:rotate(135deg) scale(1.06);filter:drop-shadow(0 0 8px rgba(100,190,255,.95))}
+}
+@keyframes signatureOrbit{
+  0%{transform:rotate(0deg) scale(.96);border-color:rgba(93,179,255,.28);box-shadow:0 0 0 4px rgba(49,137,255,.025)}
+  50%{transform:rotate(180deg) scale(1.05);border-color:rgba(93,179,255,.82);box-shadow:0 0 14px rgba(49,137,255,.2),0 0 0 4px rgba(49,137,255,.07)}
+  100%{transform:rotate(360deg) scale(.96);border-color:rgba(93,179,255,.28);box-shadow:0 0 0 4px rgba(49,137,255,.025)}
+}
+:root[data-theme="light"] .brand .logo{
+  background:radial-gradient(circle at 50% 42%,rgba(49,137,255,.16),#edf6ff 72%)!important;
+  border-color:rgba(23,111,229,.72)!important;
+  box-shadow:0 0 20px rgba(23,111,229,.18),inset 0 0 16px rgba(23,111,229,.1)!important;
+}
+:root[data-theme="light"] .brand .logo:before{border-color:#176fe5!important;box-shadow:0 0 10px rgba(23,111,229,.45),inset 0 0 8px rgba(23,111,229,.16)!important}
+:root[data-theme="light"] .brand .logo:after{border-color:rgba(23,111,229,.48)!important}
+@media(prefers-reduced-motion:reduce){
+ .brand .logo,.brand .logo:before,.brand .logo:after{animation:none!important}
+}
+@media(max-width:560px){
+ .brand .logo{width:42px!important;height:42px!important;flex-basis:42px!important}
+}
