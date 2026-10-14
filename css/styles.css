@@ -544,3 +544,22 @@ body:after,:root[data-lite="true"] body:after{display:block!important}
 :root[data-design="arctic"][data-theme="dark"]{--bg:#07111f!important;--panel:#0d1b2e!important;--panel2:#122641!important;--text:#eaf4ff!important;--muted:#9bb2cc!important;--line:rgba(82,157,255,.22)!important;--accent:#4da3ff!important;--accent2:#8bc5ff!important;--glow:rgba(49,137,255,.24)!important;color-scheme:dark}
 :root[data-design="arctic"][data-theme="dark"] .hero-shell{background:linear-gradient(130deg,rgba(5,17,34,.98),rgba(10,31,58,.96))!important}
 :root[data-design="arctic"][data-theme="dark"] .hero .art{background:radial-gradient(ellipse at 50% 55%,rgba(39,133,255,.2),transparent 47%),linear-gradient(145deg,#10233e,#081321)!important}
+
+
+/* FIX: readable hero panel controls and captions across design variants */
+.hero-shell .hero-navline .eyebrow{color:#4d88c8!important;opacity:1!important}
+.hero-shell .hero-top-link{color:#24568d!important;border-color:rgba(45,112,190,.35)!important;background:rgba(255,255,255,.12)!important;opacity:1!important}
+.hero-shell .hero-top-link span{color:#24568d!important;opacity:1!important}
+.hero-shell .hero-top-link:hover{color:#123f76!important;background:rgba(65,145,255,.12)!important}
+.hero-shell .intro p,.hero-shell .hero-feature,.hero-shell .hero-feature span,.hero-shell .hero-feature small,.hero-shell .meta small{color:#536d89!important;opacity:1!important}
+.hero-shell .hero-feature b,.hero-shell .meta b{color:#31577f!important;opacity:1!important}
+.hero-shell .hero-feature .feature-icon{color:#2677d4!important}
+:root[data-design="neon"] .hero-shell,
+:root[data-design="minimal"] .hero-shell,
+:root[data-design="matrix"] .hero-shell,
+:root[data-design="arctic"] .hero-shell{color:#122541}
+:root[data-design="neon"] .hero-shell .hero-top-link,
+:root[data-design="minimal"] .hero-shell .hero-top-link,
+:root[data-design="matrix"] .hero-shell .hero-top-link,
+:root[data-design="arctic"] .hero-shell .hero-top-link{color:#24568d!important}
+@media(max-width:760px){.hero-shell .hero-top-link{min-height:38px}}
