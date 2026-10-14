@@ -497,3 +497,8 @@ a:not(.button):not(.brand):hover,button:hover{filter:drop-shadow(0 0 7px rgba(83
 @media(max-width:760px){.cursor-trail{display:none!important}}
 @media(hover:none),(prefers-reduced-motion:reduce){.cursor-trail{display:none!important}}
 @media(prefers-reduced-motion:reduce){body:before,body:after,.brand,.brand .logo,.brand .logo:before,.brand .logo:after{animation:none!important}}
+
+/* Ensure ambient effects stay visible even if an older lite-mode rule is present */
+body:before{display:block!important}
+body:after,:root[data-lite="true"] body:after{display:block!important}
+:root[data-lite="true"] body:before{display:block!important}
