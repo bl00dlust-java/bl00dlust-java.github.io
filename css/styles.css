@@ -214,3 +214,28 @@ body:after{content:"";position:fixed;inset:0;z-index:20;pointer-events:none;opac
 .header button.lite-toggle{border-color:color-mix(in srgb,var(--accent) 50%,var(--line));white-space:nowrap}
 :root[data-lite="true"] .hero .art:before,:root[data-lite="true"] .hero .art:after,:root[data-lite="true"] .hero .shield:after{animation:none!important}
 @media(max-width:760px){.header button.lite-toggle{padding:8px 10px;font-size:10px}}
+
+
+/* Scroll and page transitions inspired by the reference site's polished motion */
+html{scroll-behavior:smooth}
+body{animation:siteEnter .65s cubic-bezier(.22,.7,.25,1) both}
+.motion-ready .reveal{opacity:0;transform:translate3d(0,34px,0);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1);transition-delay:var(--reveal-delay,0ms);will-change:opacity,transform}
+.motion-ready .reveal.is-visible{opacity:1;transform:translate3d(0,0,0);will-change:auto}
+.motion-ready .reveal.reveal-left{transform:translate3d(-32px,0,0)}
+.motion-ready .reveal.reveal-left.is-visible{transform:translate3d(0,0,0)}
+.motion-ready .reveal.reveal-scale{transform:scale(.965);opacity:0}
+.motion-ready .reveal.reveal-scale.is-visible{transform:scale(1);opacity:1}
+.cards article,.module,.hero-feature,.row{transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .35s,background-color .35s}
+.cards article:hover,.module:hover{transform:translateY(-5px)}
+a:not(.button):not(.brand),button{transition:color .25s,background-color .25s,border-color .25s,opacity .25s}
+.hero .art{clip-path:inset(0 0 0 0 round 2px);animation:artReveal .9s .12s cubic-bezier(.2,.7,.2,1) both}
+.hero .art .shield{animation:shieldIntro .85s .28s cubic-bezier(.2,.7,.2,1) both}
+.button,.btn{transition:transform .28s,background-color .28s,border-color .28s,box-shadow .28s}
+.button:hover,.btn:hover{transform:translateY(-2px)}
+@keyframes siteEnter{from{opacity:0}to{opacity:1}}
+@keyframes artReveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes shieldIntro{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+:root[data-lite="true"] body{animation:none}
+:root[data-lite="true"] .motion-ready .reveal{opacity:1!important;transform:none!important;transition:none!important;will-change:auto!important}
+:root[data-lite="true"] .hero .art,:root[data-lite="true"] .hero .art .shield{animation:none!important;clip-path:none!important}
+@media(prefers-reduced-motion:reduce){body{animation:none!important}.motion-ready .reveal{opacity:1!important;transform:none!important;transition:none!important}.hero .art,.hero .art .shield{animation:none!important;clip-path:none!important}}
