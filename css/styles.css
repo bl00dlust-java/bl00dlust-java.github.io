@@ -512,3 +512,15 @@ body:before{inset:0;background:repeating-linear-gradient(90deg,transparent 0 58p
 body:after{background:radial-gradient(circle at 12% 22%,#9ee8ff 0 1px,transparent 2px),radial-gradient(circle at 73% 16%,#00b7ff 0 1.5px,transparent 3px),radial-gradient(circle at 86% 72%,#b5f0ff 0 1px,transparent 2px),radial-gradient(circle at 31% 83%,#00b7ff 0 1.5px,transparent 3px)!important;animation:blueStars 2.6s ease-in-out infinite alternate!important}
 .hero .art{background:repeating-linear-gradient(0deg,transparent 0 20px,rgba(0,183,255,.045) 21px,transparent 22px),radial-gradient(ellipse at 50% 55%,rgba(0,183,255,.2),transparent 47%),linear-gradient(145deg,#06172a,#081321)!important}
 @keyframes matrixScan{0%{transform:translateY(-2%) translateX(-1%)}100%{transform:translateY(2%) translateX(1%)}}
+
+
+/* Mobile layout safety: keep the cyber illustration inside its card */
+@media(max-width:760px){
+ .hero .art{position:relative!important;width:100%!important;min-width:0!important;height:220px!important;min-height:220px!important;max-height:220px!important;overflow:hidden!important;transform:none!important}
+ .hero .art:before,.hero .art:after{position:absolute!important;max-width:100%!important;max-height:100%!important;pointer-events:none!important}
+ .hero .shield{max-width:70%!important;max-height:80%!important}
+ .header{position:relative!important}
+}
+@media(max-width:520px){
+ .hero .art{height:200px!important;min-height:200px!important;max-height:200px!important}
+}
