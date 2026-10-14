@@ -376,3 +376,20 @@ body,.header,.cards article,.module,.progress,.statement,.lesson-card,.lesson-as
 html.theme-wave::before{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:var(--wave-from,#101010);clip-path:circle(150vmax at var(--wave-x,50%) var(--wave-y,50%));animation:themeWaveReveal .95s cubic-bezier(.7,0,.2,1) forwards}
 @keyframes themeWaveReveal{from{clip-path:circle(150vmax at var(--wave-x,50%) var(--wave-y,50%));opacity:1}to{clip-path:circle(0 at var(--wave-x,50%) var(--wave-y,50%));opacity:1}}
 @media(prefers-reduced-motion:reduce){html.theme-wave::before{animation:none;display:none}}
+
+/* Homepage label: force a readable orange, never teal/green */
+.hero-shell .hero-navline .eyebrow,
+.hero-shell .hero-navline .eyebrow *{color:#ff6a2a!important}
+.hero-shell .hero-navline .eyebrow .status-dot{background:#ff6a2a!important;box-shadow:0 0 10px rgba(255,106,42,.6)!important}
+:root[data-theme="light"] .hero-shell .hero-navline .eyebrow,
+:root[data-theme="light"] .hero-shell .hero-navline .eyebrow *{color:#e9551d!important}
+/* Elliptical glowing wave: old theme outside the moving boundary, new theme inside */
+html.theme-wave::before{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:var(--wave-to,#101010);clip-path:ellipse(0% 0% at var(--wave-x,50%) var(--wave-y,50%));animation:themeEllipseWave 1.15s cubic-bezier(.65,0,.25,1) forwards;filter:drop-shadow(0 0 8px rgba(255,106,42,.95))}
+html.theme-wave::after{content:"";position:fixed;z-index:100000;pointer-events:none;left:var(--wave-x,50%);top:var(--wave-y,50%);width:clamp(70px,9vw,130px);height:clamp(44px,5.5vw,78px);border:2px solid #ff6a2a;border-radius:50% 46% 53% 47% / 45% 55% 43% 57%;box-shadow:0 0 8px rgba(255,106,42,.9),0 0 22px rgba(255,106,42,.48),inset 0 0 12px rgba(255,106,42,.18);transform:translate(-50%,-50%) scale(.12) rotate(-12deg);animation:themeRingTravel 1.15s cubic-bezier(.65,0,.25,1) forwards}
+@keyframes themeEllipseWave{0%{clip-path:ellipse(0% 0% at var(--wave-x,50%) var(--wave-y,50%))}70%{clip-path:ellipse(115% 105% at var(--wave-x,50%) var(--wave-y,50%))}100%{clip-path:ellipse(155% 145% at var(--wave-x,50%) var(--wave-y,50%))}}
+@keyframes themeRingTravel{0%{transform:translate(-50%,-50%) scale(.12) rotate(-12deg);opacity:.25}48%{transform:translate(-50%,-50%) scale(1) rotate(12deg);opacity:1}82%{transform:translate(-50%,-50%) scale(1.14) rotate(-8deg);opacity:.95}100%{transform:translate(-50%,-50%) scale(.08) rotate(0);opacity:0}}
+.hero .orbit-animation:before{inset:19px 7px;border-radius:48% 52% 46% 54% / 51% 44% 56% 49%;border-color:rgba(255,106,42,.68);box-shadow:0 0 7px rgba(255,106,42,.55),0 0 18px rgba(255,106,42,.2);animation:orbitWarp 8s ease-in-out infinite}
+.hero .orbit-animation:after{inset:-7px 20px;border-radius:52% 48% 57% 43% / 43% 57% 46% 54%;border-color:rgba(255,150,95,.45);box-shadow:0 0 9px rgba(255,106,42,.3);animation:orbitWarp 10s ease-in-out infinite reverse}
+@keyframes orbitWarp{0%,100%{transform:rotate(-18deg) scaleX(.92) scaleY(1.04)}50%{transform:rotate(18deg) scaleX(1.08) scaleY(.94)}}
+:root[data-lite="true"] html.theme-wave::before,:root[data-lite="true"] html.theme-wave::after{animation:none!important}
+@media(prefers-reduced-motion:reduce){html.theme-wave::before,html.theme-wave::after{animation:none!important;display:none!important}.hero .orbit-animation:before,.hero .orbit-animation:after{animation:none!important}}
