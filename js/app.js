@@ -39,7 +39,7 @@ const STORE="cyberhygiene-course-v2";
 let state={completed:[],theme:"dark"};
 try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.isArray(saved.completed))state.completed=saved.completed.filter(id=>modules.some(m=>m.id===id));if(saved&&saved.theme==="light")state.theme="light";}catch(e){}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){if($("progressHint"))$("progressHint").textContent="Браузер не разрешил сохранить прогресс. Курс всё равно можно пройти."}}
-function renderModules(){$("modules").innerHTML=modules.map((m,i)=>{const done=state.completed.includes(m.id);return `<article class="module"><div class="module-top"><span class="num">МОДУЛЬ 0${i+1}</span><span class="module-status">${done?"✓ Пройден":"Не начат"}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div class="module-bottom"><span>◷ ${m.time}</span><button type="button" data-open="${m.id}">${done?"Повторить":"Начать →"}</button></div></article>`}).join("");document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>openModule(b.dataset.open)));const n=state.completed.length;$("progressLabel").textContent=n+" из "+modules.length+" модулей";$("progressFill").style.width=(n/modules.length*100)+"%";$("progressBar").setAttribute("aria-valuenow",n);$("progressHint").textContent=n===modules.length?"Курс завершён — отлично справился!":n?"Продолжай: каждый модуль добавляет полезные привычки.":"Выбери первый модуль и начни обучение.";$("completion").hidden=n!==modules.length}
+function renderModules(){if(!$("modules"))return;const base=location.pathname.includes("/pages/")?"":"pages/";$("modules").innerHTML=modules.map((m,i)=>{const done=state.completed.includes(m.id);return `<article class="module reveal" style="--delay:${i*45}ms"><div class="module-top"><span class="num">МОДУЛЬ ${String(i+1).padStart(2,"0")}</span><span class="module-status">${done?"✓ Пройден":"Не начат"}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div class="module-bottom"><span>◷ ${m.time}</span><a class="module-open" href="${base}module.html?id=${m.id}">${done?"Повторить":"Начать урок"} <span aria-hidden="true">↗</span></a></div></article>`}).join("");const n=state.completed.length;$("progressLabel").textContent=n+" из "+modules.length+" модулей";$("progressFill").style.width=(n/modules.length*100)+"%";$("progressBar").setAttribute("aria-valuenow",n);$("progressHint").textContent=n===modules.length?"Курс завершён — отлично справился!":n?"Продолжай: каждый модуль добавляет полезные привычки.":"Выбери первый модуль и начни обучение.";$("completion").hidden=n!==modules.length}
 function theme(){document.documentElement.dataset.theme=state.theme==="light"?"light":"dark";$("theme").textContent=state.theme==="light"?"☾ Тёмная":"☼ Светлая";$("theme").setAttribute("aria-pressed",state.theme==="light"?"true":"false")}
 let active=null,step=0,answered=false;
 function openModule(id){active=modules.find(m=>m.id===id);step=0;answered=false;showStep();$("lessonDialog").showModal()}
@@ -54,7 +54,38 @@ $("lessonDialog").addEventListener("click",e=>{if(e.target===$("lessonDialog"))$
 $("theme").addEventListener("click",()=>{state.theme=state.theme==="light"?"dark":"light";theme();save()});
 if ($("print")) $("print").addEventListener("click",()=>window.print());
 theme();if ($("modules")) renderModules();
-if (location.pathname.endsWith("/module.html")) {
-  const requestedId = new URLSearchParams(location.search).get("id");
-  if (modules.some(m => m.id === requestedId)) openModule(requestedId);
+function renderSeparateLesson(){
+ const root=$("modulePage");if(!root)return;
+ const id=new URLSearchParams(location.search).get("id");
+ let activeModule=modules.find(m=>m.id===id);
+ if(!activeModule){root.innerHTML='<div class="lesson-error"><h1>Урок не найден</h1><p>Выбери модуль из списка курса.</p><a class="button" href="course.html">Вернуться к курсу ↗</a></div>';return;}
+ let index=0,answeredLocal=false;
+ const pageNum=modules.indexOf(activeModule)+1;
+ root.innerHTML=`<div class="lesson-layout">
+ <a class="back-link" href="course.html">← Все модули</a>
+ <section class="lesson-card">
+ <div class="lesson-card-top"><span class="eyebrow">МОДУЛЬ ${String(pageNum).padStart(2,"0")} · ${activeModule.time.toUpperCase()}</span><span class="lesson-counter" id="seCounter"></span></div>
+ <div class="lesson-track"><span id="seTrack"></span></div>
+ <h1 id="seTitle"></h1><div class="lesson-copy" id="seContent"></div>
+ <section class="quiz" id="seQuiz" hidden><h2 id="seQuestion"></h2><div class="options" id="seOptions"></div><p class="feedback" id="seFeedback" aria-live="polite"></p></section>
+ <div class="dialog-actions"><button class="quiet" id="seBack" type="button">← Назад</button><button class="btn" id="seNext" type="button">Далее →</button></div>
+ </section>
+ <aside class="lesson-aside"><div class="aside-icon">✳</div><span class="eyebrow">ТВОЯ ЦИФРОВАЯ ЗАЩИТА</span><h2>${activeModule.title}</h2><p>${activeModule.desc}</p><div class="aside-progress"><span id="seAsideCount"></span><div class="track"><span id="seAsideTrack"></span></div><small>Прогресс внутри урока</small></div><p class="aside-tip">Не спеши. Лучше понять одно правило и применять его каждый день, чем запомнить десять и забыть завтра.</p></aside>
+ </div>`;
+ function draw(){
+  const lesson=activeModule.lessons[index],isQuiz=!!lesson.q,total=activeModule.lessons.length;
+  $("seCounter").textContent=(index+1)+" / "+total;
+  $("seTrack").style.width=((index+1)/total*100)+"%";
+  $("seAsideCount").textContent="Шаг "+(index+1)+" из "+total;
+  $("seAsideTrack").style.width=((index+1)/total*100)+"%";
+  $("seTitle").textContent=lesson.title;
+  $("seContent").innerHTML=lesson.html||"";$("seContent").hidden=isQuiz;
+  $("seQuiz").hidden=!isQuiz;$("seFeedback").textContent="";$("seOptions").innerHTML="";answeredLocal=false;
+  if(isQuiz){$("seQuestion").textContent=lesson.q;lesson.opts.forEach((option,i)=>{const b=document.createElement("button");b.className="option";b.type="button";b.textContent=option;b.addEventListener("click",()=>{if(answeredLocal)return;answeredLocal=true;[...$("seOptions").children].forEach((el,j)=>{el.disabled=true;if(j===lesson.correct)el.classList.add("correct")});if(i!==lesson.correct)b.classList.add("wrong");$("seFeedback").textContent=(i===lesson.correct?"Верно! ":"Не совсем. ")+lesson.why;$("seNext").disabled=false;});$("seOptions").appendChild(b);});}
+  $("seBack").disabled=index===0;$("seNext").disabled=isQuiz;$("seNext").textContent=index===total-1?"Завершить модуль ✓":"Далее →";
+ }
+ $("seBack").addEventListener("click",()=>{if(index>0){index--;draw();window.scrollTo({top:0,behavior:"smooth"});}});
+ $("seNext").addEventListener("click",()=>{if(index<activeModule.lessons.length-1){index++;draw();window.scrollTo({top:0,behavior:"smooth"});return;}if(!state.completed.includes(activeModule.id))state.completed.push(activeModule.id);save();$("seNext").textContent="✓ Модуль завершён";$("seNext").disabled=true;const next=modules[modules.indexOf(activeModule)+1];const done=document.createElement("div");done.className="lesson-finish";done.innerHTML='<span class="finish-check">✓</span><div><h3>Отличная работа!</h3><p>Прогресс сохранён в этом браузере.</p></div>';root.querySelector(".lesson-card").appendChild(done);const links=document.createElement("div");links.className="finish-links";links.innerHTML='<a class="button" href="'+(next?'module.html?id='+next.id:'course.html')+'">'+(next?'Следующий модуль ↗':'К списку курса ↗')+'</a><a class="quiet-link" href="course.html">Все модули</a>';root.querySelector(".lesson-card").appendChild(links);});
+ draw();
 }
+if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
