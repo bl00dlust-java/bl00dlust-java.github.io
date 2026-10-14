@@ -704,3 +704,25 @@ body:after{background:radial-gradient(circle at 12% 22%,#9ee8ff 0 1px,transparen
 .video-links a{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;color:var(--text);text-decoration:none;font-size:.88rem;font-weight:700;transition:background .2s,border-color .2s,transform .2s}
 .video-links a:hover,.video-links a:focus-visible{background:var(--glow);border-color:var(--accent);transform:translateY(-1px)}
 @media(max-width:600px){.video-resources{padding:15px}.video-links{flex-direction:column}.video-links a{width:100%;box-sizing:border-box}}
+
+
+/* Fix invisible alphabetic characters in password/text fields */
+input[type="password"],
+input[type="text"],
+input[type="email"],
+input[type="search"],
+.password-entry input,
+#challengePassword{
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
+  caret-color:var(--accent)!important;
+  opacity:1!important;
+}
+input[type="password"]::placeholder,
+input[type="text"]::placeholder,
+.password-entry input::placeholder,
+#challengePassword::placeholder{
+  -webkit-text-fill-color:var(--muted);
+  color:var(--muted);
+  opacity:1;
+}
