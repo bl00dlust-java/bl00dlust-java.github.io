@@ -327,3 +327,21 @@ body:after{opacity:.07;background:repeating-linear-gradient(0deg,transparent 0 3
 .cta{background:linear-gradient(120deg,#713019,#2c1b15)}
 .cta:after{color:rgba(255,170,120,.06)}
 .challenge-panel{border-color:rgba(255,126,65,.28)}
+
+/* Final cleanup: orange-only interface, no Matrix canvas, animated orbital emblem */
+#matrixRain{display:none!important}
+.hero .art:before{border:1px dashed rgba(255,157,105,.28)!important;box-shadow:0 0 32px rgba(255,106,42,.08)!important;animation:cyberOrbit 32s linear infinite!important}
+.hero .art:after{border-color:rgba(255,106,42,.22)!important;animation:cyberPulse 5s ease-out infinite!important}
+.hero .shield{display:none!important}
+.orbit-animation{position:relative;width:220px;height:220px;display:grid;place-items:center;isolation:isolate}
+.orbit-animation:before,.orbit-animation:after{content:"";position:absolute;inset:15px;border:1px solid rgba(255,106,42,.55);border-radius:50%;animation:orbitSpin 12s linear infinite}
+.orbit-animation:after{inset:0;border-style:dashed;border-color:rgba(255,160,112,.35);animation:orbitSpin 22s linear infinite reverse}
+.orbit-core{display:grid;place-items:center;width:94px;height:94px;border:1px solid rgba(255,106,42,.7);border-radius:28px;color:#ff6a2a;font-size:58px;background:radial-gradient(circle,rgba(255,106,42,.16),rgba(27,20,16,.94) 70%);box-shadow:0 0 30px rgba(255,106,42,.15),inset 0 0 22px rgba(255,106,42,.1);animation:coreFloat 3.4s ease-in-out infinite}
+.orbit-animation i{position:absolute;width:11px;height:11px;border-radius:50%;background:#ff6a2a;box-shadow:0 0 18px rgba(255,106,42,.75);top:4px;left:calc(50% - 5px);transform-origin:5px 106px;animation:orbitSpin 5s linear infinite}
+.orbit-animation i:nth-of-type(2){animation-duration:7s;transform:rotate(90deg);opacity:.8}
+.orbit-animation i:nth-of-type(3){animation-duration:9s;transform:rotate(180deg);opacity:.65}
+.orbit-animation i:nth-of-type(4){animation-duration:11s;transform:rotate(270deg);opacity:.9}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+@keyframes coreFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+:root[data-lite="true"] .orbit-animation:before,:root[data-lite="true"] .orbit-animation:after,:root[data-lite="true"] .orbit-animation i,:root[data-lite="true"] .orbit-core{animation:none!important}
+@media(prefers-reduced-motion:reduce){.orbit-animation *,.orbit-animation:before,.orbit-animation:after{animation:none!important}}
