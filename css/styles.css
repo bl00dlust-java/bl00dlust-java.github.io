@@ -395,7 +395,7 @@ html.theme-wave::after{content:"";position:fixed;z-index:100000;pointer-events:n
 @media(prefers-reduced-motion:reduce){html.theme-wave::before,html.theme-wave::after{animation:none!important;display:none!important}.hero .orbit-animation:before,.hero .orbit-animation:after{animation:none!important}}
 
 /* User-provided typography: Cheharda for display, Evolt for body copy */
-@font-face{font-family:"Cheharda";src:url("../assets/fonts/Cheharda.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
-@font-face{font-family:"Evolt";src:url("../assets/fonts/Evolt.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Cheharda";src:url("../assets/fonts/Cheharda.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Evolt";src:url("../assets/fonts/evolt.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
 h1,h2,h3,h4,h5,h6,.hero-title,.statement,.section-head,.brand,.number,.metric,.big-text,.hero .intro h2,.hero .headline,.hero h1,.cta h2,.module-title{font-family:"Cheharda",sans-serif}
 body,p,li,label,input,textarea,select,button,.eyebrow,.art-label,.nav,.intro,.description,.muted,.small,.caption,.module-description,.lesson-copy,.lesson-aside,.hero-feature span{font-family:"Evolt",sans-serif}
