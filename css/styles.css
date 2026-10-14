@@ -412,10 +412,11 @@ body{background-color:var(--bg);background-image:radial-gradient(ellipse at 12% 
 @media(prefers-reduced-motion:reduce){html.theme-switching::after{animation:none!important;display:none!important}body,.hero-shell::before,.hero .orbit-animation,.cards article::after,.module::after{animation:none!important}.hero .orbit-animation:before,.hero .orbit-animation:after{animation:none!important}}
 
 /* User-provided typography: Cheharda for display, Evolt for body copy */
-@font-face{font-family:"Cheharda";src:url("../assets/fonts/Cheharda.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:"Evolt";src:url("../assets/fonts/evolt.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
-h1,h2,h3,h4,h5,h6,.hero-title,.statement,.section-head,.brand,.number,.metric,.big-text,.hero .intro h2,.hero .headline,.hero h1,.cta h2,.module-title{font-family:"Cheharda",sans-serif}
-body,p,li,label,input,textarea,select,button,.eyebrow,.art-label,.nav,.intro,.description,.muted,.small,.caption,.module-description,.lesson-copy,.lesson-aside,.hero-feature span{font-family:"Evolt",sans-serif}
+@font-face{font-family:"Cheharda";src:url("../assets/fonts/Cheharda.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap;unicode-range:U+0400-04FF,U+0500-052F}
+@font-face{font-family:"Evolt";src:url("../assets/fonts/evolt.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap;unicode-range:U+0400-04FF,U+0500-052F}
+/* Custom display fonts are limited to Cyrillic: Latin letters use a complete fallback font. */
+h1,h2,h3,h4,h5,h6,.hero-title,.statement,.section-head,.brand,.number,.metric,.big-text,.hero .intro h2,.hero .headline,.hero h1,.cta h2,.module-title{font-family:"Cheharda","JetBrains Sans",Inter,Arial,sans-serif}
+body,p,li,label,input,textarea,select,button,.eyebrow,.art-label,.nav,.intro,.description,.muted,.small,.caption,.module-description,.lesson-copy,.lesson-aside,.hero-feature span{font-family:"Evolt","JetBrains Sans",Inter,Arial,sans-serif}
 
 
 /* Animated stellar-orbit background inspired by the reference image */
