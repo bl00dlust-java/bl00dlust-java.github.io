@@ -444,3 +444,9 @@ select option{background:var(--panel);color:var(--text)}
 :root[data-lite="true"] .challenge-choice,
 :root[data-lite="true"] .bottom-menu-toggle,
 :root[data-lite="true"] .bottom-menu-link{transition:none!important}
+
+/* Animated ink reveal for headings entering the viewport */
+.char-draw{display:inline-block;opacity:0;clip-path:inset(0 100% 0 0);animation:cyberInkDraw .52s cubic-bezier(.2,.72,.24,1) forwards;animation-delay:var(--ink-delay,0ms)}
+@keyframes cyberInkDraw{0%{opacity:0;clip-path:inset(0 100% 0 0);text-shadow:none}55%{opacity:1;text-shadow:0 0 9px rgba(205,116,255,.36)}100%{opacity:1;clip-path:inset(0 0 0 0);text-shadow:none}}
+@media(prefers-reduced-motion:reduce){.char-draw{opacity:1;clip-path:none;animation:none;text-shadow:none}}
+:root[data-lite="true"] .char-draw{opacity:1;clip-path:none;animation:none;text-shadow:none}
