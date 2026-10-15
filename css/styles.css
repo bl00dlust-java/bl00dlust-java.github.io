@@ -718,3 +718,34 @@ h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.stat
  border-color:rgba(243,201,40,.45)!important;
  box-shadow:0 0 12px rgba(243,201,40,.12)!important;
 }
+
+
+/* 3D shield hero object: rotates around the X axis */
+.shield-stage{
+ position:relative;z-index:1;width:min(68%,390px);aspect-ratio:240/280;
+ display:grid;place-items:center;perspective:950px;isolation:isolate;
+ filter:drop-shadow(0 12px 28px rgba(0,0,0,.65));
+}
+.shield-model{
+ width:100%;height:100%;overflow:visible;position:relative;z-index:2;
+ transform-style:preserve-3d;transform-origin:50% 50%;
+ animation:shieldRotateX 7s cubic-bezier(.45,.04,.55,.96) infinite;
+ will-change:transform;backface-visibility:visible;
+}
+.shield-edge{stroke:#ffe889;stroke-width:2}
+.shield-aura{
+ position:absolute;z-index:0;inset:20%;border-radius:50%;
+ background:radial-gradient(ellipse,rgba(243,201,40,.24),rgba(190,143,0,.08) 42%,transparent 72%);
+ filter:blur(18px);pointer-events:none;animation:shieldAura 4s ease-in-out infinite;
+}
+@keyframes shieldRotateX{
+ 0%,100%{transform:rotateX(-12deg) rotateY(-8deg) scale(1)}
+ 25%{transform:rotateX(78deg) rotateY(0deg) scale(.88)}
+ 50%{transform:rotateX(168deg) rotateY(8deg) scale(1)}
+ 75%{transform:rotateX(258deg) rotateY(0deg) scale(.88)}
+}
+@keyframes shieldAura{0%,100%{opacity:.55;transform:scale(.88)}50%{opacity:1;transform:scale(1.12)}}
+:root[data-theme="light"] .shield-model{filter:drop-shadow(0 5px 12px rgba(120,90,0,.16))}
+@media(max-width:760px){.shield-stage{width:min(62vw,250px)}}
+@media(prefers-reduced-motion:reduce){.shield-model,.shield-aura{animation:none!important;transform:rotateX(-12deg)}}
+:root[data-lite="true"] .shield-model,:root[data-lite="true"] .shield-aura{animation:none!important;transform:none}
