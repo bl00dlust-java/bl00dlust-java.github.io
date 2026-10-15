@@ -237,7 +237,8 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
    }
   }
   const following=Math.abs(targetX-headX)+Math.abs(targetY-headY)>.5;
-  if(following||points.length>1&&now-points[0].t<lifetime)raf=requestAnimationFrame(draw);
+  const trailAlive=points.length>0&&now-points[points.length-1].t<lifetime;
+  if(following||trailAlive)raf=requestAnimationFrame(draw);
   else{ctx.clearRect(0,0,width,height);points=[];}
  }
  window.addEventListener("pointermove",move,{passive:true});
@@ -376,6 +377,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
    if(ownSequence!==sequence)return;
    liquid.style.width=nextBox.w+"px";liquid.style.height=nextBox.h+"px";
    liquid.style.transform="translate3d("+nextBox.x+"px,"+nextBox.y+"px,0) scale(.035,.82)";
+   shrink.cancel();
    const stretch=liquid.animate([
     {transform:"translate3d("+nextBox.x+"px,"+nextBox.y+"px,0) scale(.035,.82)"},
     {transform:"translate3d("+nextBox.x+"px,"+nextBox.y+"px,0) scale(1)"}
@@ -384,6 +386,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
    stretch.finished.then(()=>{
     if(ownSequence!==sequence)return;
     liquid.style.transform="translate3d("+nextBox.x+"px,"+nextBox.y+"px,0) scale(1)";
+    stretch.cancel();
     box=nextBox;animation=null;
    }).catch(()=>{});
   }).catch(()=>{});
