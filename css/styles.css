@@ -749,3 +749,7 @@ h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.stat
 @media(max-width:760px){.shield-stage{width:min(62vw,250px)}}
 @media(prefers-reduced-motion:reduce){.shield-model,.shield-aura{animation:none!important;transform:rotateY(-12deg)}}
 :root[data-lite="true"] .shield-model,:root[data-lite="true"] .shield-aura{animation:none!important;transform:none}
+
+
+/* Disable shield motion completely */
+.shield-model,.shield-aura{animation:none!important;transform:none!important;will-change:auto!important}
