@@ -468,3 +468,61 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&toggle.getAttribute("aria-expanded")==="true")close(true);});
  panel.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>close(false)));
 })();
+
+/* One-time animated ink reveal for visible headings */
+(function initInkTextReveal(){
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const root=document.documentElement;
+ if(reduce||root.dataset.lite==="true")return;
+ const selector="h1,h2,h3,.section-head,.statement";
+ const observer=("IntersectionObserver" in window)?new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(!entry.isIntersecting)return;
+   const el=entry.target;
+   el.classList.add("ink-draw-ready");
+   observer.unobserve(el);
+  });
+ },{threshold:.18,rootMargin:"0px 0px -5% 0px"}):null;
+ const decorate=el=>{
+  if(!(el instanceof Element)||el.dataset.inkDraw==="done"||el.closest("a,button,[contenteditable=true]"))return;
+  const original=el.textContent||"";
+  if(!original.trim())return;
+  el.dataset.inkDraw="done";
+  el.setAttribute("aria-label",original.replace(/\s+/g," ").trim());
+  let index=0;
+  const walk=node=>{
+   [...node.childNodes].forEach(child=>{
+    if(child.nodeType===Node.TEXT_NODE){
+     const value=child.nodeValue||"";
+     if(!value.trim()){return;}
+     const frag=document.createDocumentFragment();
+     for(const char of value){
+      if(/\s/.test(char)){frag.appendChild(document.createTextNode(char));continue;}
+      const span=document.createElement("span");
+      span.className="char-draw";span.setAttribute("aria-hidden","true");
+      span.style.setProperty("--ink-delay",Math.min(index*19,650)+"ms");
+      span.textContent=char;frag.appendChild(span);index++;
+     }
+     child.replaceWith(frag);
+    }else if(child.nodeType===Node.ELEMENT_NODE&&!child.matches("svg,script,style,.char-draw")){
+     walk(child);
+    }
+   });
+  };
+  walk(el);
+  if(observer)observer.observe(el);else el.classList.add("ink-draw-ready");
+ };
+ const scan=scope=>{
+  if(scope instanceof Element&&scope.matches(selector))decorate(scope);
+  if(scope.querySelectorAll)scope.querySelectorAll(selector).forEach(decorate);
+ };
+ scan(document);
+ const mutations=new MutationObserver(records=>{
+  records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.ELEMENT_NODE)scan(node);}));
+ });
+ mutations.observe(document.body,{childList:true,subtree:true});
+ window.addEventListener("lite-mode-change",()=>{
+  if(root.dataset.lite!=="true")return;
+  document.querySelectorAll(".char-draw").forEach(span=>{span.style.animation="none";span.style.opacity="1";span.style.clipPath="none";span.style.textShadow="none";});
+ });
+})();
