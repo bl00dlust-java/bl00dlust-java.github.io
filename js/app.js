@@ -219,12 +219,9 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  let activeId="";
  const moveIndicator=link=>{
   if(!link)return;
-  const navRect=nav.getBoundingClientRect();
-  const linkRect=link.getBoundingClientRect();
-  const x=linkRect.left-navRect.left+nav.scrollLeft;
-  indicator.style.width=linkRect.width+"px";
-  indicator.style.height=linkRect.height+"px";
-  indicator.style.transform="translate("+x+"px,"+(linkRect.top-navRect.top+nav.scrollTop)+"px)";
+  indicator.style.width=link.offsetWidth+"px";
+  indicator.style.height=link.offsetHeight+"px";
+  indicator.style.transform="translate("+link.offsetLeft+"px,"+link.offsetTop+"px)";
   indicator.style.opacity="1";
  };
  const mark=id=>{
