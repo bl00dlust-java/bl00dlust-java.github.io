@@ -183,3 +183,61 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(max-width:420px){.hero-navline{gap:8px}.pill-news{padding-right:8px}.pill-tag{font-size:8px;padding:5px 7px}.hero-top-link{max-width:95px;text-align:right}.actions .button,.actions .secondary-button{flex:1}.module-bottom{align-items:flex-start;flex-direction:column}.module-open{align-self:flex-start}.progress-top{align-items:flex-start;flex-direction:column;gap:4px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.pulsar-background{display:none}}
 @media print{body{background:#fff;color:#111;padding:0}body:before,body:after,.header,.bottom-nav,.pulsar-background,#theme,.lite-toggle{display:none!important}.wrap{width:100%}.module,.progress,.lesson-card,.lesson-aside{box-shadow:none;break-inside:avoid;border-color:#ccc;background:#fff;color:#111}.footer{padding-bottom:0}}
+
+
+/* iOS-inspired motion layer: spring easing, glass highlights and tactile feedback */
+:root{--spring:cubic-bezier(.22,1,.36,1);--spring-soft:cubic-bezier(.2,.75,.25,1);--motion-fast:220ms;--motion-mid:420ms}
+@media(prefers-reduced-motion:no-preference){
+ html{scroll-behavior:smooth}
+ .header,.site-nav,.bottom-nav,.panel,.card,.cards article,.tool-card,.module,.progress,.statement,.hero-feature,.cta,.lesson-card,.quiz-card{transition:transform .48s var(--spring),opacity .42s var(--spring),border-color .35s ease,background .4s ease,box-shadow .45s var(--spring),filter .35s ease}
+ .button,.btn,.secondary-button,.icon-btn,#theme,.module-open,.option,.challenge-choice,.bottom-nav a,.site-nav a{transition:transform .38s var(--spring),box-shadow .38s var(--spring),background .32s ease,border-color .32s ease,color .32s ease,filter .32s ease}
+ .button:active,.btn:active,.secondary-button:active,.icon-btn:active,.module-open:active,.option:active,.challenge-choice:active{transform:scale(.965)}
+ .button,.btn{position:relative;isolation:isolate;overflow:hidden}
+ .button:before,.btn:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 15%,rgba(255,255,255,.32) 48%,transparent 75%);transform:translateX(-130%);transition:transform .7s var(--spring)}
+ .button:hover:before,.btn:hover:before{transform:translateX(130%)}
+ .button:hover,.btn:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 14px 38px var(--glow),inset 0 1px rgba(255,255,255,.22)}
+ .cards article,.tool-card,.module,.hero-feature,.statement,.progress{transform-style:preserve-3d;will-change:transform}
+ .cards article:after,.tool-card:after,.module:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;background:radial-gradient(340px circle at var(--pointer-x,50%) var(--pointer-y,50%),rgba(237,154,212,.12),transparent 58%);transition:opacity .35s ease}
+ .cards article,.tool-card,.module{isolation:isolate}
+ .cards article:hover:after,.tool-card:hover:after,.module:hover:after{opacity:1}
+ .cards article:hover,.tool-card:hover{transform:translateY(-7px) scale(1.012);box-shadow:0 20px 55px rgba(0,0,0,.28),0 0 28px var(--glow)}
+ .module:hover{transform:translateY(-5px) scale(1.006)}
+ .hero .art,.orbit-animation{filter:drop-shadow(0 0 25px var(--glow));animation:artBreathe 7s ease-in-out infinite}
+ .orbit-animation:before{animation:orbitTilt 18s linear infinite}
+ .orbit-animation:after{animation:orbitTiltReverse 23s linear infinite}
+ .orbit-core{animation:corePulse 3.4s ease-in-out infinite,coreShimmer 5s linear infinite}
+ .pulsar-background{transform:translate3d(var(--bg-shift-x,0),var(--bg-shift-y,0),0);transition:transform .6s var(--spring)}
+ .pulsar-nebula{animation:nebulaPulse 10s ease-in-out infinite,nebulaDrift 19s ease-in-out infinite}
+ .pulsar-beam-soft{animation-delay:-5s;opacity:.55}
+ .pulsar-ring-two{animation-direction:reverse;animation-duration:31s}
+ .bottom-nav{backdrop-filter:blur(28px) saturate(1.55);-webkit-backdrop-filter:blur(28px) saturate(1.55);background:color-mix(in srgb,var(--panel) 76%,transparent);box-shadow:0 12px 45px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.06)}
+ .bottom-nav a.active{animation:navPop .42s var(--spring)}
+ .bottom-nav a.active span{display:inline-block;animation:iconBounce .5s var(--spring)}
+ .site-nav a[aria-current=location]:after{content:"";position:absolute;inset:3px;border-radius:inherit;background:linear-gradient(120deg,rgba(193,107,255,.14),rgba(237,154,212,.1));z-index:-1;animation:capsuleIn .35s var(--spring)}
+ .reveal{transition:opacity .8s var(--spring),transform .8s var(--spring),filter .8s var(--spring);filter:blur(5px)}
+ .reveal.is-visible{filter:blur(0)}
+ .cursor-trail{width:7px;height:7px;mix-blend-mode:screen}
+ .motion-ripple{position:absolute;pointer-events:none;width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.42);transform:translate(-50%,-50%) scale(0);animation:rippleBloom .65s var(--spring) forwards}
+ .tap-flash{animation:tapFlash .55s var(--spring)}
+ .page-leave{opacity:0!important;transform:translateY(8px) scale(.995)!important;filter:blur(4px);transition:opacity .22s ease,transform .22s ease,filter .22s ease}
+}
+@keyframes artBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.012)}}
+@keyframes orbitTilt{from{transform:rotateX(67deg) rotate(0)}to{transform:rotateX(67deg) rotate(360deg)}}
+@keyframes orbitTiltReverse{from{transform:rotateX(67deg) rotate(0)}to{transform:rotateX(67deg) rotate(-360deg)}}
+@keyframes coreShimmer{0%,100%{text-shadow:0 0 22px var(--glow)}50%{text-shadow:0 0 42px var(--accent),0 0 70px var(--glow-pink)}}
+@keyframes nebulaDrift{0%,100%{margin-right:0;margin-top:0}50%{margin-right:2vw;margin-top:-1.5vh}}
+@keyframes navPop{0%{transform:scale(.92)}65%{transform:scale(1.045)}100%{transform:scale(1)}}
+@keyframes iconBounce{0%{transform:translateY(2px) scale(.86)}65%{transform:translateY(-2px) scale(1.12)}100%{transform:translateY(0) scale(1)}}
+@keyframes capsuleIn{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:scale(1)}}
+@keyframes rippleBloom{to{opacity:0;transform:translate(-50%,-50%) scale(18)}}
+@keyframes tapFlash{0%{filter:brightness(1)}35%{filter:brightness(1.16)}100%{filter:brightness(1)}}
+@media(max-width:760px){
+ .hero .art,.orbit-animation{animation-duration:9s}
+ .cards article:hover,.tool-card:hover,.module:hover{transform:translateY(-2px)}
+ .bottom-nav{padding-bottom:env(safe-area-inset-bottom,0px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .motion-ripple{display:none!important}
+ .cards article,.tool-card,.module,.hero .art,.orbit-animation,.bottom-nav a.active,.bottom-nav a.active span{animation:none!important;transform:none!important}
+ .page-leave{opacity:1!important;filter:none!important}
+}
