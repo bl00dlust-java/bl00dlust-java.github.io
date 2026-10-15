@@ -1,5 +1,70 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Бесплатный курс по кибергигиене и безопасности в интернете"><meta name="theme-color" content="#101b24"><title>Цифровой щит — твоя безопасность в сети</title><link rel="icon" href="assets/favicon.svg?v=blue6"><link rel="stylesheet" href="css/styles.css?v=classic-restore"></head>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Бесплатный курс по кибергигиене и безопасности в интернете"><meta name="theme-color" content="#101b24"><title>Цифровой щит — твоя безопасность в сети</title><link rel="icon" href="assets/favicon.svg?v=blue6"><link rel="stylesheet" href="css/styles.css?v=classic-restore"><style>
+/* Editorial layout matching pages/about.html */
+:root{--bg:#101011;--panel:#171719;--text:#f4f0eb;--muted:#a7a29c;--line:#383633;--accent:#4da3ff;--accent2:#9bcaff;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f5f1ec;--panel:#fffaf5;--text:#211e1b;--muted:#69625c;--line:#d9d0c7;--accent:#176fe5;--accent2:#174a91;color-scheme:light}
+body{background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.8}
+.header{height:78px;background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{letter-spacing:.13em}.brand em,.brand-name em{font-style:normal;color:var(--accent)}
+.header nav a{font-size:12px;color:var(--muted);transition:color .2s}.header nav a:hover{color:var(--text)}
+#theme{border:1px solid var(--line);border-radius:0;background:transparent;color:var(--text);padding:9px 13px;cursor:pointer}
+.hero{padding-top:78px;padding-bottom:40px}.hero-shell{border:0;background:transparent;box-shadow:none}
+.hero-navline{border:0;padding:0 0 26px}.hero-top-link{color:var(--muted);font-size:12px}
+.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--accent);font-weight:700}
+.status-dot{background:var(--accent);box-shadow:none}
+.hero-grid{grid-template-columns:1.2fr .8fr;gap:45px}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.98;letter-spacing:-.065em;font-weight:800;margin:24px 0 28px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.intro>p{max-width:590px;color:var(--muted);font-size:16px;line-height:1.9}
+.button{border-radius:0;background:var(--accent);color:#07111b;border:1px solid var(--accent);font-weight:700;padding:13px 18px;box-shadow:none}
+.button:hover{transform:translateY(-2px);box-shadow:none}
+.art{border-radius:0;background:var(--bg);border:1px solid var(--line);box-shadow:none;min-height:320px}
+.art:before,.art:after{border-radius:0}
+.art-label{font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.orbit-core{background:var(--accent);box-shadow:0 0 36px #4da3ff40}
+.hero-bottom{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent}
+.hero-feature{border-right:1px solid var(--line);padding:20px}
+.hero-feature b{font-size:13px}.hero-feature small{color:var(--muted);line-height:1.6}
+.feature-icon{color:var(--accent)}
+.scroll{color:var(--muted);font-size:10px;letter-spacing:.12em}
+.section{padding-top:84px;padding-bottom:88px}
+.section-head{align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:30px}
+.section-head h2{font-size:clamp(34px,5.5vw,60px);line-height:1.05;letter-spacing:-.06em}
+.section-head h2 span{color:var(--accent)}
+.section-head>p{font-size:13px;line-height:1.9;color:var(--muted)}
+.cards{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cards article{background:transparent;border:0;border-right:1px solid var(--line);border-radius:0;padding:24px;box-shadow:none;min-height:0}
+.cards article:last-child{border-right:0}
+.cards article small{color:var(--accent);letter-spacing:.1em}
+.illustration{color:var(--accent);background:transparent;border:0;border-radius:0}
+.cards article h3,.row h3,.tool-card h3{font-size:18px;letter-spacing:-.025em}
+.cards article p,.row p,.tool-card p{font-size:13px;line-height:1.9;color:var(--muted)}
+.statement{background:var(--panel);border-block:1px solid var(--line);padding:58px 0}
+.statement p{font-size:clamp(34px,6vw,66px);font-weight:800;line-height:1.08;letter-spacing:-.055em}
+.statement em{color:var(--accent);font-style:normal}
+.row{grid-template-columns:50px 1fr 24px;padding:22px 0;border-color:var(--line)}
+.row>b,.row strong{color:var(--accent)}
+.progress,.tool-card,.checklist{background:transparent;border:1px solid var(--line);border-radius:0;box-shadow:none}
+.progress{padding:22px}.track{border-radius:0;background:var(--line)}.track span{border-radius:0;background:var(--accent)}
+.modules{gap:0;border-top:1px solid var(--line)}
+.module{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+.module:hover{background:var(--panel);transform:none}
+.module h3,.module .module-title{font-size:16px}
+.module .number,.module-number{color:var(--accent)}
+.tool-grid{gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.tool-card{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px}
+.tool-card>span{color:var(--accent);font-size:10px;letter-spacing:.12em}
+.checklist{padding:12px 22px}.checklist label{border-bottom:1px solid var(--line);padding:15px 0}
+.checklist label:last-child{border-bottom:0}
+.checklist input{accent-color:var(--accent)}
+.cta{background:var(--accent);color:#07111b;padding:68px 0}
+.cta .eyebrow{color:#07111b}.cta h2{font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-.06em}
+.cta h2 em{color:#fff}.button.light{background:#101011;color:#fff;border-color:#101011;border-radius:0}
+.footer{padding-top:28px;padding-bottom:25px}.footer-bottom{border-color:var(--line)}
+@media(max-width:760px){.hero{padding-top:48px}.hero-grid{grid-template-columns:1fr;gap:24px}.art{min-height:250px}.hero-bottom{grid-template-columns:1fr}.hero-feature{border-right:0;border-bottom:1px solid var(--line)}.hero-feature:last-child{border-bottom:0}.section{padding-block:60px}.cards{grid-template-columns:1fr}.cards article{border-right:0;border-bottom:1px solid var(--line);padding:22px 4px}.cards article:last-child{border-bottom:0}.section-head{display:block}.section-head>p{margin-top:15px}.tool-grid{grid-template-columns:1fr}.tool-card{border-right:0}.header nav{gap:12px;overflow:auto}.header nav a{white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
 <body>
 <a class="skip" href="#course">Перейти к содержанию</a>
 <header class="header"><a class="brand" href="#top"><span class="logo" aria-hidden="true">⬡</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></a><nav aria-label="Основная навигация" class="site-nav"><a href="#skills">Навыки</a><a href="#course">Курс</a><a href="#toolkit">Инструменты</a><a href="#checklist">Чек-лист</a><a href="#sources">Источники</a></nav><button id="theme" type="button" aria-pressed="false">◐ Тема</button></header>
