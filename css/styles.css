@@ -362,21 +362,85 @@ select option{background:var(--panel);color:var(--text)}
  .cards article,.tool-card,.module,.hero-feature{transform:none!important;will-change:auto}
 }
 
-
-/* Buttons size to their labels without clipping text */
-.button,.secondary-button,.btn,.module-open,.option,.challenge-choice,.bottom-menu-toggle,.bottom-menu-link{
-  width:fit-content;max-width:100%;min-width:0;white-space:normal;
-  overflow-wrap:anywhere;text-align:center;line-height:1.4;
+/* Keep labels inside controls without shrinking answer buttons or menu links */
+.button,.secondary-button,.btn,.module-open,.challenge-check,.quiet,.lite-toggle,#theme{
+  box-sizing:border-box;max-width:100%;min-width:0;white-space:normal;
+  overflow-wrap:anywhere;word-break:normal;line-height:1.4;
 }
-.button,.secondary-button,.btn,.module-open,.option,.challenge-choice{
-  height:auto;min-height:44px;padding:11px 20px;
+.button,.secondary-button,.btn,.module-open,.challenge-check,.quiet{
+  width:fit-content;height:auto;min-height:44px;padding-block:10px;
 }
-.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.actions>.button,.actions>.secondary-button{flex:0 1 auto}
+.button,.secondary-button,.btn,.challenge-check,.quiet{padding-inline:18px}
+.module-open{padding-inline:13px}
+.option,.challenge-choice{
+  box-sizing:border-box;display:block;width:100%;max-width:100%;min-width:0;
+  height:auto;min-height:44px;padding:12px 15px;white-space:normal;
+  overflow-wrap:anywhere;word-break:normal;line-height:1.5;text-align:left;
+}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-width:0}
+.actions>.button,.actions>.secondary-button{flex:0 1 auto;min-width:0}
+.dialog-actions{flex-wrap:wrap;min-width:0}
+.dialog-actions>.btn,.dialog-actions>.quiet{flex:0 1 auto}
 .header-tools{flex-wrap:wrap;min-width:0}
+.lite-toggle,#theme{height:auto;min-height:35px;padding:7px 11px}
 .icon-btn{flex:0 0 39px}
-.bottom-nav a{min-width:0;overflow-wrap:anywhere;text-align:center;padding-inline:3px}
-@media(max-width:560px){
- .button,.secondary-button,.btn,.module-open,.option,.challenge-choice{padding:10px 14px}
- .actions>.button,.actions>.secondary-button{flex:1 1 auto}
+.bottom-nav a{
+  min-width:0;white-space:normal;overflow-wrap:anywhere;word-break:normal;
+  text-align:center;padding-inline:3px;line-height:1.2;
 }
+.bottom-menu-toggle{
+  box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+  white-space:normal;overflow-wrap:anywhere;line-height:1.25;
+}
+.bottom-menu-link{
+  box-sizing:border-box;display:flex;width:100%;max-width:100%;min-width:0;
+  white-space:normal;overflow-wrap:anywhere;
+}
+.bottom-menu-link>span:nth-child(2){flex:1;min-width:0;overflow-wrap:anywhere}
+.bottom-menu-link b,.bottom-menu-link small{overflow-wrap:anywhere;word-break:normal}
+@media(max-width:560px){
+  .button,.secondary-button,.btn,.challenge-check,.quiet{padding-inline:14px}
+  .module-open{padding-inline:12px}
+  .actions>.button,.actions>.secondary-button{flex:1 1 145px}
+  .dialog-actions>.btn,.dialog-actions>.quiet{flex:1 1 120px}
+}
+
+/* Lightweight mode: suppress decorative GPU-heavy effects, not content or controls */
+:root[data-lite="true"] .pulsar-background,
+:root[data-lite="true"] #smooth-cursor-trail,
+:root[data-lite="true"] .motion-ripple,
+:root[data-lite="true"] .water-ripple-ring{display:none!important}
+:root[data-lite="true"] .art:before,
+:root[data-lite="true"] .art:after,
+:root[data-lite="true"] .orbit-animation,
+:root[data-lite="true"] .orbit-core{animation:none!important}
+:root[data-lite="true"] .header,
+:root[data-lite="true"] .bottom-nav,
+:root[data-lite="true"] .bottom-menu-panel{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+:root[data-lite="true"] .cards article,
+:root[data-lite="true"] .tool-card,
+:root[data-lite="true"] .module,
+:root[data-lite="true"] .hero-feature{
+  transform:none!important;filter:none!important;box-shadow:none!important;
+  transition:none!important;will-change:auto!important;
+}
+:root[data-lite="true"] .cards article:hover,
+:root[data-lite="true"] .tool-card:hover,
+:root[data-lite="true"] .module:hover,
+:root[data-lite="true"] .hero-feature:hover{
+  transform:none!important;filter:none!important;box-shadow:none!important;
+}
+:root[data-lite="true"] .button:before,
+:root[data-lite="true"] .btn:before{display:none!important}
+:root[data-lite="true"] .button,
+:root[data-lite="true"] .secondary-button,
+:root[data-lite="true"] .btn,
+:root[data-lite="true"] .icon-btn,
+:root[data-lite="true"] #theme,
+:root[data-lite="true"] .module-open,
+:root[data-lite="true"] .option,
+:root[data-lite="true"] .challenge-choice,
+:root[data-lite="true"] .bottom-menu-toggle,
+:root[data-lite="true"] .bottom-menu-link{transition:none!important}
