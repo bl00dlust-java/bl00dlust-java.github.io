@@ -685,3 +685,78 @@ body:before{background:radial-gradient(ellipse at 73% 35%,rgba(255,191,0,.09),tr
 @media(max-width:760px){
  .hero-shell{background:linear-gradient(150deg,rgba(12,11,6,.96),rgba(2,2,1,.99))}
 }
+
+
+/* Mobile emergency layout fixes: header, hero text, and bottom navigation */
+@media(max-width:560px){
+ html{scroll-padding-bottom:100px}
+ body{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+ .header{
+  min-height:68px!important;height:auto!important;padding:12px 14px!important;
+  display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+  justify-content:space-between!important;gap:10px!important;
+ }
+ .brand{flex:1 1 auto!important;min-width:0!important;gap:9px!important}
+ .brand-name{font-size:clamp(10px,3.4vw,13px)!important;letter-spacing:.08em!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important}
+ .logo{flex:0 0 38px!important;width:38px!important;height:38px!important}
+ .header-tools{display:flex!important;flex:0 0 auto!important;align-items:center!important;gap:8px!important;min-width:max-content!important}
+ .header-tools .icon-btn,#theme,.lite-toggle{
+  width:auto!important;min-width:42px!important;max-width:none!important;min-height:42px!important;
+  padding:0 12px!important;white-space:nowrap!important;word-break:keep-all!important;
+  writing-mode:horizontal-tb!important;overflow:visible!important;flex:0 0 auto!important;
+ }
+ #theme{font-size:0!important;width:42px!important;padding:0!important}
+ #theme:before{content:"☼";font-size:18px!important}
+ .hero{width:100%!important;padding:10px 10px 0!important}
+ .hero-shell{min-height:0!important;padding:15px 14px 14px!important;border-radius:12px!important;overflow:hidden!important}
+ .hero-navline{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;flex-wrap:wrap!important;padding-bottom:12px!important}
+ .pill-news{display:flex!important;align-items:center!important;flex:1 1 220px!important;min-width:0!important;gap:7px!important;padding:6px 8px!important;font-size:9px!important;white-space:normal!important}
+ .pill-tag{flex:0 0 auto!important;font-size:8px!important;white-space:nowrap!important;letter-spacing:.03em!important}
+ .hero-top-link{flex:0 0 auto!important;max-width:none!important;font-size:9px!important;white-space:nowrap!important;text-align:right!important}
+ .hero-grid{display:flex!important;flex-direction:column!important;gap:0!important;min-height:0!important}
+ .art{order:0!important;width:100%!important;height:clamp(220px,61vw,310px)!important;min-height:0!important;margin:4px auto 0!important;overflow:hidden!important}
+ .orbit-animation{width:min(66vw,260px)!important;max-width:100%!important}
+ .intro{order:1!important;padding:14px 0 12px!important;min-width:0!important}
+ .intro h1{
+  font-size:clamp(31px,8.2vw,46px)!important;line-height:1.02!important;
+  letter-spacing:-.045em!important;margin:0 0 12px!important;max-width:100%!important;
+  overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;
+ }
+ .intro h1 br{display:block}
+ .intro p{font-size:12px!important;line-height:1.6!important;margin:0 0 14px!important;max-width:100%!important}
+ .actions{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+ .actions .button,.actions .secondary-button{flex:1 1 135px!important;min-width:0!important;min-height:42px!important;padding:0 10px!important;justify-content:center!important;font-size:9px!important;white-space:nowrap!important}
+ .hero-bottom{grid-template-columns:1fr!important;gap:3px!important;padding-top:9px!important;margin-top:4px!important}
+ .hero-feature{display:flex!important;align-items:center!important;gap:9px!important;padding:7px 2px!important;min-width:0!important}
+ .hero-feature>span:last-child{min-width:0!important}
+ .hero-feature b{font-size:10px!important;white-space:normal!important}
+ .hero-feature small{font-size:9px!important;line-height:1.35!important;white-space:normal!important}
+ .art-label{font-size:7px!important;letter-spacing:.13em!important}
+ .scroll{display:none!important}
+ .section{padding-top:42px!important;padding-bottom:24px!important}
+ .section-head h2,main h1{font-size:clamp(29px,8vw,42px)!important;line-height:1.04!important}
+ .statement,.cta{margin-top:36px!important}
+ .bottom-nav{
+  position:fixed!important;z-index:1000!important;left:50%!important;right:auto!important;
+  bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;width:calc(100% - 18px)!important;max-width:430px!important;
+  display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:2px!important;padding:5px!important;box-sizing:border-box!important;
+  border-radius:18px!important;overflow:hidden!important;
+ }
+ .bottom-nav a{min-width:0!important;max-width:100%!important;min-height:46px!important;padding:4px 1px!important;gap:3px!important;font-size:8px!important;white-space:nowrap!important;overflow:hidden!important}
+ .bottom-nav a span{font-size:17px!important;line-height:1!important}
+ .bottom-nav a, .bottom-nav a *{writing-mode:horizontal-tb!important;word-break:keep-all!important;overflow-wrap:normal!important}
+ .bottom-menu-panel{max-width:calc(100% - 20px)!important}
+ .char-draw{display:inline!important;opacity:1!important;clip-path:none!important;animation:none!important;text-shadow:none!important}
+}
+@media(max-width:370px){
+ .brand-name{font-size:10px!important;letter-spacing:.04em!important}
+ .logo{flex-basis:34px!important;width:34px!important;height:34px!important}
+ .header{padding-inline:10px!important}
+ .header-tools{gap:5px!important}
+ .pill-news{flex-basis:100%!important}
+ .hero-top-link{margin-left:auto!important}
+ .intro h1{font-size:clamp(28px,8vw,34px)!important}
+ .bottom-nav a{font-size:7px!important}
+}
