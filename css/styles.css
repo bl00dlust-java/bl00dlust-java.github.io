@@ -550,3 +550,32 @@ body:after{opacity:.08;background-size:76px 76px}
  .orbit-animation,.art:before,.art:after{animation:none!important}
 }
 :root[data-lite="true"] .orbit-animation,:root[data-lite="true"] .art:before,:root[data-lite="true"] .art:after{animation:none!important}
+
+
+/* Compact typography and keep short UI sentences on one line when possible */
+.intro h1{font-size:clamp(40px,6.2vw,82px);line-height:.98;letter-spacing:-.055em}
+.intro p{max-width:470px;font-size:12px;line-height:1.7}
+.hero-top-link,.pill-news{font-size:9px}
+.hero-feature b{font-size:10px}
+.hero-feature small{font-size:9px;line-height:1.4}
+.art-label{font-size:8px}
+.scroll{font-size:8px}
+.button,.secondary-button,.btn{font-size:10px;letter-spacing:.045em}
+.section-head h2,main h1{font-size:clamp(30px,4.8vw,54px)}
+.eyebrow{font-size:9px}
+.cards h3,.tool-card h3{font-size:15px}
+.cards p,.tool-card p,.section-head>p{font-size:11px;line-height:1.7}
+@media(min-width:761px){
+ .intro p{max-width:500px}
+ .hero-feature{gap:8px;padding-inline:7px}
+ .hero-feature b,.hero-feature small{white-space:nowrap}
+ .pill-news{white-space:nowrap}
+}
+@media(max-width:760px){
+ .intro h1{font-size:clamp(39px,10.5vw,62px)}
+ .intro p{font-size:12px;max-width:100%}
+ .hero-feature b,.hero-feature small{font-size:9px}
+ .section-head h2,main h1{font-size:clamp(29px,8vw,44px)}
+ .section-head>p{font-size:11px}
+ .pill-news{white-space:normal}
+}
