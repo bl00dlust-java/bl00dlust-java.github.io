@@ -1048,3 +1048,34 @@ html.is-scrolling{scroll-behavior:auto}
 @media(prefers-reduced-motion:reduce){
   .header .site-nav a{transition:none!important;transform:none!important}
 }
+
+
+/* A single sliding capsule travels between the ordered section tabs */
+.header .site-nav{position:relative!important;isolation:isolate}
+.header .site-nav .nav-pill-indicator{
+  position:absolute;
+  z-index:-1;
+  left:0;
+  top:0;
+  width:0;
+  height:0;
+  border-radius:999px;
+  opacity:0;
+  pointer-events:none;
+  background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 72%,#102e55));
+  box-shadow:0 4px 16px color-mix(in srgb,var(--accent) 27%,transparent),inset 0 1px rgba(255,255,255,.24);
+  transition:transform .42s cubic-bezier(.22,1,.36,1),width .42s cubic-bezier(.22,1,.36,1),height .42s cubic-bezier(.22,1,.36,1),opacity .2s ease;
+}
+.header .site-nav a[aria-current="location"]{
+  position:relative;
+  z-index:1;
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  color:#fff!important;
+}
+:root[data-theme="light"] .header .site-nav a[aria-current="location"]{color:#fff!important}
+.header .site-nav a:active{transform:scale(.96)}
+@media(prefers-reduced-motion:reduce){
+ .header .site-nav .nav-pill-indicator{transition:none!important}
+}
