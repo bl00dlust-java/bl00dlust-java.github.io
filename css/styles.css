@@ -1079,3 +1079,32 @@ html.is-scrolling{scroll-behavior:auto}
 @media(prefers-reduced-motion:reduce){
  .header .site-nav .nav-pill-indicator{transition:none!important}
 }
+
+
+/* Make the five navigation pills explicitly ordered and the active pill visible */
+.header .site-nav{position:relative!important;display:flex!important;flex-direction:row!important}
+.header .site-nav>a[href="#skills"]{order:1}
+.header .site-nav>a[href="#course"]{order:2}
+.header .site-nav>a[href="#toolkit"]{order:3}
+.header .site-nav>a[href="#checklist"]{order:4}
+.header .site-nav>a[href="#sources"]{order:5}
+.header .site-nav .nav-pill-indicator{z-index:0!important}
+.header .site-nav>a{z-index:1!important}
+
+/* A visible transition when moving from one section to another */
+@keyframes sectionTabArrival{
+  0%{opacity:.62;transform:translateY(20px) scale(.992);filter:blur(3px)}
+  65%{opacity:1;filter:blur(0)}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+section.tab-arrival-animation{
+  animation:sectionTabArrival .72s cubic-bezier(.22,1,.36,1) both;
+  scroll-margin-top:110px;
+}
+@media(max-width:760px){
+  .header .site-nav{flex-wrap:nowrap!important}
+  section.tab-arrival-animation{scroll-margin-top:145px}
+}
+@media(prefers-reduced-motion:reduce){
+  section.tab-arrival-animation{animation:none!important}
+}
