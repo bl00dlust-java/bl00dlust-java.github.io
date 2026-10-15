@@ -71,13 +71,13 @@ function wireChallenge(container,task,nextButton){const result=container.querySe
 
 const $=id=>document.getElementById(id);
 const STORE="cyberhygiene-course-v2";
-let state={completed:[],theme:"dark",design:"matrix",lite:false};
-try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.isArray(saved.completed))state.completed=saved.completed.filter(id=>modules.some(m=>m.id===id));if(saved&&saved.theme==="light")state.theme="light";state.design="matrix";if(saved&&saved.lite===true)state.lite=true;}catch(e){}
+let state={completed:[],theme:"dark",design:"violet",lite:false};
+try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.isArray(saved.completed))state.completed=saved.completed.filter(id=>modules.some(m=>m.id===id));if(saved&&saved.theme==="light")state.theme="light";state.design="violet";if(saved&&saved.lite===true)state.lite=true;}catch(e){}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){if($("progressHint"))$("progressHint").textContent="Браузер не разрешил сохранить прогресс. Курс всё равно можно пройти."}}
 function renderModules(){if(!$("modules"))return;const base=location.pathname.includes("/pages/")?"":"pages/";$("modules").innerHTML=modules.map((m,i)=>{const done=state.completed.includes(m.id);return `<article class="module reveal" style="--delay:${i*45}ms"><div class="module-top"><span class="num">МОДУЛЬ ${String(i+1).padStart(2,"0")}</span><span class="module-status">${done?"✓ Пройден":"Не начат"}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div class="module-bottom"><span>◷ ${m.time}</span><a class="module-open" href="${base}module.html?id=${m.id}">${done?"Повторить":"Начать урок"} <span aria-hidden="true">↗</span></a></div></article>`}).join("");const n=state.completed.length;$("progressLabel").textContent=n+" из "+modules.length+" модулей";$("progressFill").style.width=(n/modules.length*100)+"%";$("progressBar").setAttribute("aria-valuenow",n);$("progressHint").textContent=n===modules.length?"Курс завершён — отлично справился!":n?"Продолжай: каждый модуль добавляет полезные привычки.":"Выбери первый модуль и начни обучение.";$("completion").hidden=n!==modules.length}
 function theme(){document.documentElement.dataset.theme=state.theme==="light"?"light":"dark";$("theme").textContent=state.theme==="light"?"☾ Тёмная":"☼ Светлая";$("theme").setAttribute("aria-pressed",state.theme==="light"?"true":"false")}
 function liteMode(){document.documentElement.dataset.lite=state.lite?"true":"false";let toggle=$("liteToggle");if(!toggle){toggle=document.createElement("button");toggle.id="liteToggle";toggle.type="button";toggle.className="lite-toggle";$("theme").insertAdjacentElement("beforebegin",toggle);}toggle.textContent=state.lite?"⚡ Лёгкий: вкл":"⚡ Лёгкий режим";toggle.setAttribute("aria-pressed",state.lite?"true":"false");toggle.setAttribute("aria-label","Включить или выключить облегчённый интерфейс");}
-function design(){document.documentElement.dataset.design="matrix";state.design="matrix";save()}
+function design(){document.documentElement.dataset.design="violet";state.design="violet";save()}
 
 let active=null,step=0,answered=false,activeSteps=[];
 function openModule(id){active=modules.find(m=>m.id===id);activeSteps=lessonSteps(active);step=0;answered=false;showStep();$("lessonDialog").showModal()}
@@ -186,7 +186,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
 })();
 
 
-/* Desktop-only subtle blue cursor trail */
+/* Desktop-only subtle violet cursor trail */
 (()=> {
  if(window.matchMedia("(min-width: 761px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches){
   let last=0;
