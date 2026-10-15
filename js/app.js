@@ -343,3 +343,24 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   window.setTimeout(()=>{location.href=url.href},180);
  });
 })();
+
+
+/* Bottom navigation sheet: open/close, outside click, Escape and focus return */
+(function initBottomMenu(){
+ const toggle=document.getElementById("bottomMenuToggle"),panel=document.getElementById("bottomMenuPanel"),backdrop=document.getElementById("bottomMenuBackdrop"),closeBtn=document.getElementById("bottomMenuClose");
+ if(!toggle||!panel||!backdrop||!closeBtn)return;
+ const open=()=>{
+  backdrop.hidden=false;panel.inert=false;panel.setAttribute("aria-hidden","false");toggle.setAttribute("aria-expanded","true");toggle.setAttribute("aria-label","Закрыть меню");
+  requestAnimationFrame(()=>{backdrop.classList.add("is-open");panel.classList.add("is-open");});
+  closeBtn.focus({preventScroll:true});document.body.classList.add("menu-open");
+ };
+ const close=(returnFocus=false)=>{
+  backdrop.classList.remove("is-open");panel.classList.remove("is-open");toggle.setAttribute("aria-expanded","false");toggle.setAttribute("aria-label","Открыть меню");panel.setAttribute("aria-hidden","true");panel.inert=true;document.body.classList.remove("menu-open");
+  window.setTimeout(()=>{if(!panel.classList.contains("is-open"))backdrop.hidden=true;},340);
+  if(returnFocus)toggle.focus({preventScroll:true});
+ };
+ toggle.addEventListener("click",()=>toggle.getAttribute("aria-expanded")==="true"?close(true):open());
+ closeBtn.addEventListener("click",()=>close(true));backdrop.addEventListener("click",()=>close(true));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&toggle.getAttribute("aria-expanded")==="true")close(true);});
+ panel.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>close(false)));
+})();
