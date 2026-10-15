@@ -291,7 +291,7 @@ select option{background:var(--panel);color:var(--text)}
 /* Liquid bottom navigation, cursor-following cards and water-drop ripples */
 .site-nav{display:none!important}
 .bottom-nav{isolation:isolate;overflow:hidden}
-.bottom-nav-liquid{position:absolute;z-index:-1;left:0;top:0;width:0;height:0;opacity:0;pointer-events:none;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:17px;background:linear-gradient(130deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-soft) 13%,transparent));box-shadow:0 0 26px var(--glow),inset 0 1px rgba(255,255,255,.1);transform:translate3d(0,0,0) scale(.82);transition:width .55s var(--spring),height .55s var(--spring),transform .62s var(--spring),opacity .2s ease,border-radius .5s var(--spring);will-change:transform,width,height}
+.bottom-nav-liquid{position:absolute;z-index:0;left:0;top:0;width:0;height:0;opacity:0;pointer-events:none;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:17px;background:linear-gradient(130deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-soft) 13%,transparent));box-shadow:0 0 26px var(--glow),inset 0 1px rgba(255,255,255,.1);transform:translate3d(0,0,0) scale(.82);transition:width .55s var(--spring),height .55s var(--spring),transform .62s var(--spring),opacity .2s ease,border-radius .5s var(--spring);will-change:transform,width,height}
 .bottom-nav-liquid.is-ready{opacity:1}
 .bottom-nav a[aria-current=location]{background:transparent!important;box-shadow:none!important}
 .bottom-nav a[aria-current=location]:before{display:none!important}
