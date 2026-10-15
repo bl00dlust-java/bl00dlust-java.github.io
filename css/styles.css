@@ -468,3 +468,85 @@ select option{background:var(--panel);color:var(--text)}
 @keyframes cyberInkDraw{0%{opacity:0;clip-path:inset(0 100% 0 0);text-shadow:none}55%{opacity:1;text-shadow:0 0 9px rgba(205,116,255,.36)}100%{opacity:1;clip-path:inset(0 0 0 0);text-shadow:none}}
 @media(prefers-reduced-motion:reduce){.char-draw{opacity:1;clip-path:none;animation:none;text-shadow:none}}
 :root[data-lite="true"] .char-draw{opacity:1;clip-path:none;animation:none;text-shadow:none}
+
+
+/* PROMT — monochrome chrome / rotating vinyl star hero redesign */
+:root{
+ --bg:#030405;--bg-soft:#080a0b;--panel:#090b0d;--panel-raised:#111416;
+ --text:#f5f7f7;--muted:#a5adaf;--line:#252b2d;--line-strong:#50595b;
+ --accent:#f4f8f7;--accent-strong:#c9d2d1;--accent-soft:#d9e6e3;
+ --glow:rgba(224,244,240,.13);--glow-pink:rgba(160,190,184,.07);
+ --shadow:0 28px 90px rgba(0,0,0,.62);
+}
+body{background:#030405;letter-spacing:.015em}
+body:before{background:radial-gradient(ellipse at 68% 19%,rgba(220,245,240,.075),transparent 31%),radial-gradient(ellipse at 10% 66%,rgba(110,135,132,.055),transparent 35%),linear-gradient(180deg,#07090a,#020303 70%)}
+body:after{opacity:.08;background-size:76px 76px}
+.header{background:rgba(3,4,5,.72);border-color:rgba(230,245,242,.12)}
+.brand-name em,.pill-arrow,.hero-top-link span,.eyebrow,.cards article>small,.tool-card>span,.num,.challenge-label,.challenge-kind{color:#dbe7e4}
+.logo{background:linear-gradient(145deg,#f7fbfa,#a8b4b1);color:#050707!important;box-shadow:0 0 28px rgba(225,245,240,.15);border-color:#aebcba}
+.hero{width:min(1320px,calc(100% - 36px));padding-top:16px}
+.hero-shell{min-height:calc(100svh - 120px);padding:26px clamp(20px,4vw,58px) 20px;border:1px solid rgba(226,241,238,.16);border-radius:4px;background:linear-gradient(125deg,rgba(10,13,14,.94),rgba(2,3,4,.98) 62%);box-shadow:0 30px 100px rgba(0,0,0,.45)}
+.hero-shell:before{right:18%;top:8%;width:58vw;height:58vw;max-width:750px;max-height:750px;background:radial-gradient(circle,rgba(221,245,240,.09),rgba(165,190,185,.025) 35%,transparent 68%)}
+.hero-navline{padding-bottom:20px;border-bottom:1px solid rgba(226,241,238,.13)}
+.pill-news{border-color:rgba(226,241,238,.18);border-radius:3px;background:rgba(255,255,255,.025);color:#c6cecc}
+.pill-tag{border-radius:2px;background:#e9f0ee;color:#050707}
+.hero-top-link{color:#e0e7e5;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.hero-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(12px,3vw,48px);min-height:min(65vh,650px)}
+.intro{padding:48px 0 44px}
+.intro .eyebrow{margin-bottom:24px}
+.intro h1{font-size:clamp(48px,7.2vw,104px);line-height:.9;letter-spacing:-.065em;font-weight:750;text-transform:uppercase}
+.intro h1 em,.section-head h2 span,.statement p em,.cta h2 em,main h1 em{color:#e5eeeb}
+.intro p{max-width:390px;color:#a9b2b0;line-height:1.8;font-size:14px}
+.button,.secondary-button,.btn{border-radius:2px;background:linear-gradient(135deg,#f4f8f7,#aab7b4);border-color:#e5eeeb;color:#080a0a;box-shadow:0 0 28px rgba(215,239,233,.1);letter-spacing:.07em;text-transform:uppercase}
+.secondary-button{background:rgba(255,255,255,.025);color:#e6ecea;border-color:#4c5654;box-shadow:none}
+.art{height:clamp(340px,55vw,610px);min-height:320px;border:0;border-radius:0;background:radial-gradient(ellipse at 50% 50%,rgba(207,231,225,.1),transparent 50%);box-shadow:none;overflow:visible}
+.art:before,.art:after{width:78%;height:78%;border:1px solid rgba(224,245,240,.2);border-radius:50%;transform:rotateX(68deg) rotate(-26deg);animation:chromeOrbit 24s linear infinite}
+.art:after{width:94%;height:94%;border-color:rgba(178,203,197,.13);animation-duration:37s;animation-direction:reverse}
+.art-label{top:10px;left:0;color:#b8c2bf;font-size:9px;letter-spacing:.22em}
+.art-label:before{background:#eaf5f1;box-shadow:0 0 14px #dff9f0}
+.art-label.bottom{right:0;bottom:9px}
+.orbit-animation{width:min(68%,390px);height:auto;aspect-ratio:1;flex-shrink:0;border:1px solid rgba(238,250,247,.9);border-radius:50%;background:
+ radial-gradient(circle at 35% 25%,rgba(255,255,255,.95) 0,rgba(205,221,218,.55) .7%,transparent 2.5%),
+ radial-gradient(circle at 67% 73%,rgba(255,255,255,.95) 0,rgba(223,242,237,.4) 1%,transparent 3%),
+ repeating-radial-gradient(circle at 48% 47%,rgba(230,244,240,.16) 0 1px,rgba(8,12,13,.1) 2px 5px,rgba(160,181,177,.13) 6px 7px),
+ conic-gradient(from 15deg,#0b0e0f,#dfe9e6 8%,#31393a 14%,#aebbb8 21%,#090b0c 30%,#f7fbf9 36%,#343b3c 45%,#a9b7b3 53%,#080a0b 62%,#e4eeeb 70%,#242a2b 82%,#dce6e3 91%,#101313);
+ box-shadow:0 0 12px rgba(235,255,250,.32),0 0 48px rgba(224,245,239,.14),inset 8px 0 20px rgba(255,255,255,.18),inset -18px -10px 38px rgba(0,0,0,.82);
+ transform:perspective(900px) rotateX(9deg) rotateZ(-24deg);
+ animation:recordFloat 8s ease-in-out infinite,recordSpin 34s linear infinite;
+}
+.orbit-animation:before{inset:5%;border:1px solid rgba(245,255,252,.34);border-radius:50%;transform:none;background:repeating-radial-gradient(circle,transparent 0 7px,rgba(255,255,255,.055) 8px 9px);box-shadow:inset 0 0 28px rgba(255,255,255,.12)}
+.orbit-animation:after{inset:28%;border:1px solid rgba(242,255,251,.85);border-radius:50%;transform:none;background:radial-gradient(circle at 32% 25%,#e7f0ed,#41494a 24%,#090b0c 66%,#aab8b4 75%,#080a0b 82%);box-shadow:0 0 20px rgba(230,250,244,.35),inset 0 0 12px #000}
+.orbit-animation i{display:none}
+.orbit-core{position:relative;z-index:3;display:grid;place-items:center;width:5px;height:5px;overflow:hidden;border-radius:50%;background:#f6fffc;color:transparent;font-size:0;box-shadow:0 0 7px #fff,0 0 20px rgba(255,255,255,.9)}
+.art:has(.orbit-animation):after{width:130%;height:1px;border:0;border-radius:0;left:-15%;top:51%;background:linear-gradient(90deg,transparent,rgba(239,255,250,.04),rgba(255,255,255,.85),rgba(205,255,243,.25),rgba(255,255,255,.8),transparent);box-shadow:0 0 18px rgba(226,255,247,.42);transform:rotate(-5deg);animation:laserGlint 5s ease-in-out infinite}
+.hero-bottom{grid-template-columns:repeat(3,minmax(0,1fr));border-color:rgba(226,241,238,.13)}
+.hero-feature{border-radius:2px}
+.feature-icon{border-radius:2px;border-color:#38413f;background:#101414;color:#e7f0ed}
+.hero-feature b{color:#e8eeec;letter-spacing:.015em}
+.hero-feature small{color:#8f9a97}
+.scroll{font-size:10px;color:#8e9996;letter-spacing:.23em}
+.section-head h2,main h1,.statement p,.cta h2{letter-spacing:-.045em}
+.cards article,.tool-card,.module,.progress,.completion,.challenge-panel,.statement,.cta{border-radius:3px}
+.cards article,.tool-card,.module{background:linear-gradient(145deg,#0b0e0f,#070809);border-color:#272e2d}
+.button:hover,.btn:hover{box-shadow:0 0 35px rgba(224,245,239,.2)}
+@keyframes recordSpin{0%{rotate:0deg}100%{rotate:360deg}}
+@keyframes recordFloat{0%,100%{translate:0 5px}50%{translate:0 -12px}}
+@keyframes chromeOrbit{0%{transform:rotateX(68deg) rotate(-26deg)}100%{transform:rotateX(68deg) rotate(334deg)}}
+@keyframes laserGlint{0%,100%{opacity:.28;filter:blur(1px)}50%{opacity:.9;filter:blur(0);box-shadow:0 0 28px rgba(226,255,247,.62)}}
+@media(max-width:760px){
+ .hero{width:calc(100% - 20px);padding-top:10px}
+ .hero-shell{min-height:0;padding:18px 17px 14px;border-radius:3px}
+ .hero-navline{align-items:flex-start;gap:10px}.pill-news{font-size:9px;gap:6px}.pill-tag{padding:5px 7px}.hero-top-link{font-size:9px;white-space:nowrap}
+ .hero-grid{grid-template-columns:1fr;gap:0;min-height:0}
+ .intro{padding:44px 0 12px;order:1}.intro h1{font-size:clamp(46px,12.5vw,76px);max-width:550px}
+ .intro p{font-size:13px;max-width:440px}
+ .art{order:0;height:clamp(290px,78vw,420px);min-height:270px;margin:4px -5px 0}
+ .orbit-animation{width:min(66%,300px)}
+ .hero-bottom{grid-template-columns:1fr;gap:2px;padding-top:10px}
+ .hero-feature{padding:9px 5px}.feature-icon{flex-basis:32px;height:32px}
+ .scroll{padding-top:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .orbit-animation,.art:before,.art:after{animation:none!important}
+}
+:root[data-lite="true"] .orbit-animation,:root[data-lite="true"] .art:before,:root[data-lite="true"] .art:after{animation:none!important}
