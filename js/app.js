@@ -272,6 +272,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  const fine=window.matchMedia("(hover:hover) and (pointer:fine)").matches;
  const cardSelector=".cards article,.tool-card,.module,.hero-feature";
  let current=null,raf=0;
+ const settling=new Set();
  const states=new WeakMap();
  const stateFor=card=>{
   let state=states.get(card);
@@ -286,24 +287,29 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   card.style.setProperty("--pointer-x",(e.clientX-r.left)+"px");
   card.style.setProperty("--pointer-y",(e.clientY-r.top)+"px");
  };
- const reset=card=>{if(!card)return;const s=stateFor(card);s.tx=0;s.ty=0;s.targetLift=0;};
+ const reset=card=>{if(!card)return;const s=stateFor(card);s.tx=0;s.ty=0;s.targetLift=0;settling.add(card);};
  if(!reduce&&fine){
   const tick=()=>{
    let moving=false;
-   if(current){
-    const s=stateFor(current);
+   const working=new Set(settling);if(current)working.add(current);
+   working.forEach(card=>{
+    const s=stateFor(card);
     s.x+=(s.tx-s.x)*.22;s.y+=(s.ty-s.y)*.22;s.lift+=(s.targetLift-s.lift)*.2;
-    current.style.setProperty("--cursor-rotate-x",s.x.toFixed(3)+"deg");
-    current.style.setProperty("--cursor-rotate-y",s.y.toFixed(3)+"deg");
-    current.style.setProperty("--cursor-lift-y",(-s.lift).toFixed(2)+"px");
-    if(Math.abs(s.tx-s.x)>.025||Math.abs(s.ty-s.y)>.025||Math.abs(s.targetLift-s.lift)>.04)moving=true;
-   }
+    card.style.setProperty("--cursor-rotate-x",s.x.toFixed(3)+"deg");
+    card.style.setProperty("--cursor-rotate-y",s.y.toFixed(3)+"deg");
+    card.style.setProperty("--cursor-lift-y",(-s.lift).toFixed(2)+"px");
+    const unsettled=Math.abs(s.tx-s.x)>.025||Math.abs(s.ty-s.y)>.025||Math.abs(s.targetLift-s.lift)>.04;
+    if(unsettled)moving=true;
+    else if(card!==current){settling.delete(card);card.style.setProperty("--cursor-rotate-x","0deg");card.style.setProperty("--cursor-rotate-y","0deg");card.style.setProperty("--cursor-lift-y","0px");}
+   });
    if(moving)raf=requestAnimationFrame(tick);else raf=0;
   };
   document.addEventListener("pointermove",e=>{
    const card=e.target instanceof Element?e.target.closest(cardSelector):null;
-   if(card!==current){reset(current);current=card;if(current)aim(current,e);}
-   else if(card)aim(card,e);
+   if(card!==current){
+    reset(current);current=card;
+    if(current){settling.delete(current);aim(current,e);}
+   }else if(card)aim(card,e);
    if(!raf)raf=requestAnimationFrame(tick);
   },{passive:true});
   document.addEventListener("pointerleave",()=>{reset(current);current=null;if(!raf)raf=requestAnimationFrame(tick);},{passive:true});
