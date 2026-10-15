@@ -635,3 +635,53 @@ h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.stat
 @keyframes recordSpin{from{rotate:0deg}to{rotate:360deg}}
 @media(prefers-reduced-motion:reduce){.orbit-animation{animation:none!important}}
 :root[data-lite="true"] .orbit-animation{animation:none!important}
+
+
+/* Gold-on-black palette and true circular black-hole spindle */
+:root{
+ --bg:#030303;--bg-soft:#080806;--panel:#0a0905;--panel-raised:#121006;
+ --text:#f5f3ec;--muted:#aaa69a;--line:#30270b;--line-strong:#67500a;
+ --accent:#f4c928;--accent-strong:#c69a08;--accent-soft:#e8bd25;
+ --glow:rgba(255,193,7,.18);--glow-pink:rgba(255,183,0,.08);
+}
+body{background:#030303}
+body:before{background:radial-gradient(ellipse at 73% 35%,rgba(255,191,0,.09),transparent 34%),radial-gradient(ellipse at 8% 78%,rgba(184,125,0,.055),transparent 38%),linear-gradient(180deg,#080806,#020202 72%)}
+.brand-name em,.pill-arrow,.hero-top-link span,.eyebrow,.cards article>small,.tool-card>span,.num,.challenge-label,.challenge-kind{color:#f1c629}
+.logo{background:linear-gradient(145deg,#ffe986,#d8a900);color:#080700!important;box-shadow:0 0 26px rgba(244,201,40,.2);border-color:#f4c928}
+.header{border-color:rgba(244,201,40,.18)}
+.hero-shell{background:linear-gradient(125deg,rgba(12,11,6,.94),rgba(2,2,1,.98) 62%);border-color:rgba(244,201,40,.2)}
+.hero-shell:before{background:radial-gradient(circle,rgba(255,193,7,.14),rgba(165,120,0,.035) 35%,transparent 68%)}
+.hero-navline,.hero-bottom{border-color:rgba(244,201,40,.18)}
+.pill-news{border-color:rgba(244,201,40,.3);color:#d6d0bb}
+.pill-tag{background:#f4c928;color:#090800}
+.hero-top-link{color:#e9e4d7}
+.intro h1 em,.section-head h2 span,.statement p em,.cta h2 em,main h1 em{color:#f4c928}
+.button,.btn{background:linear-gradient(135deg,#ffe35a,#d6a600);border-color:#f4c928;color:#080700;box-shadow:0 0 26px rgba(244,201,40,.13)}
+.secondary-button{background:rgba(255,255,255,.02);color:#f2eddd;border-color:#51420d}
+.art{background:radial-gradient(ellipse at 50% 50%,rgba(255,198,20,.11),transparent 52%)}
+.art-label{color:#d4c9a1}
+.art-label:before{background:#ffe36a;box-shadow:0 0 14px #ffc400}
+.orbit-animation{
+ background:
+  radial-gradient(circle at 50% 50%,#000 0 12.2%,#090806 12.6% 13.5%,#d9ad2c 14% 14.6%,transparent 15.2%),
+  conic-gradient(from 0deg,transparent 0deg,rgba(255,239,156,.8) 18deg,rgba(255,255,255,.02) 34deg,transparent 58deg,rgba(255,195,30,.75) 82deg,rgba(255,255,255,.03) 108deg,transparent 145deg,rgba(255,241,168,.85) 177deg,rgba(202,153,18,.05) 203deg,transparent 239deg,rgba(255,200,38,.8) 274deg,rgba(255,255,255,.02) 302deg,transparent 335deg,rgba(255,226,109,.65) 360deg),
+  repeating-radial-gradient(circle at 50% 50%,rgba(255,233,145,.22) 0 1px,rgba(12,11,7,.12) 2px 4px,rgba(202,157,28,.18) 5px 6px),
+  radial-gradient(circle at 34% 28%,#8b762e 0,#34301d 15%,#11100b 38%,#806b27 54%,#222015 67%,#e3c45a 78%,#080806 100%);
+ box-shadow:0 0 14px rgba(255,211,65,.3),0 0 54px rgba(255,193,7,.15),inset 8px 0 20px rgba(255,255,255,.14),inset -18px -10px 38px rgba(0,0,0,.9);
+}
+.orbit-animation:before{background:repeating-radial-gradient(circle,transparent 0 5px,rgba(255,230,130,.13) 5.5px 6px,transparent 6.5px 9px);border-color:rgba(255,225,117,.32)}
+.orbit-animation:after{inset:42%;border:1px solid rgba(255,226,114,.72);border-radius:50%;transform:none;background:radial-gradient(circle,#000 0 65%,#030302 77%,#201800 100%);box-shadow:0 0 16px rgba(0,0,0,.95),0 0 3px rgba(255,226,114,.75),inset 0 0 15px #000}
+.orbit-core{width:4px;height:4px;background:#fff8d6;box-shadow:0 0 4px #fff,0 0 12px #ffca28}
+.art:has(.orbit-animation):after{background:linear-gradient(90deg,transparent,rgba(255,194,0,.04),rgba(255,228,105,.85),rgba(255,183,0,.28),rgba(255,239,166,.8),transparent);box-shadow:0 0 18px rgba(255,193,7,.42)}
+.feature-icon{border-color:#57460d;background:#121006;color:#ffda45}
+.hero-feature b{color:#f2e9cc}
+.hero-feature small{color:#a49a7d}
+.scroll{color:#b3a66d}
+.cards article,.tool-card,.module{background:linear-gradient(145deg,#100f08,#070705);border-color:#30280d}
+.button:hover,.btn:hover{box-shadow:0 0 35px rgba(255,193,7,.22)}
+.bottom-nav,.bottom-menu-toggle,.bottom-menu-link{--accent:#f4c928}
+.bottom-nav .active,.bottom-nav a.active{color:#ffda45}
+.bottom-nav .active:after{background:#f4c928}
+@media(max-width:760px){
+ .hero-shell{background:linear-gradient(150deg,rgba(12,11,6,.96),rgba(2,2,1,.99))}
+}
