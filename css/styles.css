@@ -700,3 +700,21 @@ h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.stat
  .intro h1{font-size:clamp(29px,8vw,33px)!important}
  .bottom-nav a,.bottom-nav button{font-size:7px!important}
 }
+
+
+/* Tap/click ripple uses the same restrained dark-gold palette everywhere */
+:root{
+ --ripple-color:rgba(243,201,40,.42);
+ --ripple-core:rgba(255,226,105,.72);
+}
+.ripple,.click-ripple,.tap-ripple,.water-ripple,.ripple-effect,.touch-ripple{
+ border-color:var(--ripple-color)!important;
+ background:radial-gradient(circle,rgba(255,226,105,.22) 0%,rgba(243,201,40,.13) 28%,rgba(192,145,0,.08) 52%,transparent 72%)!important;
+ box-shadow:0 0 18px rgba(243,201,40,.16)!important;
+}
+.ripple:before,.ripple:after,.click-ripple:before,.click-ripple:after,
+.tap-ripple:before,.tap-ripple:after,.water-ripple:before,.water-ripple:after,
+.ripple-effect:before,.ripple-effect:after,.touch-ripple:before,.touch-ripple:after{
+ border-color:rgba(243,201,40,.45)!important;
+ box-shadow:0 0 12px rgba(243,201,40,.12)!important;
+}
