@@ -224,3 +224,35 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  sections.forEach(section=>observer.observe(section));
  links.forEach(link=>link.addEventListener("click",()=>mark(link.hash.slice(1))));
 })();
+
+
+/* Scroll progress indicator */
+(function initPageScrollProgress(){
+ if(document.getElementById("page-scroll-progress"))return;
+ const track=document.createElement("div");
+ track.id="page-scroll-progress";
+ track.setAttribute("role","progressbar");
+ track.setAttribute("aria-label","Прогресс прокрутки страницы");
+ track.setAttribute("aria-valuemin","0");
+ track.setAttribute("aria-valuemax","100");
+ const fill=document.createElement("span");
+ track.appendChild(fill);
+ document.body.appendChild(track);
+ let scheduled=false;
+ const update=()=>{
+  const root=document.documentElement;
+  const max=Math.max(1,root.scrollHeight-root.clientHeight);
+  const progress=Math.max(0,Math.min(1,root.scrollTop/max));
+  fill.style.transform="scaleX("+progress+")";
+  track.setAttribute("aria-valuenow",String(Math.round(progress*100)));
+  scheduled=false;
+ };
+ const onScroll=()=>{
+  if(scheduled)return;
+  scheduled=true;
+  requestAnimationFrame(update);
+ };
+ window.addEventListener("scroll",onScroll,{passive:true});
+ window.addEventListener("resize",onScroll,{passive:true});
+ update();
+})();
