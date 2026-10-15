@@ -380,3 +380,48 @@ select option{background:var(--panel);color:var(--text)}
  .button,.secondary-button,.btn,.module-open,.option,.challenge-choice{padding:10px 14px}
  .actions>.button,.actions>.secondary-button{flex:1 1 auto}
 }
+
+
+/* Lightweight mode: keep the interface usable while reducing GPU-heavy effects */
+:root[data-lite="true"] *,
+:root[data-lite="true"] *::before,
+:root[data-lite="true"] *::after{
+  scroll-behavior:auto!important;
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  transition-duration:.01ms!important;
+  transition-delay:0ms!important;
+}
+:root[data-lite="true"] .pulsar-background,
+:root[data-lite="true"] #smooth-cursor-trail,
+:root[data-lite="true"] .orbit-animation,
+:root[data-lite="true"] .art:before,
+:root[data-lite="true"] .art:after,
+:root[data-lite="true"] .bottom-nav-liquid{
+  display:none!important;
+}
+:root[data-lite="true"] .header,
+:root[data-lite="true"] .bottom-nav,
+:root[data-lite="true"] .bottom-menu-panel{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+:root[data-lite="true"] .hero-shell,
+:root[data-lite="true"] .art,
+:root[data-lite="true"] .cards article,
+:root[data-lite="true"] .tool-card,
+:root[data-lite="true"] .module,
+:root[data-lite="true"] .hero-feature{
+  box-shadow:none!important;
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+}
+:root[data-lite="true"] body:after{opacity:.06}
+:root[data-lite="true"] .cards article:hover,
+:root[data-lite="true"] .tool-card:hover,
+:root[data-lite="true"] .module:hover,
+:root[data-lite="true"] .hero-feature:hover{
+  transform:none!important;
+  box-shadow:none!important;
+}
