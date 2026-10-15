@@ -579,3 +579,36 @@ body:after{opacity:.08;background-size:76px 76px}
  .section-head>p{font-size:11px}
  .pill-news{white-space:normal}
 }
+
+
+/* Final typography pass: TikTok Sans everywhere + tighter first-screen layout */
+:root{--font-ui:"TikTokSans",ui-sans-serif,system-ui,sans-serif;--font-display:"TikTokSans",ui-sans-serif,system-ui,sans-serif}
+body,button,input,textarea,select,.lesson-copy,.intro p,.cards p,.tool-card p,.section-head>p,.hero-feature small,.hero-feature b,.bottom-menu-link,.bottom-menu-toggle,.pill-news,.hero-top-link{font-family:"TikTokSans",ui-sans-serif,system-ui,sans-serif!important}
+h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.statement,.cta h2,.dialog h2,.module h3,.tool-card h3,.row h3,.completion h3{font-family:"TikTokSans",ui-sans-serif,system-ui,sans-serif!important}
+.hero-shell{min-height:0}
+.hero-grid{grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);min-height:0;gap:clamp(14px,2.5vw,36px)}
+.intro{padding:clamp(24px,4vh,52px) 0}
+.intro h1{max-width:none;font-size:clamp(38px,5.25vw,72px);line-height:.98;letter-spacing:-.045em;overflow-wrap:normal;word-break:normal}
+.intro p{max-width:520px;font-size:12px;line-height:1.65}
+.art{height:clamp(310px,43vw,500px);min-height:300px}
+.hero-bottom{margin-top:0}
+.hero-feature b,.hero-feature small{white-space:normal}
+.section{padding-top:70px}
+@media(min-width:761px){
+ .hero{padding-top:12px}
+ .hero-shell{padding-top:20px;padding-bottom:16px}
+ .hero-grid{min-height:0}
+ .intro h1{font-size:clamp(38px,5.1vw,70px)}
+ .hero-bottom{padding-top:12px}
+ .hero-feature{padding:8px 7px}
+}
+@media(max-width:760px){
+ .hero-shell{min-height:0}
+ .hero-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+ .art{height:clamp(250px,68vw,360px);min-height:240px}
+ .intro{padding:18px 0 14px}
+ .intro h1{font-size:clamp(36px,9.4vw,58px);line-height:1;max-width:none}
+ .intro p{max-width:100%;font-size:12px}
+ .hero-bottom{margin-top:4px}
+ .section{padding-top:48px}
+}
