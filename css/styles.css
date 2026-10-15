@@ -1172,3 +1172,45 @@ section.tab-arrival-animation{
   }
   .header .site-nav>a{min-height:36px!important;padding:7px 12px!important;font-size:11px!important}
 }
+
+
+/* COSMIC CYBERSECURITY THEME — animated TON 618-inspired black hole */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--bg:#070b14;--panel:#0e1625;--text:#edf5ff;--muted:#9aacc5;--line:#263750;--accent:#69b8ff;--accent2:#67f0d2}
+:root[data-theme="light"]{--bg:#f3f7fc;--panel:#fff;--text:#15263e;--muted:#5b708d;--line:#d4e0f0;--accent:#176fe5;--accent2:#078c79}
+html{background:var(--bg)}
+body{font-family:Manrope,Inter,Arial,sans-serif;background:transparent;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+radial-gradient(ellipse at 50% 44%,transparent 0 4.4%,rgba(2,4,10,.98) 4.8% 7%,transparent 7.4%),
+radial-gradient(ellipse at 50% 44%,transparent 0 7%,rgba(103,190,255,.55) 7.4%,rgba(115,104,255,.2) 8.4%,transparent 10%),
+radial-gradient(ellipse at 50% 44%,transparent 0 10%,rgba(72,194,255,.13) 10.3%,transparent 12%),
+radial-gradient(ellipse at 50% 44%,rgba(4,9,20,.3),rgba(4,9,20,.68) 48%,var(--bg) 85%),
+radial-gradient(ellipse at 10% 20%,rgba(40,121,255,.13),transparent 38%),
+radial-gradient(ellipse at 92% 70%,rgba(54,225,198,.09),transparent 34%);
+background-size:100% 100%;animation:ton618-breathe 12s ease-in-out infinite alternate;opacity:.95}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(1.5px 1.5px at 12% 20%,#8fd3ff99 40%,transparent 70%),
+radial-gradient(1px 1px at 88% 31%,#7af6e599 40%,transparent 70%),
+radial-gradient(2px 2px at 7% 72%,#8fd3ff77 40%,transparent 70%),
+radial-gradient(1px 1px at 94% 81%,#8fd3ff99 40%,transparent 70%),
+linear-gradient(90deg,rgba(80,168,255,.09),transparent 7%,transparent 93%,rgba(103,240,210,.08));
+background-size:100% 100%;animation:cyber-edge-drift 18s linear infinite;opacity:.8}
+.header,.footer,.section,.hero,.wrap,main{position:relative}
+@keyframes ton618-breathe{0%{background-position:50% 48%,50% 48%,50% 48%,center,center,center;filter:hue-rotate(-7deg)}100%{background-position:50% 42%,50% 42%,50% 42%,center,center,center;filter:hue-rotate(8deg)}}
+@keyframes cyber-edge-drift{0%{background-position:0 0,0 0,0 0,0 0,0 0}100%{background-position:0 40px,0 -55px,0 -45px,0 65px,0 0}}
+/* Glowing security traces running along both screen edges */
+body{--edge-line:rgba(105,184,255,.45)}
+body .cyber-edge{display:none}
+@media(min-width:900px){
+ body:after{background:
+ radial-gradient(1.5px 1.5px at 12% 20%,#8fd3ff99 40%,transparent 70%),
+ radial-gradient(1px 1px at 88% 31%,#7af6e599 40%,transparent 70%),
+ radial-gradient(2px 2px at 7% 72%,#8fd3ff77 40%,transparent 70%),
+ radial-gradient(1px 1px at 94% 81%,#8fd3ff99 40%,transparent 70%),
+ repeating-linear-gradient(180deg,transparent 0 26px,rgba(105,184,255,.13) 27px,transparent 28px 54px),
+ linear-gradient(90deg,rgba(80,168,255,.14),transparent 5%,transparent 95%,rgba(103,240,210,.12));
+ background-size:100% 100%;opacity:.85}
+}
+:root[data-theme="light"] body:before{opacity:.34}
+:root[data-theme="light"] body:after{opacity:.3}
+@media(prefers-reduced-motion:reduce){body:before,body:after{animation:none!important;scroll-behavior:auto!important}}
