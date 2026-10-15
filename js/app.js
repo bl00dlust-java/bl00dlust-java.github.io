@@ -76,7 +76,7 @@ try{const saved=JSON.parse(localStorage.getItem(STORE)||"null");if(saved&&Array.
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){if($("progressHint"))$("progressHint").textContent="Браузер не разрешил сохранить прогресс. Курс всё равно можно пройти."}}
 function renderModules(){if(!$("modules"))return;const base=location.pathname.includes("/pages/")?"":"pages/";$("modules").innerHTML=modules.map((m,i)=>{const done=state.completed.includes(m.id);return `<article class="module reveal" style="--delay:${i*45}ms"><div class="module-top"><span class="num">МОДУЛЬ ${String(i+1).padStart(2,"0")}</span><span class="module-status">${done?"✓ Пройден":"Не начат"}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div class="module-bottom"><span>◷ ${m.time}</span><a class="module-open" href="${base}module.html?id=${m.id}">${done?"Повторить":"Начать урок"} <span aria-hidden="true">↗</span></a></div></article>`}).join("");const n=state.completed.length;$("progressLabel").textContent=n+" из "+modules.length+" модулей";$("progressFill").style.width=(n/modules.length*100)+"%";$("progressBar").setAttribute("aria-valuenow",n);$("progressHint").textContent=n===modules.length?"Курс завершён — отлично справился!":n?"Продолжай: каждый модуль добавляет полезные привычки.":"Выбери первый модуль и начни обучение.";$("completion").hidden=n!==modules.length}
 function theme(){document.documentElement.dataset.theme=state.theme==="light"?"light":"dark";$("theme").textContent=state.theme==="light"?"☾ Тёмная":"☼ Светлая";$("theme").setAttribute("aria-pressed",state.theme==="light"?"true":"false")}
-function liteMode(){document.documentElement.dataset.lite=state.lite?"true":"false";let toggle=$("liteToggle");if(!toggle){toggle=document.createElement("button");toggle.id="liteToggle";toggle.type="button";toggle.className="lite-toggle";$("theme").insertAdjacentElement("beforebegin",toggle);}toggle.textContent=state.lite?"⚡ Лёгкий: вкл":"⚡ Лёгкий режим";toggle.setAttribute("aria-pressed",state.lite?"true":"false");toggle.setAttribute("aria-label","Включить или выключить облегчённый интерфейс");}
+function liteMode(){document.documentElement.dataset.lite=state.lite?"true":"false";let toggle=$("liteToggle");if(!toggle){toggle=document.createElement("button");toggle.id="liteToggle";toggle.type="button";toggle.className="lite-toggle";$("theme").insertAdjacentElement("beforebegin",toggle);}toggle.textContent=state.lite?"⚡ Лёгкий: вкл":"⚡ Лёгкий режим";toggle.setAttribute("aria-pressed",state.lite?"true":"false");toggle.setAttribute("aria-label","Включить или выключить облегчённый интерфейс");window.dispatchEvent(new Event("lite-mode-change"));}
 function design(){document.documentElement.dataset.design="violet";state.design="violet";save()}
 
 let active=null,step=0,answered=false,activeSteps=[];
@@ -207,6 +207,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   ctx.setTransform(dpr,0,0,dpr,0,0);
  }
  function move(e){
+  if(document.documentElement.dataset.lite==="true"){points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);return;}
   targetX=e.clientX;targetY=e.clientY;lastInput=performance.now();
   if(!points.length){headX=targetX;headY=targetY;points.push({x:headX,y:headY,t:lastInput});}
   if(!raf)raf=requestAnimationFrame(draw);
@@ -241,6 +242,8 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   if(following||trailAlive)raf=requestAnimationFrame(draw);
   else{ctx.clearRect(0,0,width,height);points=[];}
  }
+ const clearLiteTrail=()=>{if(document.documentElement.dataset.lite!=="true")return;points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);};
+ window.addEventListener("lite-mode-change",clearLiteTrail);
  window.addEventListener("pointermove",move,{passive:true});
  window.addEventListener("resize",resize,{passive:true});
  window.addEventListener("blur",()=>{points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);});
@@ -289,6 +292,15 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   card.style.setProperty("--pointer-y",(e.clientY-r.top)+"px");
  };
  const reset=card=>{if(!card)return;const s=stateFor(card);s.tx=0;s.ty=0;s.targetLift=0;settling.add(card);};
+ const clearLiteCardMotion=()=>{
+  if(document.documentElement.dataset.lite!=="true")return;
+  if(raf){cancelAnimationFrame(raf);raf=0;}
+  const touched=new Set(settling);if(current)touched.add(current);
+  touched.forEach(card=>{const s=stateFor(card);s.x=s.y=s.tx=s.ty=s.lift=s.targetLift=0;card.style.setProperty("--cursor-rotate-x","0deg");card.style.setProperty("--cursor-rotate-y","0deg");card.style.setProperty("--cursor-lift-y","0px");});
+  settling.clear();current=null;
+ };
+ window.addEventListener("lite-mode-change",clearLiteCardMotion);
+ if(document.documentElement.dataset.lite==="true")clearLiteCardMotion();
  if(!reduce&&fine){
   const tick=()=>{
    let moving=false;
@@ -306,6 +318,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
    if(moving)raf=requestAnimationFrame(tick);else raf=0;
   };
   document.addEventListener("pointermove",e=>{
+   if(document.documentElement.dataset.lite==="true")return;
    const card=e.target instanceof Element?e.target.closest(cardSelector):null;
    if(card!==current){
     reset(current);current=card;
@@ -317,6 +330,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  }
  if(!reduce){
   document.addEventListener("pointerdown",e=>{
+   if(document.documentElement.dataset.lite==="true")return;
    if(e.button!==0||!(e.target instanceof Element))return;
    const target=e.target.closest("a,button,.cards article,.tool-card,.module,.hero-feature");
    if(!target)return;
@@ -361,7 +375,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   if(animation){animation.cancel();animation=null;}
   const previous=box;
   active=next;setAttributes(next);
-  if(!previous||!animate||reduce){
+  if(!previous||!animate||reduce||document.documentElement.dataset.lite==="true"){
    box=nextBox;liquid.style.width=box.w+"px";liquid.style.height=box.h+"px";
    liquid.style.transform="translate3d("+box.x+"px,"+box.y+"px,0) scale(1)";
    liquid.classList.add("is-ready");return;
@@ -392,6 +406,14 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   }).catch(()=>{});
   box=nextBox;liquid.classList.add("is-ready");
  };
+ const settleLiteNavigation=()=>{
+  if(document.documentElement.dataset.lite!=="true"||!active)return;
+  sequence++;if(animation){animation.cancel();animation=null;}
+  box=coords(active);liquid.style.width=box.w+"px";liquid.style.height=box.h+"px";
+  liquid.style.transform="translate3d("+box.x+"px,"+box.y+"px,0) scale(1)";
+  liquid.classList.add("is-ready");
+ };
+ window.addEventListener("lite-mode-change",settleLiteNavigation);
  const nearestSection=()=>{
   if(manualTarget)return;
   const probe=(window.scrollY||document.documentElement.scrollTop)+Math.min(window.innerHeight*.36,290);
