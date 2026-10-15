@@ -291,3 +291,55 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  window.addEventListener("resize",onScroll,{passive:true});
  update();
 })();
+
+
+/* Tactile, iOS-inspired microinteractions (kept lightweight and accessible) */
+(function initGlassMotion(){
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(reduce)return;
+ const finePointer=window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+ const interactive=document.querySelectorAll(".button,.btn,.secondary-button,.icon-btn,.module-open,.option,.challenge-choice,#theme");
+ interactive.forEach(el=>{
+  el.addEventListener("pointerdown",e=>{
+   if(e.pointerType==="mouse"&&e.button!==0)return;
+   const rect=el.getBoundingClientRect(),r=document.createElement("span");
+   r.className="motion-ripple";
+   r.style.left=(e.clientX-rect.left)+"px";r.style.top=(e.clientY-rect.top)+"px";
+   if(getComputedStyle(el).position==="static")el.style.position="relative";
+   el.style.overflow="hidden";el.appendChild(r);
+   r.addEventListener("animationend",()=>r.remove(),{once:true});
+  },{passive:true});
+ });
+ if(finePointer){
+  document.querySelectorAll(".cards article,.tool-card,.module,.hero-feature").forEach(card=>{
+   card.addEventListener("pointermove",e=>{
+    const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+    card.style.setProperty("--pointer-x",x+"px");card.style.setProperty("--pointer-y",y+"px");
+    if(card.matches(".cards article,.tool-card")&&r.width>230){
+     const rx=((y/r.height)-.5)*-2.2,ry=((x/r.width)-.5)*2.8;
+     card.style.transform="perspective(900px) rotateX("+rx+"deg) rotateY("+ry+"deg) translateY(-5px)";
+    }
+   },{passive:true});
+   card.addEventListener("pointerleave",()=>{card.style.transform="";},{passive:true});
+  });
+  let tx=0,ty=0,raf=0;
+  window.addEventListener("pointermove",e=>{
+   if(raf)return;raf=requestAnimationFrame(()=>{
+    tx=((e.clientX/window.innerWidth)-.5)*-7;ty=((e.clientY/window.innerHeight)-.5)*-6;
+    document.documentElement.style.setProperty("--bg-shift-x",tx.toFixed(2)+"px");
+    document.documentElement.style.setProperty("--bg-shift-y",ty.toFixed(2)+"px");raf=0;
+   });
+  },{passive:true});
+ }
+ document.addEventListener("click",e=>{
+  const link=e.target.closest('a[href]');
+  if(!link||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||link.target==="_blank")return;
+  const href=link.getAttribute("href");
+  if(!href||href.startsWith("#")||href.startsWith("javascript:")||link.hasAttribute("download"))return;
+  let url;try{url=new URL(link.href,location.href)}catch(_){return}
+  if(url.origin!==location.origin||url.pathname===location.pathname&&url.search===location.search)return;
+  const main=document.querySelector("main");if(!main)return;
+  e.preventDefault();main.classList.add("page-leave");
+  window.setTimeout(()=>{location.href=url.href},180);
+ });
+})();
