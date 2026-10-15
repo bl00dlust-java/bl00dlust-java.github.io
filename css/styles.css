@@ -361,3 +361,22 @@ select option{background:var(--panel);color:var(--text)}
  .bottom-nav-liquid,.bottom-nav a,.cards article,.tool-card,.module,.hero-feature,.water-ripple-ring,.motion-ripple{transition:none!important;animation:none!important}
  .cards article,.tool-card,.module,.hero-feature{transform:none!important;will-change:auto}
 }
+
+
+/* Buttons size to their labels without clipping text */
+.button,.secondary-button,.btn,.module-open,.option,.challenge-choice,.bottom-menu-toggle,.bottom-menu-link{
+  width:fit-content;max-width:100%;min-width:0;white-space:normal;
+  overflow-wrap:anywhere;text-align:center;line-height:1.4;
+}
+.button,.secondary-button,.btn,.module-open,.option,.challenge-choice{
+  height:auto;min-height:44px;padding:11px 20px;
+}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.actions>.button,.actions>.secondary-button{flex:0 1 auto}
+.header-tools{flex-wrap:wrap;min-width:0}
+.icon-btn{flex:0 0 39px}
+.bottom-nav a{min-width:0;overflow-wrap:anywhere;text-align:center;padding-inline:3px}
+@media(max-width:560px){
+ .button,.secondary-button,.btn,.module-open,.option,.challenge-choice{padding:10px 14px}
+ .actions>.button,.actions>.secondary-button{flex:1 1 auto}
+}
