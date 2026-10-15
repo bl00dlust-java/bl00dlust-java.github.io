@@ -260,7 +260,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 
 /* Context-aware top pills, bottom sheet and polished form controls */
-:root{--font-ui:"Pixar",ui-sans-serif,system-ui,sans-serif;--font-display:"Schueler","Pixar",ui-sans-serif,system-ui,sans-serif}
+:root{--font-ui:"Schueler",ui-sans-serif,system-ui,sans-serif;--font-display:"Pixar","Schueler",ui-sans-serif,system-ui,sans-serif}
 body,button,input,textarea,select{font-family:var(--font-ui)}
 h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.pill-news,.site-nav,.bottom-nav,.section-head,.statement,.cta h2,.dialog h2,.module h3,.tool-card h3,.row h3,.completion h3{font-family:var(--font-display)}
 .site-nav a{isolation:isolate;transition:color .3s ease,background .35s ease,border-color .3s ease,box-shadow .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
