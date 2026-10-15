@@ -248,7 +248,17 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   },{rootMargin:"-18% 0px -65% 0px",threshold:[0,.15,.35,.6]});
   sections.forEach(section=>observer.observe(section));
  }
- links.forEach(link=>link.addEventListener("click",()=>mark(link.hash.slice(1))));
+ links.forEach(link=>link.addEventListener("click",()=>{
+  const id=link.hash.slice(1);
+  mark(id);
+  const target=document.querySelector(link.hash);
+  if(target){
+   target.classList.remove("tab-arrival-animation");
+   void target.offsetWidth;
+   target.classList.add("tab-arrival-animation");
+   window.setTimeout(()=>target.classList.remove("tab-arrival-animation"),800);
+  }
+ }));
  nav.addEventListener("scroll",()=>moveIndicator(links.find(item=>item.hash==="#"+activeId)),{passive:true});
  window.addEventListener("resize",()=>moveIndicator(links.find(item=>item.hash==="#"+activeId)),{passive:true});
 })();
