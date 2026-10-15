@@ -883,3 +883,73 @@ input[type="text"]::placeholder,
 @media(max-width:560px){
  .brand .logo{width:42px!important;height:42px!important;flex-basis:42px!important}
 }
+
+
+/* Light-theme closing banner and footer stay bright and readable */
+:root[data-theme="light"] .cta,
+:root[data-theme="light"] section.cta,
+:root[data-theme="light"] .cta.wrap{
+  background:linear-gradient(125deg,#eaf4ff 0%,#d8eaff 52%,#f5faff 100%)!important;
+  color:#17395f!important;
+  border-color:rgba(35,125,225,.28)!important;
+  box-shadow:0 14px 42px rgba(35,125,225,.12),inset 0 0 28px rgba(255,255,255,.7)!important;
+}
+:root[data-theme="light"] .cta h2,
+:root[data-theme="light"] .cta p,
+:root[data-theme="light"] .cta .eyebrow{color:#17395f!important}
+:root[data-theme="light"] .cta h2 em{color:#176fe5!important}
+:root[data-theme="light"] .cta .button,
+:root[data-theme="light"] .cta .btn,
+:root[data-theme="light"] .cta a.button{
+  background:#176fe5!important;color:#fff!important;border-color:#176fe5!important;
+}
+:root[data-theme="light"] .footer,
+:root[data-theme="light"] footer{
+  background:transparent!important;
+  color:#496987!important;
+  border-color:rgba(35,125,225,.18)!important;
+  box-shadow:none!important;
+}
+:root[data-theme="light"] .footer p,
+:root[data-theme="light"] footer p,
+:root[data-theme="light"] .footer a,
+:root[data-theme="light"] footer a{color:#496987!important}
+:root[data-theme="light"] .cta:after{color:rgba(35,125,225,.07)!important}
+
+/* Reading progress bar at the very top, updated while scrolling */
+#page-scroll-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  z-index:10000;
+  pointer-events:none;
+  background:transparent;
+}
+#page-scroll-progress span{
+  display:block;
+  width:100%;
+  height:100%;
+  transform:scaleX(0);
+  transform-origin:left center;
+  background:linear-gradient(90deg,#3e91ff,#82c9ff,#2b7ce5);
+  box-shadow:0 0 10px rgba(63,153,255,.55),0 0 22px rgba(63,153,255,.22);
+  will-change:transform;
+}
+#page-scroll-progress:after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:0;
+  width:18px;
+  height:3px;
+  background:#c5e8ff;
+  opacity:.8;
+  filter:blur(3px);
+}
+:root[data-theme="light"] #page-scroll-progress span{
+  background:linear-gradient(90deg,#176fe5,#6eb8ff,#176fe5);
+}
+html{scroll-behavior:smooth}
+html.is-scrolling{scroll-behavior:auto}
