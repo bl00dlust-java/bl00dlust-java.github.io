@@ -612,3 +612,26 @@ h1,h2,h3,h4,h5,h6,.brand-name,.eyebrow,.site-nav,.bottom-nav,.section-head,.stat
  .hero-bottom{margin-top:4px}
  .section{padding-top:48px}
 }
+
+
+/* Spinning CD: visible rotation, metallic grooves and a stable spindle */
+.orbit-animation{
+ background:
+  radial-gradient(circle at 50% 50%,#101415 0 8.5%,#dce6e3 8.8% 9.2%,#171b1c 9.5% 10.8%,transparent 11.2%),
+  conic-gradient(from 0deg,transparent 0deg,rgba(255,255,255,.7) 18deg,rgba(255,255,255,.04) 34deg,transparent 58deg,rgba(214,239,233,.65) 82deg,rgba(255,255,255,.03) 108deg,transparent 145deg,rgba(255,255,255,.82) 177deg,rgba(202,227,221,.05) 203deg,transparent 239deg,rgba(255,255,255,.65) 274deg,rgba(255,255,255,.02) 302deg,transparent 335deg,rgba(255,255,255,.45) 360deg),
+  repeating-radial-gradient(circle at 50% 50%,rgba(240,250,247,.22) 0 1px,rgba(12,16,17,.12) 2px 4px,rgba(190,210,205,.13) 5px 6px),
+  radial-gradient(circle at 34% 28%,#dce7e4 0,#596261 15%,#111415 38%,#a7b4b0 54%,#222829 67%,#dce6e3 78%,#080a0b 100%);
+ animation:recordSpin 4.8s linear infinite,recordFloat 10s ease-in-out infinite;
+}
+.orbit-animation:before{
+ background:repeating-radial-gradient(circle,transparent 0 5px,rgba(255,255,255,.11) 5.5px 6px,transparent 6.5px 9px);
+}
+.orbit-animation:after{
+ inset:42%;
+ background:radial-gradient(circle at 35% 28%,#fff 0,#c6d1ce 12%,#353c3d 30%,#080a0b 68%,#aab7b3 82%,#111414 100%);
+ box-shadow:0 0 7px rgba(245,255,252,.8),inset 0 0 8px #000;
+}
+.orbit-core{width:4px;height:4px;box-shadow:0 0 4px #fff,0 0 12px rgba(255,255,255,.95)}
+@keyframes recordSpin{from{rotate:0deg}to{rotate:360deg}}
+@media(prefers-reduced-motion:reduce){.orbit-animation{animation:none!important}}
+:root[data-lite="true"] .orbit-animation{animation:none!important}
