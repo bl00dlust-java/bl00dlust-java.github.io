@@ -277,6 +277,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  }
 })();
 (function initLiquidBottomNavigation(){
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
  const nav=document.querySelector(".bottom-nav"),liquid=nav&&nav.querySelector(".bottom-nav-liquid");
  if(!nav||!liquid)return;
  const links=[...nav.querySelectorAll('a[href^="#"]')].filter(a=>document.querySelector(a.getAttribute("href")));
