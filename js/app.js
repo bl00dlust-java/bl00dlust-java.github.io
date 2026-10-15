@@ -205,24 +205,52 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
 })();
 
 
-/* Keep the current section visible in the sticky navigation */
+/* Ordered section tabs with a smoothly sliding active capsule */
 (function initSectionIndicator(){
  const nav=document.querySelector(".site-nav");
  if(!nav)return;
  const links=[...nav.querySelectorAll('a[href^="#"]')];
  const sections=links.map(link=>document.querySelector(link.getAttribute("href"))).filter(Boolean);
- if(!sections.length)return;
- const mark=id=>links.forEach(link=>{
-  if(link.getAttribute("href")==="#"+id){link.setAttribute("aria-current","location");}
-  else link.removeAttribute("aria-current");
- });
- if(!("IntersectionObserver" in window)){return;}
- const observer=new IntersectionObserver(entries=>{
-  const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
-  if(visible[0])mark(visible[0].target.id);
- },{rootMargin:"-18% 0px -65% 0px",threshold:[0,.15,.35,.6]});
- sections.forEach(section=>observer.observe(section));
+ if(!links.length)return;
+ const indicator=document.createElement("span");
+ indicator.className="nav-pill-indicator";
+ indicator.setAttribute("aria-hidden","true");
+ nav.prepend(indicator);
+ let activeId="";
+ const moveIndicator=link=>{
+  if(!link)return;
+  const navRect=nav.getBoundingClientRect();
+  const linkRect=link.getBoundingClientRect();
+  const x=linkRect.left-navRect.left+nav.scrollLeft;
+  indicator.style.width=linkRect.width+"px";
+  indicator.style.height=linkRect.height+"px";
+  indicator.style.transform="translate("+x+"px,"+(linkRect.top-navRect.top+nav.scrollTop)+"px)";
+  indicator.style.opacity="1";
+ };
+ const mark=id=>{
+  const link=links.find(item=>item.hash==="#"+id)||links[0];
+  activeId=link.hash.slice(1);
+  links.forEach(item=>{
+   if(item===link)item.setAttribute("aria-current","location");
+   else item.removeAttribute("aria-current");
+  });
+  moveIndicator(link);
+  const navRect=nav.getBoundingClientRect(),linkRect=link.getBoundingClientRect();
+  if(linkRect.left<navRect.left||linkRect.right>navRect.right){
+   link.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest",inline:"nearest"});
+  }
+ };
+ if(links.length)mark((location.hash||links[0].hash).replace("#",""));
+ if("IntersectionObserver" in window&&sections.length){
+  const observer=new IntersectionObserver(entries=>{
+   const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+   if(visible[0]&&visible[0].target.id!==activeId)mark(visible[0].target.id);
+  },{rootMargin:"-18% 0px -65% 0px",threshold:[0,.15,.35,.6]});
+  sections.forEach(section=>observer.observe(section));
+ }
  links.forEach(link=>link.addEventListener("click",()=>mark(link.hash.slice(1))));
+ nav.addEventListener("scroll",()=>moveIndicator(links.find(item=>item.hash==="#"+activeId)),{passive:true});
+ window.addEventListener("resize",()=>moveIndicator(links.find(item=>item.hash==="#"+activeId)),{passive:true});
 })();
 
 
