@@ -1223,3 +1223,63 @@ h1 em,h2 em,h3 em,.section-head h2 span,.section-head h2 em,.intro h1 em,
  .logo{flex-basis:29px!important;width:29px!important;height:29px!important}
  .header-tools .icon-btn,#theme{flex-basis:31px!important;width:31px!important;min-width:31px!important;max-width:31px!important;height:31px!important;min-height:31px!important}
 }
+
+
+/* BUGFIX — light theme blue palette, readable accent text, mobile hero / 2026-10-16 */
+:root[data-theme="light"]{
+ --bg:#f1f8ff!important;--bg-soft:#e5f2ff!important;--panel:#fff!important;--panel-raised:#edf7ff!important;
+ --text:#10243b!important;--muted:#526b84!important;--line:rgba(30,106,181,.18)!important;
+ --line-strong:rgba(28,130,221,.42)!important;--accent:#087fd5!important;--accent-strong:#0564b5!important;
+ --accent-soft:#16a6db!important;--glow:rgba(0,133,230,.12)!important;
+}
+:root[data-theme="light"] .header,
+:root[data-theme="light"] .bottom-nav{background:rgba(245,250,255,.94)!important;color:#10243b!important;border-color:rgba(30,106,181,.22)!important}
+:root[data-theme="light"] .icon-btn,
+:root[data-theme="light"] #theme,
+:root[data-theme="light"] .lite-toggle{background:linear-gradient(145deg,#e8f5ff,#d8edff)!important;color:#075b9d!important;border-color:rgba(28,130,221,.3)!important}
+:root[data-theme="light"] .intro h1,
+:root[data-theme="light"] .section-head h2,
+:root[data-theme="light"] .statement p,
+:root[data-theme="light"] .statement p em,
+:root[data-theme="light"] .cta h2,
+:root[data-theme="light"] .cta h2 em{color:#10243b!important}
+:root[data-theme="light"] .intro h1 em,
+:root[data-theme="light"] .section-head h2 span,
+:root[data-theme="light"] .section-head h2 em,
+:root[data-theme="light"] .statement p em,
+:root[data-theme="light"] .cta h2 em,
+:root[data-theme="light"] .eyebrow,
+:root[data-theme="light"] .brand-name em,
+:root[data-theme="light"] .hero-feature b,
+:root[data-theme="light"] .cards article>small,
+:root[data-theme="light"] .cards article>a,
+:root[data-theme="light"] .tool-card>span,
+:root[data-theme="light"] .num,
+:root[data-theme="light"] .progress-top strong{color:#087fd5!important;text-shadow:none!important}
+:root[data-theme="light"] .statement{background:linear-gradient(120deg,#fff,#eaf5ff)!important;border-color:rgba(28,130,221,.22)!important}
+:root[data-theme="light"] .cards article,
+:root[data-theme="light"] .tool-card,
+:root[data-theme="light"] .module,
+:root[data-theme="light"] .progress{box-shadow:0 12px 35px rgba(35,88,140,.1)!important;border-color:rgba(30,106,181,.2)!important}
+:root[data-theme="light"] .bottom-nav a{color:#526b84!important}
+:root[data-theme="light"] .bottom-nav a.active,
+:root[data-theme="light"] .bottom-nav a[aria-current=location]{background:linear-gradient(125deg,#38baff,#83e4ff)!important;color:#06213a!important}
+:root[data-theme="light"] .bottom-nav a.active span,
+:root[data-theme="light"] .bottom-nav a[aria-current=location] span{color:#06213a!important}
+:root[data-theme="light"] .cta{background:linear-gradient(120deg,#e0f2ff,#c9eaff 62%,#d9f8ff)!important;color:#10243b!important}
+:root[data-theme="light"] .cta .eyebrow{color:#087fd5!important}
+:root[data-theme="light"] .cta:after{color:rgba(0,111,205,.08)!important}
+@media(max-width:760px){
+ .hero-grid{grid-template-columns:minmax(0,1fr)!important}
+ .intro{min-width:0!important;width:100%!important}
+ .intro h1{max-width:100%!important;width:100%!important;font-size:clamp(30px,7.5vw,42px)!important;line-height:1.03!important;letter-spacing:-.04em!important;overflow-wrap:normal!important;word-break:normal!important}
+ .intro h1 br{display:none!important}
+ .intro h1 em{display:inline!important;white-space:normal!important}
+ .art{min-width:0!important;width:100%!important}
+ .statement p{font-size:clamp(31px,7.8vw,48px)!important;line-height:1.08!important;overflow-wrap:normal!important}
+ .statement p em{color:#66d2ff!important}
+}
+@media(max-width:380px){
+ .intro h1{font-size:30px!important;letter-spacing:-.045em!important}
+ .statement p{font-size:29px!important}
+}
