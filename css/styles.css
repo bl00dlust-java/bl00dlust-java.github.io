@@ -1170,3 +1170,56 @@ body:after{
 :root[data-theme="light"] body:before{
  background:radial-gradient(ellipse at 18% 25%,rgba(35,112,255,.1),transparent 30%),radial-gradient(ellipse at 82% 70%,rgba(42,177,255,.08),transparent 28%),linear-gradient(155deg,#f5faff,#eaf4ff 55%,#f8fcff)!important;
 }
+
+
+/* CHECKPOINT — Mobile polish + blue-only accents / 2026-10-16 */
+:root{
+ --accent:#38baff!important;--accent-strong:#0787ed!important;--accent-soft:#83e4ff!important;
+ --gold:#38baff!important;--yellow:#38baff!important;--warning:#38baff!important;
+}
+:root[data-theme="light"]{--accent:#0787d8!important;--accent-strong:#0867b5!important;--accent-soft:#0eb6de!important}
+h1 em,h2 em,h3 em,.section-head h2 span,.section-head h2 em,.intro h1 em,
+.hero-feature b,.hero-feature strong,.feature-icon,.cards article>small,.cards article>a,
+.tool-card>span,.num,.progress-top strong,.eyebrow,.cta .eyebrow,.art-label,
+.brand-name em,.pill-arrow,.module-top .num,.module-status{
+ color:#66d2ff!important;
+}
+.section-head h2,.section-head h2 *{text-shadow:none!important}
+.header{min-width:0!important}
+.header-tools{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:7px!important;min-width:0!important}
+.header-tools .icon-btn{flex:0 0 38px!important;width:38px!important;min-width:38px!important;height:38px!important}
+#theme{
+ flex:0 0 38px!important;width:38px!important;min-width:38px!important;max-width:38px!important;
+ height:38px!important;min-height:38px!important;padding:0!important;overflow:hidden!important;
+ font-size:0!important;line-height:0!important;white-space:nowrap!important;
+ writing-mode:horizontal-tb!important;word-break:normal!important;overflow-wrap:normal!important;
+ border-radius:50%!important;display:inline-grid!important;place-items:center!important;
+}
+#theme:after{content:"☼";font-size:18px!important;line-height:1!important;color:#9de8ff!important}
+#theme[aria-pressed="true"]:after{content:"☾"}
+.hero-top-link,.actions .btn,.actions .button,.btn:not(.secondary-button),.button:not(.secondary-button){
+ background:linear-gradient(115deg,#087fe0,#22bdf1)!important;color:#031321!important;
+ border-color:rgba(142,225,255,.55)!important;
+}
+.pill-tag{background:linear-gradient(120deg,#1598ff,#54dcff)!important;color:#031321!important}
+.cards article,.tool-card,.module,.progress,.hero-feature,.statement,.checklist,.cta{
+ border-color:rgba(83,166,236,.27)!important;
+}
+@media(max-width:700px){
+ .header{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:0 12px!important;min-height:58px!important;gap:8px!important}
+ .brand{display:flex!important;align-items:center!important;flex:1 1 auto!important;min-width:0!important;gap:7px!important}
+ .logo{flex:0 0 32px!important;width:32px!important;height:32px!important}
+ .brand-name{font-size:clamp(9px,2.65vw,12px)!important;letter-spacing:.045em!important;white-space:nowrap!important;overflow:visible!important}
+ .header-tools{flex:0 0 auto!important;width:auto!important;gap:6px!important}
+ .header-tools .icon-btn,#theme{flex:0 0 34px!important;width:34px!important;min-width:34px!important;max-width:34px!important;height:34px!important;min-height:34px!important}
+ #theme:after{font-size:17px!important}
+ .hero-navline{align-items:flex-start!important;flex-wrap:wrap!important}
+ .pill-news{max-width:100%!important;min-width:0!important;flex-wrap:wrap!important}
+ .section-head h2{font-size:clamp(30px,8vw,44px)!important;line-height:1.04!important}
+ .intro p,.cards p,.tool-card p,.module p{font-size:13px!important;line-height:1.65!important}
+}
+@media(max-width:360px){
+ .brand-name{font-size:9px!important;letter-spacing:.02em!important}
+ .logo{flex-basis:29px!important;width:29px!important;height:29px!important}
+ .header-tools .icon-btn,#theme{flex-basis:31px!important;width:31px!important;min-width:31px!important;max-width:31px!important;height:31px!important;min-height:31px!important}
+}
