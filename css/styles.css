@@ -1126,3 +1126,47 @@ html.has-cursor-glow .cursor-glow{opacity:1}
 :root[data-theme="light"] .node-main{background:linear-gradient(145deg,rgba(44,168,255,.25),rgba(239,249,255,.95))}
 @media(max-width:700px){.cyber-network{min-height:230px}.network-scene{width:100%;max-width:340px}.node-main{width:70px;height:70px;border-radius:21px}.node-lock{font-size:34px}.network-node{width:38px;height:38px;border-radius:12px}.network-node i{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.network-scene *{animation:none!important}}
+
+
+/* BLUE PULSAR + TikTok Sans global typography */
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+:root{
+ --font-ui:"TikTok Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+ --font-display:"TikTok Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+}
+html,body,body *,button,input,textarea,select,option,label,a,p,span,small,strong,b,i,em,h1,h2,h3,h4,h5,h6,summary,li,dt,dd,th,td{
+ font-family:"TikTok Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+}
+body:before{
+ background:
+  radial-gradient(ellipse 48% 17% at 50% 50%,transparent 96%,rgba(67,157,255,.3) 98%,transparent 100%),
+  radial-gradient(ellipse 38% 32% at 50% 50%,transparent 96%,rgba(88,181,255,.2) 98%,transparent 100%),
+  radial-gradient(ellipse at 18% 25%,rgba(35,112,255,.18),transparent 30%),
+  radial-gradient(ellipse at 82% 70%,rgba(42,177,255,.13),transparent 28%),
+  linear-gradient(155deg,#020817,#07172d 55%,#020914)!important;
+}
+body:after{
+ background:
+  radial-gradient(circle at 12% 22%,#8bc5ff 0 1px,transparent 2px),
+  radial-gradient(circle at 73% 16%,#4da3ff 0 1.5px,transparent 3px),
+  radial-gradient(circle at 86% 72%,#b5ddff 0 1px,transparent 2px),
+  radial-gradient(circle at 31% 83%,#4da3ff 0 1.5px,transparent 3px),
+  radial-gradient(circle at 55% 46%,#fff 0 .7px,transparent 1.7px)!important;
+}
+.pulsar-nebula{
+ background:radial-gradient(ellipse,rgba(35,112,255,.28),rgba(0,160,255,.13) 35%,transparent 72%)!important;
+ filter:blur(14px)!important;
+}
+.pulsar-beam,.pulsar-beam:before,.pulsar-beam:after{
+ background:linear-gradient(90deg,transparent,rgba(58,160,255,.28),rgba(0,207,255,.42),transparent)!important;
+}
+.pulsar-ring{border-color:rgba(77,170,255,.24)!important;box-shadow:0 0 32px rgba(0,136,255,.1)!important}
+.pulsar-ring-two{border-color:rgba(0,207,255,.18)!important}
+.pulsar-core{
+ background:radial-gradient(circle,#d8f7ff 0,#58caff 18%,rgba(0,110,255,.3) 48%,transparent 72%)!important;
+ box-shadow:0 0 12px 4px rgba(74,179,255,.78),0 0 55px 18px rgba(0,137,255,.3),0 0 120px 40px rgba(0,205,255,.14)!important;
+}
+.pulsar-nebula,.pulsar-beam,.pulsar-beam:after,.pulsar-ring,.pulsar-core{filter:hue-rotate(0deg)}
+:root[data-theme="light"] body:before{
+ background:radial-gradient(ellipse at 18% 25%,rgba(35,112,255,.1),transparent 30%),radial-gradient(ellipse at 82% 70%,rgba(42,177,255,.08),transparent 28%),linear-gradient(155deg,#f5faff,#eaf4ff 55%,#f8fcff)!important;
+}
