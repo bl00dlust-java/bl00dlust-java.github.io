@@ -1283,3 +1283,49 @@ h1 em,h2 em,h3 em,.section-head h2 span,.section-head h2 em,.intro h1 em,
  .intro h1{font-size:30px!important;letter-spacing:-.045em!important}
  .statement p{font-size:29px!important}
 }
+
+
+/* FIX — actual mobile layout: readable cards, no clipped headline / 2026-10-16 */
+@media(max-width:700px){
+ html,body{max-width:100%;overflow-x:hidden!important}
+ .wrap{width:calc(100% - 28px)!important;max-width:100%!important}
+ .hero.wrap{width:calc(100% - 20px)!important}
+ .hero-shell{padding:16px 14px!important}
+ .hero-navline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important}
+ .pill-news{flex:1 1 auto!important;min-width:0!important}
+ .hero-top-link{flex:0 0 auto!important;max-width:none!important;white-space:nowrap!important}
+ .hero-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ .intro{padding:20px 0 10px!important;min-width:0!important}
+ .intro h1{font-size:clamp(30px,8.4vw,38px)!important;line-height:1.02!important;letter-spacing:-.045em!important;max-width:100%!important;width:100%!important;overflow-wrap:normal!important;word-break:keep-all!important;hyphens:none!important}
+ .intro h1 br{display:block!important}
+ .intro p{font-size:13px!important;line-height:1.6!important;max-width:100%!important}
+ .actions{display:flex!important;flex-wrap:wrap!important}
+ .actions .button,.actions .secondary-button{flex:0 1 auto!important;min-width:0!important;padding:0 13px!important;font-size:10px!important}
+ .art{height:auto!important;min-height:190px!important;max-height:250px!important}
+ .cyber-network{min-height:190px!important}
+ .hero-bottom{display:grid!important;grid-template-columns:1fr!important;gap:7px!important}
+ .hero-feature{min-width:0!important;padding:10px!important}
+ .section{padding-top:48px!important;padding-bottom:22px!important}
+ .section-head{display:block!important}
+ .section-head h2,main h1{font-size:clamp(29px,8vw,38px)!important;line-height:1.06!important;overflow-wrap:normal!important}
+ .section-head>p{font-size:13px!important;line-height:1.55!important}
+ .cards,.modules,.tool-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ .cards article,.tool-card,.module{width:100%!important;min-width:0!important;min-height:0!important;padding:17px!important}
+ .cards article h3,.tool-card h3,.module h3{font-size:16px!important;line-height:1.3!important}
+ .cards article p,.tool-card p,.module p{font-size:13px!important;line-height:1.6!important}
+ .statement,.cta{width:calc(100% - 28px)!important;margin:38px auto 0!important;padding:25px 18px!important}
+ .statement .wrap{width:100%!important}
+ .statement p{font-size:clamp(29px,8vw,38px)!important;line-height:1.08!important;letter-spacing:-.04em!important}
+ .progress,.checklist{width:100%!important;min-width:0!important}
+ .checklist label,.checklist li{font-size:13px!important;line-height:1.5!important}
+ .bottom-nav{max-width:calc(100% - 20px)!important}
+}
+@media(max-width:380px){
+ .wrap{width:calc(100% - 24px)!important}
+ .hero.wrap{width:calc(100% - 16px)!important}
+ .intro h1{font-size:29px!important}
+ .section-head h2,main h1{font-size:28px!important}
+ .hero-top-link{font-size:8px!important}
+ .hero-feature{font-size:10px!important}
+ .statement p{font-size:28px!important}
+}
