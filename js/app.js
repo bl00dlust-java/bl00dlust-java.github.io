@@ -186,69 +186,7 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
 })();
 
 
-/* Shared motion controller: smooth canvas trail, real section tracking and card tilt */
-(function initSmoothCursorTrail(){
- const media=window.matchMedia("(min-width: 761px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
- if(!media.matches)return;
- const canvas=document.createElement("canvas");
- canvas.id="smooth-cursor-trail";
- canvas.setAttribute("aria-hidden","true");
- document.body.appendChild(canvas);
- const ctx=canvas.getContext("2d",{alpha:true});
- if(!ctx){canvas.remove();return;}
- let width=window.innerWidth,height=window.innerHeight,dpr=1;
- let targetX=width/2,targetY=height/2,headX=targetX,headY=targetY;
- let lastInput=0,raf=0,points=[];
- const lifetime=540;
- function resize(){
-  width=window.innerWidth;height=window.innerHeight;dpr=Math.min(window.devicePixelRatio||1,1.5);
-  canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-  canvas.style.width=width+"px";canvas.style.height=height+"px";
-  ctx.setTransform(dpr,0,0,dpr,0,0);
- }
- function move(e){
-  if(document.documentElement.dataset.lite==="true"){points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);return;}
-  targetX=e.clientX;targetY=e.clientY;lastInput=performance.now();
-  if(!points.length){headX=targetX;headY=targetY;points.push({x:headX,y:headY,t:lastInput});}
-  if(!raf)raf=requestAnimationFrame(draw);
- }
- function draw(now){
-  raf=0;
-  const dx=targetX-headX,dy=targetY-headY;
-  headX+=dx*.38;headY+=dy*.38;
-  if(Math.abs(dx)+Math.abs(dy)>.16)points.push({x:headX,y:headY,t:now});
-  while(points.length&&now-points[0].t>lifetime)points.shift();
-  ctx.clearRect(0,0,width,height);
-  if(points.length>1){
-   ctx.lineCap="round";ctx.lineJoin="round";ctx.globalCompositeOperation="lighter";
-   for(let i=1;i<points.length;i++){
-    const a=points[i-1],b=points[i],age=Math.max(0,now-b.t),fade=Math.pow(Math.max(0,1-age/lifetime),1.45);
-    if(fade<=.015)continue;
-    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-    ctx.lineWidth=.35+2.15*fade;
-    ctx.strokeStyle="rgba(193,107,255,"+(fade*.78)+")";
-    ctx.shadowColor="rgba(237,154,212,"+(fade*.8)+")";ctx.shadowBlur=7*fade;
-    ctx.stroke();
-   }
-   ctx.shadowBlur=0;ctx.globalCompositeOperation="source-over";
-   const age=points.length?now-points[points.length-1].t:lifetime;
-   if(now-lastInput<110&&age<100){
-    ctx.beginPath();ctx.arc(headX,headY,2.2,0,Math.PI*2);
-    ctx.fillStyle="rgba(255,226,250,.8)";ctx.shadowColor="rgba(237,154,212,.9)";ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
-   }
-  }
-  const following=Math.abs(targetX-headX)+Math.abs(targetY-headY)>.5;
-  const trailAlive=points.length>0&&now-points[points.length-1].t<lifetime;
-  if(following||trailAlive)raf=requestAnimationFrame(draw);
-  else{ctx.clearRect(0,0,width,height);points=[];}
- }
- const clearLiteTrail=()=>{if(document.documentElement.dataset.lite!=="true")return;points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);};
- window.addEventListener("lite-mode-change",clearLiteTrail);
- window.addEventListener("pointermove",move,{passive:true});
- window.addEventListener("resize",resize,{passive:true});
- window.addEventListener("blur",()=>{points=[];if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,width,height);});
- resize();
-})();
+/* Cursor trail removed by design request. */
 
 /* Lightweight page-scroll progress bar, updated at most once per frame */
 (function initPageScrollProgress(){
@@ -528,46 +466,4 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
 })();
 
 
-/* Smooth cursor glow + restrained 3D card tilt; disabled on touch/reduced-motion. */
-(function initNeonCursorAndTilt(){
- const root=document.documentElement;
- const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- const touch=window.matchMedia("(hover: none), (pointer: coarse)").matches;
- if(reduce||touch||root.dataset.lite==="true")return;
- const glow=document.createElement("div");
- glow.className="cursor-glow";glow.setAttribute("aria-hidden","true");
- document.body.appendChild(glow);root.classList.add("has-cursor-glow");
- let x=innerWidth/2,y=innerHeight/2,tx=x,ty=y,frame=0;
- const render=()=>{
-  frame=0;x+=(tx-x)*.16;y+=(ty-y)*.16;
-  glow.style.transform="translate3d("+x+"px,"+y+"px,0) translate3d(-50%,-50%,0)";
-  if(Math.abs(tx-x)>.25||Math.abs(ty-y)>.25)frame=requestAnimationFrame(render);
- };
- window.addEventListener("pointermove",e=>{
-  tx=e.clientX;ty=e.clientY;
-  if(!frame)frame=requestAnimationFrame(render);
-  document.documentElement.style.setProperty("--pointer-x",e.clientX+"px");
-  document.documentElement.style.setProperty("--pointer-y",e.clientY+"px");
- },{passive:true});
- const cards=document.querySelectorAll(".cards article,.tool-card,.module,.hero-feature");
- cards.forEach(card=>{
-  card.addEventListener("pointermove",e=>{
-   if(e.pointerType!=="mouse")return;
-   const r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-   const rx=(.5-py)*4.2,ry=(px-.5)*5;
-   card.style.transform="perspective(850px) translateY(-3px) rotateX("+rx+"deg) rotateY("+ry+"deg)";
-   card.style.setProperty("--pointer-x",(px*100)+"%");
-   card.style.setProperty("--pointer-y",(py*100)+"%");
-  },{passive:true});
-  card.addEventListener("pointerleave",()=>{
-   card.style.transform="";
-   card.style.removeProperty("--pointer-x");card.style.removeProperty("--pointer-y");
-  });
- });
- window.addEventListener("lite-mode-change",()=>{
-  if(root.dataset.lite==="true"){
-   root.classList.remove("has-cursor-glow");glow.remove();
-   cards.forEach(card=>{card.style.transform="";});
-  }
- });
-})();
+/* Cursor glow/trail removed. Card tracking is handled by initCardMotionAndRipples above. */
