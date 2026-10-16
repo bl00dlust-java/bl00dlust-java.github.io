@@ -526,3 +526,48 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
   document.querySelectorAll(".char-draw").forEach(span=>{span.style.animation="none";span.style.opacity="1";span.style.clipPath="none";span.style.textShadow="none";});
  });
 })();
+
+
+/* Smooth cursor glow + restrained 3D card tilt; disabled on touch/reduced-motion. */
+(function initNeonCursorAndTilt(){
+ const root=document.documentElement;
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const touch=window.matchMedia("(hover: none), (pointer: coarse)").matches;
+ if(reduce||touch||root.dataset.lite==="true")return;
+ const glow=document.createElement("div");
+ glow.className="cursor-glow";glow.setAttribute("aria-hidden","true");
+ document.body.appendChild(glow);root.classList.add("has-cursor-glow");
+ let x=innerWidth/2,y=innerHeight/2,tx=x,ty=y,frame=0;
+ const render=()=>{
+  frame=0;x+=(tx-x)*.16;y+=(ty-y)*.16;
+  glow.style.transform="translate3d("+x+"px,"+y+"px,0) translate3d(-50%,-50%,0)";
+  if(Math.abs(tx-x)>.25||Math.abs(ty-y)>.25)frame=requestAnimationFrame(render);
+ };
+ window.addEventListener("pointermove",e=>{
+  tx=e.clientX;ty=e.clientY;
+  if(!frame)frame=requestAnimationFrame(render);
+  document.documentElement.style.setProperty("--pointer-x",e.clientX+"px");
+  document.documentElement.style.setProperty("--pointer-y",e.clientY+"px");
+ },{passive:true});
+ const cards=document.querySelectorAll(".cards article,.tool-card,.module,.hero-feature");
+ cards.forEach(card=>{
+  card.addEventListener("pointermove",e=>{
+   if(e.pointerType!=="mouse")return;
+   const r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+   const rx=(.5-py)*4.2,ry=(px-.5)*5;
+   card.style.transform="perspective(850px) translateY(-3px) rotateX("+rx+"deg) rotateY("+ry+"deg)";
+   card.style.setProperty("--pointer-x",(px*100)+"%");
+   card.style.setProperty("--pointer-y",(py*100)+"%");
+  },{passive:true});
+  card.addEventListener("pointerleave",()=>{
+   card.style.transform="";
+   card.style.removeProperty("--pointer-x");card.style.removeProperty("--pointer-y");
+  });
+ });
+ window.addEventListener("lite-mode-change",()=>{
+  if(root.dataset.lite==="true"){
+   root.classList.remove("has-cursor-glow");glow.remove();
+   cards.forEach(card=>{card.style.transform="";});
+  }
+ });
+})();
