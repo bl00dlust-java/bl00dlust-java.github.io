@@ -788,3 +788,36 @@ body:before{
  filter:blur(24px);animation:none!important;
 }
 @media(max-width:700px){.legacy-shield-stage{width:min(55%,220px)}.legacy-shield{width:118px;height:144px;font-size:54px}}
+
+
+/* Checkpoint: blue ambient background restored; current component animations remain unchanged */
+:root{
+ --bg:#030d1b;--bg-soft:#07172a;--glow:rgba(0,183,255,.22);--glow-pink:rgba(49,137,255,.13);
+}
+:root[data-theme="light"]{
+ --bg:#f2f7ff;--bg-soft:#e6f0ff;--glow:rgba(35,125,225,.12);--glow-pink:rgba(0,183,255,.07);
+}
+body:before{
+ content:"";display:block;position:fixed;inset:-20%;z-index:-3;pointer-events:none;opacity:.72!important;
+ background:
+  radial-gradient(ellipse 48% 17% at 50% 50%,transparent 96%,rgba(67,157,255,.3) 98%,transparent 100%),
+  radial-gradient(ellipse 38% 32% at 50% 50%,transparent 96%,rgba(88,181,255,.2) 98%,transparent 100%),
+  radial-gradient(ellipse at 18% 25%,rgba(35,112,255,.18),transparent 30%),
+  radial-gradient(ellipse at 82% 70%,rgba(42,177,255,.13),transparent 28%),
+  linear-gradient(180deg,#030d1b,#07172a 60%,#020814)!important;
+ animation:blueOrbitDrift 24s ease-in-out infinite alternate!important;
+}
+body:after{
+ content:"";display:block;position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.38!important;
+ background:
+  radial-gradient(circle at 12% 22%,#8bc5ff 0 1px,transparent 2px),
+  radial-gradient(circle at 73% 16%,#4da3ff 0 1.5px,transparent 3px),
+  radial-gradient(circle at 86% 72%,#b5ddff 0 1px,transparent 2px),
+  radial-gradient(circle at 31% 83%,#4da3ff 0 1.5px,transparent 3px),
+  radial-gradient(circle at 55% 46%,#fff 0 .7px,transparent 1.7px)!important;
+ animation:blueStars 4.8s ease-in-out infinite alternate!important;
+}
+@keyframes blueOrbitDrift{0%{transform:rotate(-7deg) scale(.96)}50%{transform:rotate(4deg) scale(1.035)}100%{transform:rotate(10deg) scale(.98)}}
+@keyframes blueStars{from{opacity:.16;filter:blur(0)}to{opacity:.55;filter:blur(.7px)}}
+:root[data-theme="light"] body:before{background:linear-gradient(145deg,#f7fbff,#eaf3ff 65%,#fff)!important;opacity:.8!important}
+:root[data-theme="light"] body:after{opacity:.16!important}
