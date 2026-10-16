@@ -1083,3 +1083,46 @@ html.has-cursor-glow .cursor-glow{opacity:1}
  .bottom-nav a,.bottom-nav button{font-size:8px!important}
 }
 @media(prefers-reduced-motion:reduce){body:before,body:after{animation:none!important}}
+
+
+/* FINAL BLUE PALETTE — remove all inherited yellow/gold accents */
+:root{
+ --accent:#38baff!important;--accent-strong:#0787ed!important;--accent-soft:#83e4ff!important;
+ --glow:rgba(0,151,255,.25)!important;--glow-pink:rgba(0,215,255,.13)!important;
+ --ripple-color:rgba(56,186,255,.45)!important;--ripple-core:rgba(131,228,255,.72)!important;
+}
+:root[data-theme="light"]{--accent:#0787d8!important;--accent-strong:#0867b5!important;--accent-soft:#0eb6de!important;--glow:rgba(0,132,230,.13)!important;--glow-pink:rgba(0,194,230,.07)!important}
+.brand-name em,.eyebrow,.pill-arrow,.feature-icon,.art-label:before,.hero-feature b,.section-head h2 span,
+.cards article>small,.cards article>a,.tool-card>span,.num,.progress-top strong,.cta .eyebrow{
+ color:#66d2ff!important;text-shadow:none!important
+}
+.pill-tag{background:linear-gradient(120deg,#1598ff,#54dcff)!important;color:#031321!important}
+.track>span,.track .fill,.progress-fill{background:linear-gradient(90deg,#0787ed,#4cddff)!important}
+.legacy-shield,.shield,.shield-stage,.legacy-shield-stage,.shield-aura{display:none!important}
+.art{background:radial-gradient(ellipse at center,rgba(0,145,255,.13),rgba(3,18,38,.3) 56%,transparent 78%)!important}
+.cyber-network{position:relative;isolation:isolate;min-height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.network-scene{position:relative;width:min(100%,440px);aspect-ratio:1.25;display:grid;place-items:center;isolation:isolate}
+.network-orbit{position:absolute;left:50%;top:50%;width:76%;height:48%;border:1px solid rgba(63,187,255,.28);border-radius:50%;transform:translate(-50%,-50%) rotate(-22deg);box-shadow:0 0 24px rgba(0,142,255,.06),inset 0 0 18px rgba(0,142,255,.035)}
+.orbit-a{animation:networkOrbit 16s linear infinite}
+.orbit-b{width:91%;height:65%;transform:translate(-50%,-50%) rotate(28deg);border-color:rgba(0,211,255,.2);animation:networkOrbit 23s linear infinite reverse}
+.orbit-c{width:61%;height:82%;transform:translate(-50%,-50%) rotate(64deg);border-color:rgba(74,156,255,.18);animation:networkOrbit 30s linear infinite}
+.node-main{position:absolute;left:50%;top:50%;width:88px;height:88px;transform:translate(-50%,-50%);display:grid;place-items:center;border:1px solid rgba(111,222,255,.8);border-radius:26px;background:linear-gradient(145deg,rgba(25,153,255,.28),rgba(4,31,66,.9));box-shadow:0 0 34px rgba(0,153,255,.24),inset 0 0 22px rgba(67,191,255,.13);animation:secureNodePulse 3.4s ease-in-out infinite}
+.node-lock{font-size:42px;color:#d9f7ff;text-shadow:0 0 18px rgba(62,196,255,.8);line-height:1}
+.node-pulse{position:absolute;inset:-9px;border:1px solid rgba(76,202,255,.3);border-radius:31px;animation:nodePulseRing 2.8s ease-out infinite}
+.network-node{position:absolute;display:grid;place-items:center;width:46px;height:46px;border-radius:15px;border:1px solid rgba(76,188,255,.48);background:rgba(5,31,59,.9);box-shadow:0 0 22px rgba(0,142,255,.14);color:#83e4ff;font-style:normal;animation:nodeFloat 4.8s ease-in-out infinite}
+.network-node i{font-size:20px;font-style:normal}
+.node-a{left:17%;top:22%;animation-delay:-1s}.node-b{right:15%;top:23%;animation-delay:-2.2s}.node-c{left:18%;bottom:17%;animation-delay:-3.1s}.node-d{right:16%;bottom:18%;animation-delay:-.6s}
+.data-packet{position:absolute;width:7px;height:7px;border-radius:50%;background:#a7f0ff;box-shadow:0 0 13px 3px rgba(45,187,255,.7);offset-path:ellipse(35% 23% at 50% 50%);animation:dataTravel 6s linear infinite}
+.packet-a{top:29%;left:22%}.packet-b{top:30%;right:21%;animation-delay:-1.5s}.packet-c{bottom:24%;left:26%;animation-delay:-3s}.packet-d{bottom:26%;right:25%;animation-delay:-4.5s}
+.network-scan{position:absolute;left:10%;right:10%;height:1px;top:15%;background:linear-gradient(90deg,transparent,rgba(69,205,255,.65),transparent);filter:drop-shadow(0 0 5px #1abfff);animation:networkScan 5s ease-in-out infinite;opacity:.6}
+@keyframes networkOrbit{from{rotate:0deg}to{rotate:360deg}}
+@keyframes secureNodePulse{0%,100%{box-shadow:0 0 24px rgba(0,153,255,.19),inset 0 0 20px rgba(67,191,255,.1)}50%{box-shadow:0 0 42px rgba(0,175,255,.35),inset 0 0 27px rgba(67,191,255,.2)}}
+@keyframes nodePulseRing{0%{transform:scale(.88);opacity:.65}100%{transform:scale(1.35);opacity:0}}
+@keyframes nodeFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes dataTravel{0%{transform:translate(0,0);opacity:0}12%,82%{opacity:1}100%{transform:translate(70px,38px);opacity:0}}
+@keyframes networkScan{0%,100%{top:16%;opacity:0}20%,80%{opacity:.7}50%{top:84%;opacity:.45}}
+:root[data-theme="light"] .cyber-network{background:radial-gradient(ellipse,rgba(0,145,255,.08),transparent 70%)!important}
+:root[data-theme="light"] .network-node{background:rgba(240,249,255,.95);color:#087fd5}
+:root[data-theme="light"] .node-main{background:linear-gradient(145deg,rgba(44,168,255,.25),rgba(239,249,255,.95))}
+@media(max-width:700px){.cyber-network{min-height:230px}.network-scene{width:100%;max-width:340px}.node-main{width:70px;height:70px;border-radius:21px}.node-lock{font-size:34px}.network-node{width:38px;height:38px;border-radius:12px}.network-node i{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.network-scene *{animation:none!important}}
