@@ -208,83 +208,41 @@ if (location.pathname.endsWith("/module.html")) renderSeparateLesson();
  window.addEventListener("resize",schedule,{passive:true});update();
 })();
 
-/* Pointer-driven cards: one delegated listener also supports dynamically rendered modules */
-(function initCardMotionAndRipples(){
+/* Card cursor tracking only — no click ripples or cursor trails. */
+(function initCardTracking(){
  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
  const fine=window.matchMedia("(hover:hover) and (pointer:fine)").matches;
- const cardSelector=".cards article,.tool-card,.module,.hero-feature";
+ if(reduce||!fine)return;
+ const selector=".cards article,.tool-card,.module,.hero-feature";
  let current=null,raf=0;
- const settling=new Set();
- const states=new WeakMap();
- const stateFor=card=>{
-  let state=states.get(card);
-  if(!state){state={x:0,y:0,tx:0,ty:0,lift:0,targetLift:0};states.set(card,state);}
-  return state;
- };
+ const settling=new Set(),states=new WeakMap();
+ const stateFor=card=>{let s=states.get(card);if(!s){s={x:0,y:0,tx:0,ty:0,lift:0,targetLift:0};states.set(card,s);}return s;};
+ const reset=card=>{if(!card)return;const s=stateFor(card);s.tx=0;s.ty=0;s.targetLift=0;settling.add(card);};
  const aim=(card,e)=>{
   const r=card.getBoundingClientRect();if(!r.width||!r.height)return;
-  const nx=Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2));
-  const ny=Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2));
-  const s=stateFor(card);s.tx=-ny*8.5;s.ty=nx*9;s.targetLift=7.5;
-  card.style.setProperty("--pointer-x",(e.clientX-r.left)+"px");
-  card.style.setProperty("--pointer-y",(e.clientY-r.top)+"px");
+  const s=stateFor(card),nx=Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2)),ny=Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2));
+  s.tx=-ny*4;s.ty=nx*4;s.targetLift=3;
+  card.style.setProperty("--pointer-x",(e.clientX-r.left)+"px");card.style.setProperty("--pointer-y",(e.clientY-r.top)+"px");
  };
- const reset=card=>{if(!card)return;const s=stateFor(card);s.tx=0;s.ty=0;s.targetLift=0;settling.add(card);};
- const clearLiteCardMotion=()=>{
-  if(document.documentElement.dataset.lite!=="true")return;
-  if(raf){cancelAnimationFrame(raf);raf=0;}
-  const touched=new Set(settling);if(current)touched.add(current);
-  touched.forEach(card=>{const s=stateFor(card);s.x=s.y=s.tx=s.ty=s.lift=s.targetLift=0;card.style.setProperty("--cursor-rotate-x","0deg");card.style.setProperty("--cursor-rotate-y","0deg");card.style.setProperty("--cursor-lift-y","0px");});
-  settling.clear();current=null;
+ const tick=()=>{
+  let moving=false;const work=new Set(settling);if(current)work.add(current);
+  work.forEach(card=>{
+   const s=stateFor(card);s.x+=(s.tx-s.x)*.2;s.y+=(s.ty-s.y)*.2;s.lift+=(s.targetLift-s.lift)*.2;
+   card.style.setProperty("--cursor-rotate-x",s.x.toFixed(2)+"deg");card.style.setProperty("--cursor-rotate-y",s.y.toFixed(2)+"deg");card.style.setProperty("--cursor-lift-y",(-s.lift).toFixed(2)+"px");
+   if(Math.abs(s.tx-s.x)>.03||Math.abs(s.ty-s.y)>.03||Math.abs(s.targetLift-s.lift)>.04)moving=true;
+   else if(card!==current){settling.delete(card);card.style.setProperty("--cursor-rotate-x","0deg");card.style.setProperty("--cursor-rotate-y","0deg");card.style.setProperty("--cursor-lift-y","0px");}
+  });
+  if(moving)raf=requestAnimationFrame(tick);else raf=0;
  };
- window.addEventListener("lite-mode-change",clearLiteCardMotion);
- if(document.documentElement.dataset.lite==="true")clearLiteCardMotion();
- if(!reduce&&fine){
-  const tick=()=>{
-   let moving=false;
-   const working=new Set(settling);if(current)working.add(current);
-   working.forEach(card=>{
-    const s=stateFor(card);
-    s.x+=(s.tx-s.x)*.22;s.y+=(s.ty-s.y)*.22;s.lift+=(s.targetLift-s.lift)*.2;
-    card.style.setProperty("--cursor-rotate-x",s.x.toFixed(3)+"deg");
-    card.style.setProperty("--cursor-rotate-y",s.y.toFixed(3)+"deg");
-    card.style.setProperty("--cursor-lift-y",(-s.lift).toFixed(2)+"px");
-    const unsettled=Math.abs(s.tx-s.x)>.025||Math.abs(s.ty-s.y)>.025||Math.abs(s.targetLift-s.lift)>.04;
-    if(unsettled)moving=true;
-    else if(card!==current){settling.delete(card);card.style.setProperty("--cursor-rotate-x","0deg");card.style.setProperty("--cursor-rotate-y","0deg");card.style.setProperty("--cursor-lift-y","0px");}
-   });
-   if(moving)raf=requestAnimationFrame(tick);else raf=0;
-  };
-  document.addEventListener("pointermove",e=>{
-   if(document.documentElement.dataset.lite==="true")return;
-   const card=e.target instanceof Element?e.target.closest(cardSelector):null;
-   if(card!==current){
-    reset(current);current=card;
-    if(current){settling.delete(current);aim(current,e);}
-   }else if(card)aim(card,e);
-   if(!raf)raf=requestAnimationFrame(tick);
-  },{passive:true});
-  document.addEventListener("pointerleave",()=>{reset(current);current=null;if(!raf)raf=requestAnimationFrame(tick);},{passive:true});
- }
- if(!reduce){
-  document.addEventListener("pointerdown",e=>{
-   if(document.documentElement.dataset.lite==="true")return;
-   if(e.button!==0||!(e.target instanceof Element))return;
-   const target=e.target.closest("a,button,.cards article,.tool-card,.module,.hero-feature");
-   if(!target)return;
-   const rect=target.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;
-   if(getComputedStyle(target).position==="static")target.style.position="relative";
-   target.style.overflow="hidden";
-   const addRipple=(className)=>{
-    const el=document.createElement("span");el.className=className;
-    el.style.left=x+"px";el.style.top=y+"px";target.appendChild(el);
-    el.addEventListener("animationend",()=>el.remove(),{once:true});
-   };
-   addRipple("motion-ripple");addRipple("water-ripple-ring");addRipple("water-ripple-ring ring-two");
-  },{passive:true});
- }
+ document.addEventListener("pointermove",e=>{
+  const card=e.target instanceof Element?e.target.closest(selector):null;
+  if(card!==current){reset(current);current=card;if(current){settling.delete(current);aim(current,e);}}
+  else if(card)aim(card,e);
+  if(!raf)raf=requestAnimationFrame(tick);
+ },{passive:true});
+ document.addEventListener("pointerleave",()=>{reset(current);current=null;if(!raf)raf=requestAnimationFrame(tick);},{passive:true});
 })();
-
+ 
 /* Bottom navigation follows section boundaries and animates a solid accent capsule */
 (function initLiquidBottomNavigation(){
  const nav=document.querySelector(".bottom-nav");
