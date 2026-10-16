@@ -1329,3 +1329,88 @@ h1 em,h2 em,h3 em,.section-head h2 span,.section-head h2 em,.intro h1 em,
  .hero-feature{font-size:10px!important}
  .statement p{font-size:28px!important}
 }
+
+
+/* CHECKPOINT — Simple blue school-project design + consistent typography / 2026-10-16 */
+:root{
+ --bg:#071426!important;--bg-soft:#0b1d33!important;--panel:#0d2037!important;--panel-raised:#122943!important;
+ --text:#eaf3ff!important;--muted:#a9bfd8!important;--line:#1e3b59!important;--line-strong:#32618a!important;
+ --accent:#45b9f5!important;--accent-strong:#1687d4!important;--accent-soft:#8cddff!important;
+ --glow:rgba(40,145,220,.10)!important;--glow-pink:rgba(40,145,220,.05)!important;
+ --shadow:0 8px 22px rgba(0,0,0,.15)!important;--radius:14px!important;
+}
+:root[data-theme="light"]{
+ --bg:#f1f6fb!important;--bg-soft:#eaf2fa!important;--panel:#fff!important;--panel-raised:#f7fbff!important;
+ --text:#1a2e43!important;--muted:#536b82!important;--line:#d5e2ee!important;--line-strong:#a8c6df!important;
+ --accent:#1687d4!important;--accent-strong:#096bb1!important;--accent-soft:#54b9e8!important;
+ --glow:rgba(20,120,195,.05)!important;--glow-pink:rgba(20,120,195,.03)!important;
+ --shadow:0 6px 18px rgba(30,70,110,.08)!important;
+}
+/* Use a predictable system font instead of novelty fonts with irregular widths. */
+html,body,button,input,textarea,select{
+ font-family:Arial,"Helvetica Neue",Helvetica,system-ui,sans-serif!important;
+ font-synthesis:none!important;text-rendering:optimizeLegibility;
+}
+body{font-size:15px!important;line-height:1.6!important;letter-spacing:0!important}
+h1,h2,h3,h4,p,small,button,a,label,li,span{
+ font-synthesis:none;
+}
+h1,h2,h3,h4,.brand,.brand-name,.eyebrow,.section-head h2,.intro h1,.statement p{
+ font-family:Arial,"Helvetica Neue",Helvetica,system-ui,sans-serif!important;
+ letter-spacing:-.025em!important;
+}
+.intro h1{
+ font-size:clamp(38px,4vw,56px)!important;line-height:1.04!important;font-weight:800!important;
+ max-width:100%!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;
+}
+.intro h1 em{font-style:normal!important;white-space:normal!important;color:var(--accent-soft)!important}
+.section-head h2{font-size:clamp(30px,3vw,42px)!important;line-height:1.12!important;font-weight:750!important}
+.statement p{font-size:clamp(30px,4vw,48px)!important;line-height:1.12!important;font-weight:750!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+.statement p em{color:var(--accent-soft)!important;font-style:normal!important}
+.hero-shell{
+ background:var(--panel)!important;border:1px solid var(--line)!important;border-radius:18px!important;
+ box-shadow:var(--shadow)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.hero-shell:before,.art:before,.art:after{opacity:.18!important}
+body:before{
+ background:linear-gradient(180deg,var(--bg-soft),var(--bg) 65%)!important;
+}
+body:after{opacity:.07!important;background-size:72px 72px!important}
+.cards article,.tool-card,.module,.progress,.hero-feature,.statement,.checklist,.cta{
+ background:var(--panel)!important;border:1px solid var(--line)!important;
+ box-shadow:0 5px 16px rgba(0,0,0,.08)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ border-radius:14px!important;
+}
+.cards article:hover,.tool-card:hover,.module:hover{
+ transform:translateY(-2px)!important;box-shadow:0 9px 20px rgba(0,0,0,.12)!important;border-color:var(--line-strong)!important;
+}
+.btn:not(.secondary-button),.button:not(.secondary-button),.actions .btn:not(.secondary-button){
+ background:var(--accent-strong)!important;color:white!important;border:1px solid var(--accent-strong)!important;
+ box-shadow:none!important;filter:none!important;
+}
+.secondary-button,.module-open{
+ background:transparent!important;border:1px solid var(--line-strong)!important;color:var(--text)!important;box-shadow:none!important;
+}
+.pill-tag{background:var(--accent)!important;color:#062039!important}
+.header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--bg)!important;border-bottom:1px solid var(--line)!important}
+.logo{box-shadow:none!important;background:var(--panel-raised)!important;color:var(--accent-soft)!important}
+.bottom-nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--panel)!important;box-shadow:0 5px 20px rgba(0,0,0,.16)!important;border:1px solid var(--line)!important}
+.bottom-nav-liquid{display:none!important}
+.bottom-nav a.active,.bottom-nav a[aria-current=location]{background:var(--accent)!important;color:#062039!important;box-shadow:none!important}
+.cta{background:var(--panel-raised)!important;color:var(--text)!important}
+:root[data-theme="light"] .intro h1,:root[data-theme="light"] .section-head h2,:root[data-theme="light"] .statement p{color:var(--text)!important}
+:root[data-theme="light"] .intro h1 em,:root[data-theme="light"] .section-head h2 em,:root[data-theme="light"] .statement p em{color:var(--accent-strong)!important}
+@media(min-width:701px){
+ .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)!important;align-items:center!important;gap:28px!important}
+ .intro{min-width:0!important}
+ .intro h1{font-size:clamp(38px,3.7vw,54px)!important}
+ .hero-bottom{gap:10px!important}
+ .cards,.tool-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+ .intro h1{font-size:clamp(29px,7.2vw,36px)!important;line-height:1.08!important;letter-spacing:-.03em!important}
+ .intro h1 br{display:block!important}
+ .section-head h2{font-size:clamp(27px,7vw,34px)!important;line-height:1.12!important}
+ .statement p{font-size:clamp(27px,7vw,35px)!important;line-height:1.12!important}
+ .cards,.tool-grid,.modules{grid-template-columns:minmax(0,1fr)!important}
+}
