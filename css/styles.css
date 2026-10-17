@@ -1586,3 +1586,27 @@ body:before{
 @media(max-width:390px){
  .intro h1{font-size:28px!important;letter-spacing:-.04em!important}
 }
+
+
+/* FIX — keep hero heading words intact on desktop and mobile */
+.intro{min-width:0!important}
+.intro h1{
+ width:100%!important;max-width:100%!important;
+ font-size:clamp(32px,3.4vw,52px)!important;
+ line-height:1.06!important;letter-spacing:-.035em!important;
+ word-break:normal!important;overflow-wrap:normal!important;
+ hyphens:none!important;text-wrap:balance!important;
+}
+.intro h1 br{display:none!important}
+.intro h1 em{display:inline!important;white-space:normal!important}
+@media(min-width:761px){
+ .hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)!important;gap:clamp(18px,2.5vw,36px)!important}
+ .intro h1{font-size:clamp(32px,3.15vw,48px)!important}
+}
+@media(max-width:760px){
+ .intro h1{font-size:clamp(28px,7.3vw,36px)!important;line-height:1.08!important;letter-spacing:-.035em!important}
+ .intro h1 br{display:none!important}
+}
+@media(max-width:380px){
+ .intro h1{font-size:27px!important;letter-spacing:-.04em!important}
+}
