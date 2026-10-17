@@ -1610,3 +1610,33 @@ body:before{
 @media(max-width:380px){
  .intro h1{font-size:27px!important;letter-spacing:-.04em!important}
 }
+
+
+/* Readability pass — slightly larger and stronger small text */
+body{font-size:15px}
+p,li,.intro p,.section-head>p,.cards article p,.tool-card p,.module p,
+.hero-feature small,.hero-feature p,.hero-top-link,.pill-news,
+.eyebrow,.lesson-copy,.lesson-counter,.quiet-link,.scroll,
+.bottom-nav a,.bottom-nav button,.bottom-menu-link small,.caption,
+small,.muted,.meta,.helper-text,.form-hint{
+ font-size:1.04em!important;
+ font-weight:500!important;
+}
+.eyebrow,.scroll,.lesson-counter,.meta,.caption{
+ font-weight:600!important;
+}
+.hero-feature b,.hero-feature strong,.cards article h3,.tool-card h3,.module h3{
+ font-weight:700!important;
+}
+button,.button,.secondary-button,.btn,input,select,textarea{
+ font-weight:600;
+}
+@media(max-width:760px){
+ body{font-size:15px}
+ .intro p,.section-head>p,.cards article p,.tool-card p,.module p,
+ .hero-feature small,.hero-feature p,.lesson-copy,.bottom-nav a,.bottom-nav button,
+ .bottom-menu-link small,.form-hint,small{
+  font-size:14px!important;line-height:1.6!important;font-weight:500!important;
+ }
+ .eyebrow,.scroll,.lesson-counter,.meta,.caption{font-size:11px!important;font-weight:650!important}
+}
