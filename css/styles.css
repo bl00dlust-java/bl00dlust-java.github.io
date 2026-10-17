@@ -1546,3 +1546,43 @@ body:before{
  .scroll{font-size:9px!important}
 }
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
+
+
+/* FIX — light theme surfaces, mobile heading wrap and remove gold hero outline */
+:root[data-theme="light"] .hero-shell,
+:root[data-theme="light"] .hero-shell:before{
+ background:#ffffff!important;
+ border-color:#cbddea!important;
+ box-shadow:0 10px 26px rgba(34,82,124,.09)!important;
+}
+:root[data-theme="light"] .pill-news,
+:root[data-theme="light"] .hero-feature,
+:root[data-theme="light"] .hero-feature .feature-icon,
+:root[data-theme="light"] .hero-bottom .hero-feature{
+ background:#f0f7fd!important;color:#203b55!important;border-color:#d4e4f1!important;
+}
+:root[data-theme="light"] .pill-news *,
+:root[data-theme="light"] .hero-feature *,
+:root[data-theme="light"] .hero-feature p,
+:root[data-theme="light"] .hero-feature small,
+:root[data-theme="light"] .hero-feature span{color:#294761!important;text-shadow:none!important}
+:root[data-theme="light"] .pill-news strong,
+:root[data-theme="light"] .pill-news b,
+:root[data-theme="light"] .hero-feature b,
+:root[data-theme="light"] .hero-feature strong{color:#0877bd!important}
+:root[data-theme="light"] .hero-shell,
+:root[data-theme="light"] .hero-shell *{text-shadow:none}
+:root[data-theme="light"] .hero-shell{outline:0!important}
+:root[data-theme="light"] .intro p{color:#536b82!important}
+:root[data-theme="light"] .eyebrow,
+:root[data-theme="light"] .status-label,
+:root[data-theme="light"] .connection-label{color:#47718f!important}
+@media(max-width:760px){
+ .intro h1{font-size:clamp(29px,6.8vw,34px)!important;line-height:1.08!important;letter-spacing:-.035em!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
+ .intro h1 em{display:inline!important;white-space:normal!important}
+ .hero-shell{border-color:var(--line)!important;box-shadow:0 8px 22px rgba(25,70,110,.08)!important}
+ .hero-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:390px){
+ .intro h1{font-size:28px!important;letter-spacing:-.04em!important}
+}
