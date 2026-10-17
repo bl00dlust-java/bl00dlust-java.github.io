@@ -1640,3 +1640,25 @@ button,.button,.secondary-button,.btn,input,select,textarea{
  }
  .eyebrow,.scroll,.lesson-counter,.meta,.caption{font-size:11px!important;font-weight:650!important}
 }
+
+
+/* 2026-10-17 — slightly stronger security labels and neutral light-theme CTA border */
+.art-label{
+  font-weight:600!important;
+  color:var(--muted)!important;
+  text-shadow:none;
+}
+:root[data-theme="light"] .art-label{
+  color:#5d4b6d!important;
+  font-weight:600!important;
+}
+:root[data-theme="light"] .secondary-button{
+  border:1px solid var(--line)!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+:root[data-theme="light"] .secondary-button:hover,
+:root[data-theme="light"] .secondary-button:focus-visible{
+  border-color:var(--accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 12%,transparent)!important;
+}
