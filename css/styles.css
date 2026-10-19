@@ -1662,3 +1662,82 @@ button,.button,.secondary-button,.btn,input,select,textarea{
   border-color:var(--accent)!important;
   box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 12%,transparent)!important;
 }
+
+
+/* 2026-10-19 — calmer motion, readable text, blue accents and hover-reveal navigation */
+:root{
+ --glow:rgba(40,166,238,.10)!important;
+ --glow-pink:rgba(40,166,238,.04)!important;
+}
+body:before{animation:none!important;opacity:.35!important}
+.cursor-glow{display:none!important;opacity:0!important}
+.theme-switching{animation:none!important}
+.char-draw{animation:none!important;opacity:1!important;clip-path:none!important;text-shadow:none!important}
+.ink-draw-ready .char-draw{animation:none!important;opacity:1!important;clip-path:none!important;text-shadow:none!important}
+.cards article,.tool-card,.module,.hero-feature,.progress,.statement{
+ transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease!important;
+}
+.cards article:hover,.tool-card:hover,.module:hover{transform:translateY(-2px)!important}
+.header .icon-btn#theme{
+ width:42px!important;height:42px!important;min-width:42px!important;
+ border:1px solid #2d5878!important;border-radius:50%!important;
+ background:#0d2238!important;color:#70d0ff!important;
+ font-size:22px!important;line-height:1!important;padding:0!important;
+ box-shadow:none!important;transform:none!important;filter:none!important;
+}
+.header .icon-btn#theme:hover{background:#15334f!important;border-color:#55bfff!important}
+:root[data-theme="light"] .header .icon-btn#theme{
+ background:#f2f8fd!important;color:#147fbd!important;border-color:#b8d5e8!important;
+}
+.bottom-nav{
+ transition:transform .22s ease,opacity .22s ease!important;
+}
+@media (hover:hover) and (pointer:fine) and (min-width:761px){
+ .bottom-nav{
+  transform:translate(-50%,calc(100% - 12px))!important;
+  opacity:.72!important;
+ }
+ .bottom-nav:hover,.bottom-nav:focus-within{
+  transform:translate(-50%,0)!important;opacity:1!important;
+ }
+}
+.bottom-nav a,.bottom-nav button{
+ font-size:11px!important;line-height:1.25!important;
+ transition:background .16s ease,color .16s ease!important;
+}
+.bottom-nav a span{font-size:19px!important}
+.bottom-nav .bottom-menu-toggle{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+ min-height:47px;border:0;border-radius:15px;background:transparent;
+ color:var(--muted);cursor:pointer;
+}
+.bottom-nav .bottom-menu-toggle:hover,.bottom-nav .bottom-menu-toggle:focus-visible{
+ background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--text);
+}
+.bottom-menu-panel{
+ transition:opacity .2s ease,transform .2s ease!important;
+ transform:translate(-50%,10px)!important;
+ backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+ box-shadow:0 16px 40px rgba(0,0,0,.28)!important;
+}
+.bottom-menu-panel.is-open{transform:translate(-50%,0)!important}
+.bottom-menu-backdrop{transition:opacity .18s ease!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.bottom-menu-description,.bottom-menu-link small,.bottom-menu-note{font-size:14px!important;line-height:1.55!important}
+p,li,.intro p,.section-head>p,.cards article p,.tool-card p,.module p,
+.hero-feature small,.hero-feature p,.bottom-menu-description,.bottom-menu-link small,
+.bottom-menu-note,.form-hint,.lesson-copy{
+ font-size:15px!important;line-height:1.65!important;
+}
+.eyebrow,.scroll,.lesson-counter,.meta,.caption,.art-label{font-size:12px!important}
+.cards article h3,.tool-card h3,.module h3{font-size:18px!important;line-height:1.35!important}
+@media(max-width:760px){
+ .bottom-nav{transform:translateX(-50%)!important;opacity:1!important}
+ .bottom-nav a,.bottom-nav button{font-size:10px!important}
+ p,li,.intro p,.section-head>p,.cards article p,.tool-card p,.module p,
+ .hero-feature small,.hero-feature p,.bottom-menu-description,.bottom-menu-link small,
+ .bottom-menu-note,.form-hint,.lesson-copy{font-size:14px!important;line-height:1.6!important}
+ .eyebrow,.scroll,.lesson-counter,.meta,.caption,.art-label{font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
