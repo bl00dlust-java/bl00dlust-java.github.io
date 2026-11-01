@@ -1,5 +1,5 @@
 /* Home composition rebuilt from DESIGN.md: midnight glass cathedral. */
-.authkit-home{overflow:hidden}
+.authkit-home{overflow-x:hidden;overflow-y:visible}
 .authkit-home .header{max-width:1200px;display:flex;align-items:center;justify-content:space-between}
 .authkit-home .header nav{display:flex;gap:8px;align-items:center}
 .authkit-home .header nav a,.authkit-home .header-tools a{padding:8px 14px;border-radius:999px;font-size:14px;text-decoration:none}
