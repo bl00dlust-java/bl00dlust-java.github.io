@@ -1,42 +1,97 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Практический курс по кибергигиене и безопасности в интернете"><meta name="theme-color" content="#050b18"><title>Цифровой щит — твоя безопасность в сети</title><link rel="icon" href="assets/favicon.svg?v=purple-complete-20261015"><link rel="stylesheet" href="css/styles.css?v=calm-nav-readable-20261019">
-
-
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Практический курс по кибергигиене и безопасности в интернете">
+<meta name="theme-color" content="#05060f">
+<title>Цифровой щит — твоя безопасность в сети</title>
+<link rel="icon" href="assets/favicon.svg?v=purple-complete-20261015">
+<link rel="stylesheet" href="css/styles.css?v=calm-nav-readable-20261019">
 <link rel="stylesheet" href="css/authkit-theme.css?v=authkit-20261101">
+<link rel="stylesheet" href="css/authkit-home.css?v=authkit-home-20261101">
 </head>
-<body>
-<div class="pulsar-background" aria-hidden="true">
-  <div class="pulsar-nebula"></div>
-  <div class="pulsar-beam"></div>
-  <div class="pulsar-beam pulsar-beam-soft"></div>
-  <div class="pulsar-ring pulsar-ring-one"></div>
-  <div class="pulsar-ring pulsar-ring-two"></div>
-  <div class="pulsar-core"></div>
-</div>
-<a class="skip" href="#course">Перейти к содержанию</a>
-<header class="header"><a class="brand" href="#top"><span class="logo" aria-hidden="true">⌬</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></a><div class="header-tools"><button class="icon-btn" type="button" aria-label="Поиск" onclick="document.querySelector('#course').scrollIntoView({behavior:'smooth'})">⌕</button><button class="icon-btn" type="button" aria-label="Настройки темы" id="theme" aria-pressed="false">☷</button></div></header>
+<body class="authkit-home">
+<a class="skip" href="#course">Перейти к программе курса</a>
+<header class="header">
+  <a class="brand" href="#top"><span class="logo" aria-hidden="true">◇</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></a>
+  <nav aria-label="Основная навигация"><a href="#skills">Навыки</a><a href="#course">Программа</a><a href="pages/about.html">О проекте</a></nav>
+  <div class="header-tools">
+    <a class="github-link" href="#sources" aria-label="Полезные источники"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M8.5 12h7M12 8.5v7"/></svg></a>
+    <button id="theme" type="button" aria-label="Изменить тему" aria-pressed="false">Тема</button>
+  </div>
+</header>
 <main id="top">
-<section class="hero wrap"><div class="hero-shell"><div class="hero-navline"><div class="pill-news"><span class="pill-tag">15 МОДУЛЕЙ</span><span>Курс цифровой безопасности для каждого</span><span class="pill-arrow">→</span></div><a class="hero-top-link" href="#course">Начать обучение <span>↗</span></a></div><div class="hero-grid"><div class="intro"><h1>Твоя безопасность.<br><em>Твои правила.</em></h1><p>Практический курс по защите аккаунтов, личных данных и устройств. Понятно, практично и в своём темпе.</p><div class="actions"><a class="button" href="#course">Начать обучение <span>→</span></a><a class="secondary-button" href="https://bl00dlust-java.github.io/?utm_source=chatgpt.com#skills"><span class="spark">✦</span> Узнать больше</a></div></div><div class="art cyber-network" role="img" aria-label="Анимация защищённой цифровой сети: узлы данных соединяются и передают защищённые сигналы"><span class="art-label">ЗАЩИЩЁННОЕ СОЕДИНЕНИЕ</span><div class="network-scene" aria-hidden="true"><div class="network-orbit orbit-a"></div><div class="network-orbit orbit-b"></div><div class="network-orbit orbit-c"></div><div class="network-node node-main"><span class="node-lock">⌑</span><span class="node-pulse"></span></div><span class="network-node node-a"><i>✉</i></span><span class="network-node node-b"><i>⌁</i></span><span class="network-node node-c"><i>▦</i></span><span class="network-node node-d"><i>◎</i></span><span class="data-packet packet-a"></span><span class="data-packet packet-b"></span><span class="data-packet packet-c"></span><span class="data-packet packet-d"></span><span class="network-scan"></span></div><span class="art-label bottom">ДАННЫЕ ПОД ЗАЩИТОЙ</span></div></div><div class="hero-bottom"><div class="hero-feature"><span class="feature-icon">▤</span><span><b>15 практических модулей</b><small>Короткая теория и практические задания</small></span></div><div class="hero-feature"><span class="feature-icon">◉</span><span><b>Без регистрации</b><small>Сразу начинай учиться</small></span></div><div class="hero-feature"><span class="feature-icon">↗</span><span><b>Прогресс сохраняется</b><small>На твоём устройстве</small></span></div></div></div><div class="scroll">↓ ПРОКРУТИ, ЧТОБЫ УЗНАТЬ БОЛЬШЕ</div></section>
-<section id="skills" class="section wrap"><div class="section-head"><div><div class="eyebrow">01 — НАВЫКИ</div><h2>Меньше риска.<br><span>Больше уверенности.</span></h2></div><p>Не нужно быть специалистом, чтобы защищать себя в сети. Начни с базовых привычек.</p></div><div class="cards"><article><small>01</small><div class="illustration">▣</div><h3>Защищать аккаунты</h3><p>Создавать уникальные пароли и включать дополнительную защиту.</p></article><article><small>02</small><div class="illustration">✉</div><h3>Замечать обман</h3><p>Распознавать фишинговые письма, ссылки и подозрительные сообщения.</p></article><article><small>03</small><div class="illustration">◎</div><h3>Беречь приватность</h3><p>Понимать, какие данные оставляешь в интернете и кому их показываешь.</p></article></div></section>
-<section class="statement"><div class="wrap"><div class="eyebrow">ЦИФРОВАЯ ГРАМОТНОСТЬ — ЭТО НАВЫК</div><p>Остановись.<br>Проверь.<br><em>Только потом нажимай.</em></p></div></section>
-<section class="section wrap"><div class="section-head"><div><div class="eyebrow">02 — ОБУЧЕНИЕ</div><h2>Знания, которые<br><span>работают в жизни.</span></h2></div><p>Каждый модуль посвящён одному навыку и завершается практическим заданием.</p></div><div class="row"><b>01</b><div><h3>Разберись в основах</h3><p>Короткие объяснения, схемы и реальные учебные ситуации.</p></div><strong>↗</strong></div><div class="row"><b>02</b><div><h3>Попробуй сам</h3><p>Проверь знания на интерактивных заданиях после модулей.</p></div><strong>↗</strong></div><div class="row"><b>03</b><div><h3>Отслеживай прогресс</h3><p>Результаты сохраняются в этом браузере — регистрация не нужна.</p></div><strong>↗</strong></div><a class="button" href="#course">Посмотреть курс ↗</a></section>
-<section class="section wrap" id="course"><div class="section-head"><div><div class="eyebrow">03 — ПРОГРАММА</div><h2>ТВОЙ ПУТЬ К<br><span>БЕЗОПАСНОСТИ.</span></h2></div><p>Выбирай модуль, изучай урок и закрепляй знания практическим заданием.</p></div><div class="progress"><div class="progress-top"><span>ТВОЙ ПРОГРЕСС</span><strong id="progressLabel">0 из 15 модулей</strong></div><div class="track" id="progressBar" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><span id="progressFill"></span></div><p id="progressHint">Выбери первый модуль и начни обучение.</p></div><div id="modules" class="modules"></div><div class="completion" id="completion" hidden><div class="completion-mark">✓</div><div><h3>Хорошая работа!</h3><p>Ты прошёл все пятнадцать модулей. Распечатай страницу, если хочешь сохранить памятку.</p><button class="btn" id="print" type="button">Распечатать / сохранить в PDF</button></div></div></section>
-<section class="section wrap" id="sources"><div class="section-head"><div><div class="eyebrow">04 — ПОЛЕЗНЫЕ ССЫЛКИ</div><h2>Изучи тему<br><span>глубже.</span></h2></div><p>Русскоязычные материалы и официальные рекомендации по цифровой и финансовой безопасности.</p></div><div class="cards"><article><small>ПАМЯТКИ</small><div class="illustration">↗</div><h3>КиберЗОЖ</h3><p>Советы о безопасном поведении в интернете.</p><a href="https://киберзож.рф/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a></article><article><small>ФИНАНСЫ</small><div class="illustration">↗</div><h3>Финансовая культура</h3><p>Материалы Банка России о платежах и мошенничестве.</p><a href="https://fincult.info/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a></article><article><small>ОФИЦИАЛЬНЫЕ СОВЕТЫ</small><div class="illustration">↗</div><h3>МВД России</h3><p>Предупреждения о распространённых схемах обмана.</p><a href="https://мвд.рф/" target="_blank" rel="noopener noreferrer">Открыть сайт ↗</a></article></div><p style="font-size:12px;color:var(--muted);margin-top:20px">Прогресс хранится в локальном хранилище браузера. Не вводи настоящие пароли в учебные задания.</p></section>
-<section class="section wrap extra-section" id="toolkit"><div class="section-head"><div><div class="eyebrow">05 — ИНСТРУМЕНТЫ</div><h2>Твоя цифровая<br><span>панель управления.</span></h2></div><p>Несколько простых привычек, которые помогают держать аккаунты и устройства под контролем.</p></div><div class="tool-grid"><article class="tool-card"><span>01 / ДОСТУП</span><h3>Проверь входы</h3><p>Просмотри активные сеансы в почте и соцсетях. Заверши незнакомые и старые сеансы.</p></article><article class="tool-card"><span>02 / ОБНОВЛЕНИЯ</span><h3>Закрой уязвимости</h3><p>Включи автоматические обновления системы, браузера и важных приложений.</p></article><article class="tool-card"><span>03 / РЕЗЕРВ</span><h3>Сохрани важное</h3><p>Настрой резервное копирование фотографий и документов в надёжное место.</p></article><article class="tool-card"><span>04 / ВОССТАНОВЛЕНИЕ</span><h3>Подготовь запасной путь</h3><p>Проверь резервную почту и телефон восстановления. Никому не передавай коды.</p></article></div></section><section class="section wrap extra-section" id="checklist"><div class="section-head"><div><div class="eyebrow">06 — БЫСТРАЯ ПРОВЕРКА</div><h2>Пять минут<br><span>на безопасность.</span></h2></div><p>Отмечай пункты прямо здесь. Это локальный чек-лист, он не отправляет данные на сервер.</p></div><div class="checklist"><label><input type="checkbox"> У меня разные пароли для важных аккаунтов</label><label><input type="checkbox"> Для почты включена двухэтапная проверка</label><label><input type="checkbox"> Телефон и приложения обновлены</label><label><input type="checkbox"> Я проверил настройки приватности</label><label><input type="checkbox"> У важных файлов есть резервная копия</label></div><p class="check-note">Не вводи на учебном сайте реальные пароли или коды подтверждения.</p></section><section class="cta"><div class="wrap"><div class="eyebrow">ТВОЙ СЛЕДУЮЩИЙ ШАГ</div><h2>Готов быть<br><em>внимательнее?</em></h2><a class="button light" href="#course">Перейти к курсу ↗</a></div></section></main>
-<footer class="footer wrap"><div class="brand"><span class="logo" aria-hidden="true">⌬</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></div><p>Практический учебный курс по безопасности в интернете.</p><div class="footer-bottom"><span>© Учебный проект · 2026</span><span>Курс для начинающих</span><a href="#sources">Источники</a></div></footer>
+  <section class="authkit-hero">
+    <p class="authkit-kicker">Практический курс цифровой безопасности</p>
+    <h1>Цифровой<br>щит</h1>
+    <p class="hero-copy">Защищай аккаунты, личные данные и устройства. Короткие уроки, реальные ситуации и никакой регистрации.</p>
+    <a class="hero-cta" href="#course">Начать обучение</a>
+    <div class="authkit-card-stage" aria-label="Возможности курса">
+      <article class="authkit-card authkit-card--left">
+        <small>01 · ПРОВЕРЬ СЕБЯ</small>
+        <h2>Заметь фишинг</h2>
+        <p>Найди тревожные признаки до того, как откроешь ссылку.</p>
+        <div class="mock-input">security@game-gifts.example</div>
+        <div class="mock-button">Проверить письмо</div>
+      </article>
+      <article class="authkit-card authkit-card--main">
+        <small>ТВОЙ ПРОГРЕСС</small>
+        <h2>Путь к защите</h2>
+        <p>Пятнадцать коротких модулей — в твоём темпе.</p>
+        <div class="progress-line" aria-hidden="true"><span></span></div>
+        <div class="card-separator">БЕЗ РЕГИСТРАЦИИ</div>
+        <div class="mock-row"><span class="mock-icon" aria-hidden="true">✓</span>Прогресс хранится только в браузере</div>
+      </article>
+      <article class="authkit-card authkit-card--right">
+        <small>02 · ЗАЩИТА ВХОДА</small>
+        <h2>Укрепи аккаунт</h2>
+        <p>Уникальные пароли и второй фактор создают дополнительный барьер.</p>
+        <div class="mock-row"><span class="mock-icon" aria-hidden="true">1</span>Длинный уникальный пароль</div>
+        <div class="mock-row"><span class="mock-icon" aria-hidden="true">2</span>Двухэтапная проверка</div>
+      </article>
+    </div>
+    <div class="authkit-toggle" aria-label="Темная тема"><span class="selected">● Тёмная тема</span><span>○ Светлая</span></div>
+  </section>
 
-<nav class="bottom-nav" aria-label="Навигация по главной странице"><span class="bottom-nav-liquid" aria-hidden="true"></span>
-<a class="active" href="#top" aria-current="location"><span>⌂</span>Главная</a><a href="#skills"><span>✦</span>Навыки</a><a href="#course"><span>⬡</span>Курс</a><a href="#toolkit"><span>⌘</span>Инструменты</a>
-<button class="bottom-menu-toggle" id="bottomMenuToggle" type="button" aria-expanded="false" aria-controls="bottomMenuPanel" aria-label="Открыть меню"><span class="menu-toggle-icon">＋</span><span>Ещё</span></button>
-</nav>
-<div class="bottom-menu-backdrop" id="bottomMenuBackdrop" hidden></div>
-<aside class="bottom-menu-panel" id="bottomMenuPanel" aria-hidden="true" aria-labelledby="bottomMenuTitle" inert>
- <div class="bottom-menu-grabber" aria-hidden="true"></div>
- <div class="bottom-menu-heading"><div><div class="eyebrow">ЦИФРОВОЙ ЩИТ</div><h2 id="bottomMenuTitle">Больше о проекте</h2></div><button class="icon-btn bottom-menu-close" id="bottomMenuClose" type="button" aria-label="Закрыть меню">×</button></div>
- <p class="bottom-menu-description">Бесплатный курс, который помогает увереннее пользоваться интернетом и защищать свои данные.</p>
- <a class="bottom-menu-link" href="pages/about.html"><span class="bottom-menu-link-icon">✧</span><span><b>О проекте</b><small>Цели, устройство и возможности курса</small></span><span class="bottom-menu-arrow">↗</span></a>
- <a class="bottom-menu-link" href="pages/privacy.html"><span class="bottom-menu-link-icon">⌑</span><span><b>Конфиденциальность</b><small>Какие данные сохраняются и где</small></span><span class="bottom-menu-arrow">↗</span></a>
- <div class="bottom-menu-note"><span>◈</span><span>Прогресс курса хранится локально в браузере. Регистрация не нужна.</span></div>
-</aside>
-<script defer src="js/app.js?v=calm-theme-20261019"></script>
-</body></html>
+  <section class="authkit-skills" id="skills">
+    <div class="authkit-heading">
+      <p class="authkit-section-label">Навыки, которые остаются с тобой</p>
+      <h2>Меньше риска.<br>Больше уверенности.</h2>
+      <p>Начни с простых действий, которые помогают заметить обман и сохранить контроль над своими данными.</p>
+    </div>
+    <div class="authkit-timeline">
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>Защищай аккаунты</h3><p>Создавай уникальные пароли и включай дополнительную защиту.</p></article>
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/><path d="M4 4h16v16H4z"/></svg></div><h3>Проверяй сообщения</h3><p>Распознавай фишинговые ссылки и подозрительные просьбы.</p></article>
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-3.3 7-9V5l-7-2-7 2v7c0 5.7 7 9 7 9z"/><path d="m9.5 12 1.7 1.7 3.5-3.5"/></svg></div><h3>Береги приватность</h3><p>Управляй цифровым следом и не раскрывай лишнее.</p></article>
+    </div>
+  </section>
+
+  <section class="authkit-course" id="course">
+    <div class="section-head">
+      <p class="authkit-section-label">Программа курса</p>
+      <h2>Твой путь к безопасности</h2>
+      <p>Выбирай модуль, проходи урок и закрепляй знания практическим заданием.</p>
+    </div>
+    <div class="progress">
+      <div class="progress-top"><span>ТВОЙ ПРОГРЕСС</span><strong id="progressLabel">0 из 15 модулей</strong></div>
+      <div class="track" id="progressBar" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><span id="progressFill"></span></div>
+      <p id="progressHint">Выбери первый модуль и начни обучение.</p>
+    </div>
+    <div id="modules" class="modules"></div>
+    <div class="completion" id="completion" hidden><div class="completion-mark">✓</div><div><h3>Хорошая работа!</h3><p>Ты прошёл все пятнадцать модулей.</p><button class="btn" id="print" type="button">Распечатать / сохранить в PDF</button></div></div>
+  </section>
+
+  <section class="authkit-skills" id="sources">
+    <div class="authkit-heading"><p class="authkit-section-label">Полезные источники</p><h2>Проверяй важное<br>по официальным каналам.</h2></div>
+    <div class="authkit-timeline">
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg></div><h3>КиберЗОЖ</h3><p><a href="https://киберзож.рф/" target="_blank" rel="noopener noreferrer">Советы о безопасности в интернете</a></p></article>
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></div><h3>Финансовая культура</h3><p><a href="https://fincult.info/" target="_blank" rel="noopener noreferrer">Материалы Банка России</a></p></article>
+      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7l-8-4z"/></svg></div><h3>МВД России</h3><p><a href="https://мвд.рф/" target="_blank" rel="noopener noreferrer">Предупреждения о схемах обмана</a></p></article>
+    </div>
+  </section>
+</main>
+<footer class="footer wrap"><div class="brand"><span class="logo" aria-hidden="true">◇</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></div><p>Бесплатный учебный курс по безопасности в интернете.</p><div class="footer-bottom"><span>© Учебный проект · 2026</span><a href="pages/privacy.html">Конфиденциальность</a><a href="pages/about.html">О проекте</a></div></footer>
+<script defer src="js/app.js?v=authkit-home-20261101"></script>
+</body>
+</html>
