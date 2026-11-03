@@ -720,147 +720,97 @@ html { scroll-behavior: smooth; }
 :root a.button.button-ghost:hover { color: var(--ghost-fg) !important; }
 :root .button:disabled, :root .button[disabled] { color: var(--muted) !important; }
 
-/* Final theme and layout corrections */
-:root[data-theme="light"] {
-  --surface-invert: #e3e3df;
+
+/* === Final theme system: surfaces follow the selected palette === */
+:root { --motion-fast:220ms cubic-bezier(.2,.7,.2,1); --motion-reveal:620ms cubic-bezier(.2,.7,.2,1); --tile-dim:transparent; }
+:root[data-theme="light"] { --tile-dim:transparent; --surface:#fff; --surface-hover:#eeeeeb; }
+:root[data-theme="dark"] { --tile-dim:transparent; --surface:#252729; --surface-hover:#33363a; }
+
+:root .statement, :root .hero-meta {
+  background:var(--surface) !important; color:var(--heading) !important;
+  border:1px solid var(--line) !important; box-shadow:0 12px 34px rgba(0,0,0,.045);
 }
-:root[data-theme="light"] .hero-meta {
-  background: #e3e3df !important;
-  color: #171819 !important;
+:root .statement .eyebrow { color:var(--body) !important; opacity:1; }
+:root .statement p, :root .statement em, :root .hero-meta b { color:var(--heading) !important; }
+:root .hero-meta span { color:var(--body) !important; }
+:root .hero-meta > div + div { border-left-color:var(--line-strong) !important; }
+:root .hero-meta > div { min-width:0; }
+
+/* Theme-aware module palette with readable foregrounds. */
+:root[data-theme="light"] .skill:nth-child(1), :root[data-theme="light"] .module-tile.tile-iris { background:#d7d2ff !important; color:#211b4c !important; }
+:root[data-theme="light"] .skill:nth-child(2), :root[data-theme="light"] .module-tile.tile-cyan { background:#bdecf4 !important; color:#0c3038 !important; }
+:root[data-theme="light"] .module-tile.tile-pale { background:#e8e4ff !important; color:#2b2650 !important; }
+:root[data-theme="light"] .module-tile.tile-deep { background:#45418f !important; color:#fff !important; }
+:root[data-theme="light"] .skill:nth-child(3), :root[data-theme="light"] .module-tile.tile-orchid { background:#f5d7ee !important; color:#48223f !important; }
+:root[data-theme="light"] .module-tile.tile-periwinkle { background:#d3e1f7 !important; color:#1d3556 !important; }
+
+:root[data-theme="dark"] .skill:nth-child(1), :root[data-theme="dark"] .module-tile.tile-iris { background:#514b9a !important; color:#fff !important; }
+:root[data-theme="dark"] .skill:nth-child(2), :root[data-theme="dark"] .module-tile.tile-cyan { background:#00677f !important; color:#fff !important; }
+:root[data-theme="dark"] .module-tile.tile-pale { background:#565078 !important; color:#fff !important; }
+:root[data-theme="dark"] .module-tile.tile-deep { background:#34316e !important; color:#fff !important; }
+:root[data-theme="dark"] .skill:nth-child(3), :root[data-theme="dark"] .module-tile.tile-orchid { background:#743d70 !important; color:#fff !important; }
+:root[data-theme="dark"] .module-tile.tile-periwinkle { background:#355779 !important; color:#fff !important; }
+
+:root .skill h3, :root .skill p, :root .skill .skill-num,
+:root .module-tile h2, :root .module-tile p, :root .module-tile .module-number-label,
+:root .module-tile .tile-status, :root .module-tile .tile-foot, :root .module-tile .tile-foot * { color:inherit !important; }
+:root .module-tile .tile-status { border-color:color-mix(in srgb,currentColor 38%,transparent) !important; }
+:root .module-tile .tile-foot { border-top-color:color-mix(in srgb,currentColor 35%,transparent) !important; }
+:root .skill::after, :root .module-tile::after { background:transparent !important; }
+
+/* Interactive states. */
+:root .faq-item { background:var(--surface) !important; border-color:var(--line) !important; }
+:root .faq-question { color:var(--heading) !important; background:transparent !important; }
+:root .faq-question .num, :root .faq-answer { color:var(--body) !important; }
+:root .faq-question > span:last-child { color:var(--heading) !important; background:var(--canvas-deep) !important; border-color:var(--line) !important; }
+:root .demo-tab, :root .demo-answer, :root .quiz-option, :root .lesson-link { color:var(--text) !important; border-color:var(--line) !important; }
+:root .demo-tab.active, :root .demo-answer.selected, :root .quiz-option:has(input:checked),
+:root .quiz-option.selected, :root .lesson-link.active { background:var(--surface-hover) !important; color:var(--heading) !important; border-color:var(--line-strong) !important; }
+:root input, :root textarea, :root select { color:var(--text); background-color:var(--surface); border-color:var(--line); }
+:root input::placeholder, :root textarea::placeholder { color:var(--muted); }
+
+/* Crisp rounded rectangles, with pills reserved for labels. */
+:where(.statement,.hero-meta,.skill,.module-tile,.demo-panel,.demo-content,.demo-side,.faq-item,.info-card,.progress-panel,.quiz-box,.lesson-content,.lesson-sidebar,.review-item,.theory-extension,.certificate-preview,.settings-row,.empty-state,.toast,.notice,.lesson-callout) { border-radius:22px; }
+:where(button,.button,input,textarea,select,.demo-tab,.demo-answer,.quiz-option,.lesson-link,.faq-question) { border-radius:12px; }
+:where(.pill-label,.hero-topline,.page-kicker .eyebrow,.tile-status,.status,.skip-link) { border-radius:9999px; }
+
+/* Motion on sections, cards, controls and expanded content. */
+#app > .hero-panel, #app > .section, #app > .cta-band, .site-footer { animation:site-section-in 560ms cubic-bezier(.2,.7,.2,1) both; }
+#app > .section:nth-of-type(2) { animation-delay:45ms; }
+#app > .section:nth-of-type(3) { animation-delay:90ms; }
+#app > .section:nth-of-type(4) { animation-delay:135ms; }
+.reveal { opacity:0; transform:translateY(14px); transition:opacity var(--motion-reveal),transform var(--motion-reveal); }
+.reveal.is-visible { opacity:1; transform:translateY(0); }
+.skill,.module-tile,.feature-row,.faq-item,.demo-panel,.info-card,.progress-panel,.quiz-box,.lesson-content,.lesson-sidebar,.review-item,.settings-row,.source-list li,.button,button,input,textarea,select,.demo-tab,.demo-answer,.quiz-option,.lesson-link {
+  transition:color var(--motion-fast),background-color var(--motion-fast),border-color var(--motion-fast),box-shadow var(--motion-fast),transform var(--motion-fast),opacity var(--motion-fast);
 }
-:root[data-theme="light"] .hero-meta b { color: #171819 !important; }
-:root[data-theme="light"] .hero-meta span { color: rgba(23,24,25,.76) !important; }
-:root[data-theme="light"] .hero-meta > div + div { border-left-color: rgba(23,24,25,.2); }
-:root[data-theme="dark"] .hero-meta {
-  background: #cacaca !important;
-  color: #171819 !important;
+.skill:hover,.module-tile:hover,.info-card:hover,.source-list li:hover,.feature-row:hover { transform:translateY(-3px); }
+.button:hover,button:hover:not(:disabled),.demo-tab:hover,.demo-answer:hover,.quiz-option:hover,.lesson-link:hover { box-shadow:0 7px 20px rgba(0,0,0,.09); }
+.faq-list .faq-item { animation:site-section-in 420ms cubic-bezier(.2,.7,.2,1) both; }
+.faq-list .faq-item:nth-child(2) { animation-delay:45ms; }
+.faq-list .faq-item:nth-child(3) { animation-delay:90ms; }
+.faq-list .faq-item:nth-child(4) { animation-delay:135ms; }
+.faq-answer:not([hidden]) { animation:faq-answer-in 240ms ease-out both; }
+.demo-content,.notice,.toast,.review-item,.quiz-question { animation:faq-answer-in 280ms ease-out both; }
+@keyframes site-section-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes faq-answer-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@media (hover:none) {
+  .skill:hover,.module-tile:hover,.info-card:hover,.source-list li:hover,.feature-row:hover { transform:none; }
+  .button:hover,button:hover:not(:disabled),.demo-tab:hover,.demo-answer:hover,.quiz-option:hover,.lesson-link:hover { box-shadow:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto !important; }
+  *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+  .reveal { opacity:1 !important; transform:none !important; }
 }
 
-/* The colored module cards use one readable foreground per palette family. */
-:root .module-tile.tile-iris,
-:root .module-tile.tile-deep { color: #fff !important; }
-:root .module-tile.tile-iris p,
-:root .module-tile.tile-deep p,
-:root .module-tile.tile-iris .module-number-label,
-:root .module-tile.tile-deep .module-number-label,
-:root .module-tile.tile-iris .tile-status,
-:root .module-tile.tile-deep .tile-status,
-:root .module-tile.tile-iris .tile-foot,
-:root .module-tile.tile-deep .tile-foot { color: rgba(255,255,255,.9) !important; }
-:root .module-tile.tile-cyan,
-:root .module-tile.tile-pale,
-:root .module-tile.tile-orchid,
-:root .module-tile.tile-periwinkle { color: #171819 !important; }
-:root .module-tile.tile-cyan p,
-:root .module-tile.tile-pale p,
-:root .module-tile.tile-orchid p,
-:root .module-tile.tile-periwinkle p,
-:root .module-tile.tile-cyan .module-number-label,
-:root .module-tile.tile-pale .module-number-label,
-:root .module-tile.tile-orchid .module-number-label,
-:root .module-tile.tile-periwinkle .module-number-label,
-:root .module-tile.tile-cyan .tile-status,
-:root .module-tile.tile-pale .tile-status,
-:root .module-tile.tile-orchid .tile-status,
-:root .module-tile.tile-periwinkle .tile-status,
-:root .module-tile.tile-cyan .tile-foot,
-:root .module-tile.tile-pale .tile-foot,
-:root .module-tile.tile-orchid .tile-foot,
-:root .module-tile.tile-periwinkle .tile-foot { color: rgba(23,24,25,.82) !important; }
-
-/* FAQ block: prevent the heading and question column from being clipped. */
-.faq-home, .faq-layout { grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); min-width: 0; }
-.faq-home > div, .faq-layout > div, .faq-list, .faq-item { min-width: 0; }
-.faq-home .section-title, .faq-layout .page-title {
-  max-width: 100%; overflow: visible; overflow-wrap: anywhere;
-  font-size: clamp(42px,5.2vw,68px); line-height: 1.04;
-}
-.faq-question { grid-template-columns: 36px minmax(0,1fr) 24px; white-space: normal; overflow-wrap: anywhere; }
-.faq-answer { overflow-wrap: anywhere; }
-@media (max-width: 760px) {
-  .faq-home, .faq-layout { grid-template-columns: minmax(0,1fr); }
-  .faq-home .section-title, .faq-layout .page-title { font-size: clamp(40px,10vw,58px); }
-}
-
-/* New geometry: crisp rounded rectangles instead of oversized pill-like corners. */
-:root {
-  --radius-button: 12px;
-  --radius-input: 12px;
-  --radius-card: 22px;
-  --radius-feature: 28px;
-}
-:where(button, .button, input, textarea, select, summary, details,
-.header, .nav, .nav-links, .mobile-nav, .hero-card, .feature-card,
-.module-card, .module-tile, .lesson-card, .lesson-content, .lesson-sidebar,
-.info-card, .progress-panel, .quiz-box, .quiz-card, .question-card,
-.review-item, .faq-item, .faq-question, .faq-answer, .statement,
-.theory-extension, .stats-panel, .empty-state, .certificate-preview,
-.demo-panel, .demo-content, .demo-side, .cta-band, .settings-row,
-.source-list li, .lesson-callout, .lesson-diagram, .modal, .dialog,
-.dropdown, .toast, .notice, .alert, .panel, .card, .surface) {
-  border-radius: 22px;
-}
-:where(button, .button, input, textarea, select, .demo-tab, .quiz-option) {
-  border-radius: 12px;
-}
-.brand-mark { border-radius: 50% !important; }
-.pill-label, .hero-topline, .page-kicker .eyebrow, .module-tile .tile-status,
-.status, .skip-link { border-radius: 9999px !important; }
-
-
-/* Contrast fix: the key-rule banner keeps a dark surface in the light theme. */
-:root[data-theme="light"] .statement,
-:root[data-theme="dark"] .statement {
-  background: #171819 !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 28px !important;
-}
-:root[data-theme="light"] .statement .eyebrow,
-:root[data-theme="light"] .statement p,
-:root[data-theme="light"] .statement em,
-:root[data-theme="dark"] .statement .eyebrow,
-:root[data-theme="dark"] .statement p,
-:root[data-theme="dark"] .statement em {
-  color: #ffffff !important;
-}
-
-/* FAQ: separate compact cards, no more one continuous rounded capsule. */
-.faq-list {
-  display: grid;
-  gap: 10px;
-}
-.faq-item {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  border-radius: 16px !important;
-  background: var(--surface);
-}
-.faq-question {
-  min-height: 58px;
-  padding: 15px 18px;
-  border: 0;
-  border-radius: 0 !important;
-  background: transparent;
-}
-.faq-answer {
-  padding: 0 18px 18px 72px;
-  border-radius: 0 !important;
-  color: var(--body);
-  line-height: 1.7;
-}
-.faq-question > span:last-child {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: var(--canvas-deep);
-}
-@media (max-width: 600px) {
-  .faq-question { padding: 14px 13px; grid-template-columns: 28px minmax(0,1fr) 28px; gap: 9px; }
-  .faq-answer { padding: 0 14px 16px 50px; }
-  .statement { border-radius: 20px !important; }
+/* FAQ layout responds cleanly from desktop to narrow screens. */
+.faq-home,.faq-layout { display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); min-width:0; }
+.faq-home > div,.faq-layout > div,.faq-list,.faq-item { min-width:0; }
+.faq-home .section-title,.faq-layout .page-title { max-width:100%; overflow:visible; overflow-wrap:anywhere; line-height:1.04; }
+.faq-question { grid-template-columns:36px minmax(0,1fr) 28px; white-space:normal; overflow-wrap:anywhere; }
+.faq-answer { overflow-wrap:anywhere; }
+@media (max-width:760px) {
+  .faq-home,.faq-layout { grid-template-columns:minmax(0,1fr); }
+  .faq-home .section-title { font-size:clamp(40px,10vw,58px); }
 }
