@@ -790,14 +790,14 @@ html { scroll-behavior: smooth; }
   --radius-feature: 28px;
 }
 :where(button, .button, input, textarea, select, summary, details,
-.skill, .module-tile, .info-card, .progress-panel, .quiz-box,
-.lesson-content, .lesson-sidebar, .review-item, .faq-item,
-.faq-question, .faq-answer, .hero-meta, .statement, .theory-extension,
-.stats-panel, .empty-state, .certificate-preview, .demo-panel,
-.demo-content, .demo-side, .cta-band, .settings-row, .source-list li,
-.lesson-callout, .lesson-diagram) {
-  -webkit-border-radius: 22px;
-  -moz-border-radius: 22px;
+.header, .nav, .nav-links, .mobile-nav, .hero-card, .feature-card,
+.module-card, .module-tile, .lesson-card, .lesson-content, .lesson-sidebar,
+.info-card, .progress-panel, .quiz-box, .quiz-card, .question-card,
+.review-item, .faq-item, .faq-question, .faq-answer, .statement,
+.theory-extension, .stats-panel, .empty-state, .certificate-preview,
+.demo-panel, .demo-content, .demo-side, .cta-band, .settings-row,
+.source-list li, .lesson-callout, .lesson-diagram, .modal, .dialog,
+.dropdown, .toast, .notice, .alert, .panel, .card, .surface) {
   border-radius: 22px;
 }
 :where(button, .button, input, textarea, select, .demo-tab, .quiz-option) {
