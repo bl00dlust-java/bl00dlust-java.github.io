@@ -782,17 +782,85 @@ html { scroll-behavior: smooth; }
   .faq-home .section-title, .faq-layout .page-title { font-size: clamp(40px,10vw,58px); }
 }
 
-/* Consistent 60px rounding for visible interface surfaces and controls. */
-:where(button, .button, input, textarea, select, summary, details, .skill,
-.module-tile, .info-card, .progress-panel, .quiz-box, .lesson-content,
-.lesson-sidebar, .review-item, .faq-item, .faq-question, .faq-answer,
-.hero-meta, .statement, .theory-extension, .stats-panel, .empty-state,
-.certificate-preview, .demo-panel, .demo-content, .demo-side, .cta-band,
-.settings-row, .source-list li, .lesson-callout, .lesson-diagram) {
-  -webkit-border-radius: 60px;
-  -moz-border-radius: 60px;
-  border-radius: 60px;
+/* New geometry: crisp rounded rectangles instead of oversized pill-like corners. */
+:root {
+  --radius-button: 12px;
+  --radius-input: 12px;
+  --radius-card: 22px;
+  --radius-feature: 28px;
+}
+:where(button, .button, input, textarea, select, summary, details,
+.skill, .module-tile, .info-card, .progress-panel, .quiz-box,
+.lesson-content, .lesson-sidebar, .review-item, .faq-item,
+.faq-question, .faq-answer, .hero-meta, .statement, .theory-extension,
+.stats-panel, .empty-state, .certificate-preview, .demo-panel,
+.demo-content, .demo-side, .cta-band, .settings-row, .source-list li,
+.lesson-callout, .lesson-diagram) {
+  -webkit-border-radius: 22px;
+  -moz-border-radius: 22px;
+  border-radius: 22px;
+}
+:where(button, .button, input, textarea, select, .demo-tab, .quiz-option) {
+  border-radius: 12px;
 }
 .brand-mark { border-radius: 50% !important; }
 .pill-label, .hero-topline, .page-kicker .eyebrow, .module-tile .tile-status,
 .status, .skip-link { border-radius: 9999px !important; }
+
+
+/* Contrast fix: the key-rule banner keeps a dark surface in the light theme. */
+:root[data-theme="light"] .statement,
+:root[data-theme="dark"] .statement {
+  background: #171819 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 28px !important;
+}
+:root[data-theme="light"] .statement .eyebrow,
+:root[data-theme="light"] .statement p,
+:root[data-theme="light"] .statement em,
+:root[data-theme="dark"] .statement .eyebrow,
+:root[data-theme="dark"] .statement p,
+:root[data-theme="dark"] .statement em {
+  color: #ffffff !important;
+}
+
+/* FAQ: separate compact cards, no more one continuous rounded capsule. */
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+.faq-item {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 16px !important;
+  background: var(--surface);
+}
+.faq-question {
+  min-height: 58px;
+  padding: 15px 18px;
+  border: 0;
+  border-radius: 0 !important;
+  background: transparent;
+}
+.faq-answer {
+  padding: 0 18px 18px 72px;
+  border-radius: 0 !important;
+  color: var(--body);
+  line-height: 1.7;
+}
+.faq-question > span:last-child {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--canvas-deep);
+}
+@media (max-width: 600px) {
+  .faq-question { padding: 14px 13px; grid-template-columns: 28px minmax(0,1fr) 28px; gap: 9px; }
+  .faq-answer { padding: 0 14px 16px 50px; }
+  .statement { border-radius: 20px !important; }
+}
