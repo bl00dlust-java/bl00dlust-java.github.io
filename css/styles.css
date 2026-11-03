@@ -814,3 +814,54 @@ html { scroll-behavior: smooth; }
   .faq-home,.faq-layout { grid-template-columns:minmax(0,1fr); }
   .faq-home .section-title { font-size:clamp(40px,10vw,58px); }
 }
+
+/* Mobile FAQ fix: keep the expand control inside the card at every width. */
+.faq-list { min-width: 0; width: 100%; }
+.faq-item { min-width: 0; width: 100%; overflow: hidden; }
+.faq-question {
+  display: grid !important;
+  grid-template-columns: 30px minmax(0, 1fr) 34px !important;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  padding: 18px 18px !important;
+  text-align: left;
+}
+.faq-question > span { min-width: 0; }
+.faq-question > .faq-toggle {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  justify-self: end;
+  flex: 0 0 30px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  line-height: 1;
+  font-size: 18px;
+  transform: rotate(0);
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1), background-color var(--motion-fast);
+}
+.faq-question[aria-expanded="true"] > .faq-toggle { transform: rotate(45deg); }
+.faq-answer[hidden] { display: none !important; }
+.faq-answer:not([hidden]) {
+  display: block;
+  transform-origin: top;
+  animation: faq-panel-open 300ms cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes faq-panel-open {
+  from { opacity: 0; transform: translateY(-7px); clip-path: inset(0 0 100% 0); }
+  to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+@media (max-width: 520px) {
+  .faq-question { grid-template-columns: 25px minmax(0,1fr) 30px !important; gap: 9px; padding: 15px 12px !important; }
+  .faq-question > .faq-toggle { width: 28px; height: 28px; }
+  .faq-question .num { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-question > .faq-toggle, .faq-answer:not([hidden]) { animation: none !important; transition: none !important; }
+}
