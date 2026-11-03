@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "none",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "outFile": "js/app.js",
+    "noEmitOnError": true,
+    "removeComments": true,
+    "strict": false
+  },
+  "files": [
+    "src/app.ts"
+  ]
+}

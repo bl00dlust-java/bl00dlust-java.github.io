@@ -1,97 +1,55 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Практический курс по кибергигиене и безопасности в интернете">
-<meta name="theme-color" content="#05060f">
-<title>Цифровой щит — твоя безопасность в сети</title>
-<link rel="icon" href="assets/favicon.svg?v=purple-complete-20261015">
-<link rel="stylesheet" href="css/styles.css?v=calm-nav-readable-20261019">
-<link rel="stylesheet" href="css/authkit-theme.css?v=authkit-20261101">
-<link rel="stylesheet" href="css/authkit-home.css?v=authkit-home-20261101">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f1011">
+  <meta name="description" content="Бесплатный практический курс по кибергигиене: пароли, фишинг, приватность, защита устройств и восстановление доступа.">
+  <meta property="og:title" content="Кибергигиена — курс цифровой безопасности">
+  <meta property="og:description" content="Шесть модулей, интерактивные уроки и тесты. Бесплатно, без регистрации, с сохранением прогресса в браузере.">
+  <title>Кибергигиена — курс цифровой безопасности</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/app.js"></script>
 </head>
-<body class="authkit-home">
-<a class="skip" href="#course">Перейти к программе курса</a>
-<header class="header">
-  <a class="brand" href="#top"><span class="logo" aria-hidden="true">◇</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></a>
-  <nav aria-label="Основная навигация"><a href="#skills">Навыки</a><a href="#course">Программа</a><a href="pages/about.html">О проекте</a></nav>
-  <div class="header-tools">
-    <a class="github-link" href="#sources" aria-label="Полезные источники"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M8.5 12h7M12 8.5v7"/></svg></a>
-    <button id="theme" type="button" aria-label="Изменить тему" aria-pressed="false">Тема</button>
-  </div>
-</header>
-<main id="top">
-  <section class="authkit-hero">
-    <p class="authkit-kicker">Практический курс цифровой безопасности</p>
-    <h1>Цифровой<br>щит</h1>
-    <p class="hero-copy">Защищай аккаунты, личные данные и устройства. Короткие уроки, реальные ситуации и никакой регистрации.</p>
-    <a class="hero-cta" href="#course">Начать обучение</a>
-    <div class="authkit-card-stage" aria-label="Возможности курса">
-      <article class="authkit-card authkit-card--left">
-        <small>01 · ПРОВЕРЬ СЕБЯ</small>
-        <h2>Заметь фишинг</h2>
-        <p>Найди тревожные признаки до того, как откроешь ссылку.</p>
-        <div class="mock-input">security@game-gifts.example</div>
-        <div class="mock-button">Проверить письмо</div>
-      </article>
-      <article class="authkit-card authkit-card--main">
-        <small>ТВОЙ ПРОГРЕСС</small>
-        <h2>Путь к защите</h2>
-        <p>Пятнадцать коротких модулей — в твоём темпе.</p>
-        <div class="progress-line" aria-hidden="true"><span></span></div>
-        <div class="card-separator">БЕЗ РЕГИСТРАЦИИ</div>
-        <div class="mock-row"><span class="mock-icon" aria-hidden="true">✓</span>Прогресс хранится только в браузере</div>
-      </article>
-      <article class="authkit-card authkit-card--right">
-        <small>02 · ЗАЩИТА ВХОДА</small>
-        <h2>Укрепи аккаунт</h2>
-        <p>Уникальные пароли и второй фактор создают дополнительный барьер.</p>
-        <div class="mock-row"><span class="mock-icon" aria-hidden="true">1</span>Длинный уникальный пароль</div>
-        <div class="mock-row"><span class="mock-icon" aria-hidden="true">2</span>Двухэтапная проверка</div>
-      </article>
+<body>
+  <a class="skip-link" href="#app">Перейти к содержанию</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="Кибергигиена — главная">
+        <span class="brand-mark">К<span>·</span></span>
+        <span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#/course">Программа</a>
+        <a href="#/about">О курсе</a>
+        <a href="#/results">Результаты</a>
+        <a href="#/project">О проекте</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-action="theme" aria-label="Переключить тему"><span class="theme-icon">☼</span><span class="theme-label">Тема</span></button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню" data-action="menu">☰</button>
+      </div>
     </div>
-    <div class="authkit-toggle" aria-label="Темная тема"><span class="selected">● Тёмная тема</span><span>○ Светлая</span></div>
-  </section>
-
-  <section class="authkit-skills" id="skills">
-    <div class="authkit-heading">
-      <p class="authkit-section-label">Навыки, которые остаются с тобой</p>
-      <h2>Меньше риска.<br>Больше уверенности.</h2>
-      <p>Начни с простых действий, которые помогают заметить обман и сохранить контроль над своими данными.</p>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация" hidden>
+      <a href="#/course">Программа</a><a href="#/about">О курсе</a><a href="#/results">Результаты</a><a href="#/project">О проекте</a><a href="#/faq">Вопросы и ответы</a><a href="#/privacy">Конфиденциальность</a>
+    </nav>
+  </header>
+  <main id="app" tabindex="-1"><div class="loading-state">Подготавливаем учебные материалы…</div></main>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand-block">
+        <a class="brand" href="#/" aria-label="Кибергигиена — главная"><span class="brand-mark">К<span>·</span></span><span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span></a>
+        <p>Цифровая безопасность начинается<br>с повседневных привычек.</p>
+      </div>
+      <div class="footer-links"><a href="#/course">Программа</a><a href="#/about">О курсе</a><a href="#/faq">Вопросы и ответы</a><a href="#/privacy">Конфиденциальность</a><a href="mailto:jeleshkasus@gmail.com">Связаться →</a></div>
+      <div class="footer-note"><span class="eyebrow">ОТКРЫТЫЙ УЧЕБНЫЙ ПРОЕКТ</span><p>Бесплатно.<br>Без регистрации.<br>В своём темпе.</p></div>
     </div>
-    <div class="authkit-timeline">
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>Защищай аккаунты</h3><p>Создавай уникальные пароли и включай дополнительную защиту.</p></article>
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/><path d="M4 4h16v16H4z"/></svg></div><h3>Проверяй сообщения</h3><p>Распознавай фишинговые ссылки и подозрительные просьбы.</p></article>
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-3.3 7-9V5l-7-2-7 2v7c0 5.7 7 9 7 9z"/><path d="m9.5 12 1.7 1.7 3.5-3.5"/></svg></div><h3>Береги приватность</h3><p>Управляй цифровым следом и не раскрывай лишнее.</p></article>
-    </div>
-  </section>
-
-  <section class="authkit-course" id="course">
-    <div class="section-head">
-      <p class="authkit-section-label">Программа курса</p>
-      <h2>Твой путь к безопасности</h2>
-      <p>Выбирай модуль, проходи урок и закрепляй знания практическим заданием.</p>
-    </div>
-    <div class="progress">
-      <div class="progress-top"><span>ТВОЙ ПРОГРЕСС</span><strong id="progressLabel">0 из 15 модулей</strong></div>
-      <div class="track" id="progressBar" role="progressbar" aria-label="Прогресс курса" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><span id="progressFill"></span></div>
-      <p id="progressHint">Выбери первый модуль и начни обучение.</p>
-    </div>
-    <div id="modules" class="modules"></div>
-    <div class="completion" id="completion" hidden><div class="completion-mark">✓</div><div><h3>Хорошая работа!</h3><p>Ты прошёл все пятнадцать модулей.</p><button class="btn" id="print" type="button">Распечатать / сохранить в PDF</button></div></div>
-  </section>
-
-  <section class="authkit-skills" id="sources">
-    <div class="authkit-heading"><p class="authkit-section-label">Полезные источники</p><h2>Проверяй важное<br>по официальным каналам.</h2></div>
-    <div class="authkit-timeline">
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg></div><h3>КиберЗОЖ</h3><p><a href="https://киберзож.рф/" target="_blank" rel="noopener noreferrer">Советы о безопасности в интернете</a></p></article>
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></div><h3>Финансовая культура</h3><p><a href="https://fincult.info/" target="_blank" rel="noopener noreferrer">Материалы Банка России</a></p></article>
-      <article class="authkit-skill"><div class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7l-8-4z"/></svg></div><h3>МВД России</h3><p><a href="https://мвд.рф/" target="_blank" rel="noopener noreferrer">Предупреждения о схемах обмана</a></p></article>
-    </div>
-  </section>
-</main>
-<footer class="footer wrap"><div class="brand"><span class="logo" aria-hidden="true">◇</span><span class="brand-name">ЦИФРОВОЙ <em>ЩИТ</em></span></div><p>Бесплатный учебный курс по безопасности в интернете.</p><div class="footer-bottom"><span>© Учебный проект · 2026</span><a href="pages/privacy.html">Конфиденциальность</a><a href="pages/about.html">О проекте</a></div></footer>
-<script defer src="js/app.js?v=authkit-home-20261101"></script>
+    <div class="footer-bottom"><span>© Учебный проект · 2026</span><span>Материалы курса — для повседневной цифровой безопасности.</span></div>
+  </footer>
+  <noscript><div class="noscript">Для работы интерактивных уроков и сохранения прогресса включите JavaScript.</div></noscript>
 </body>
 </html>
