@@ -40,7 +40,10 @@
   backdrop.addEventListener("click",close);
   nav.querySelector(".app-sidebar__mobile-close").addEventListener("click",close);
   nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",close));
-  nav.querySelector(".app-sidebar__collapse").addEventListener("click",()=>document.body.classList.toggle("app-sidebar-collapsed"));
+  nav.querySelector(".app-sidebar__collapse").addEventListener("click",()=>{
+    const collapsed=document.body.classList.toggle("app-sidebar-collapsed");
+    try { localStorage.setItem("cyber-sidebar-collapsed",collapsed ? "1" : "0"); } catch {}
+  });
   document.body.classList.add("has-app-sidebar");
   document.body.prepend(nav,trigger,backdrop);
   try { if(localStorage.getItem("cyber-sidebar-collapsed")==="1") document.body.classList.add("app-sidebar-collapsed"); } catch {}
