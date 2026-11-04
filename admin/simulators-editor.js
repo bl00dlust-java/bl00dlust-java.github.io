@@ -34,7 +34,7 @@ function renderList(){
   const row=document.createElement('article');row.className='hub-article';
   const h=document.createElement('h3');h.textContent=item.title;
   const p=document.createElement('p');p.textContent=(item.category||'Тренажёр')+' · '+item.options.length+' варианта ответа';
-  const edit=document.createElement('button');edit.className='button button-ghost';edit.type='button';edit.textContent='Изменить';edit.addEventListener('click',()=>{editingId=item.id;$('sim-id').value=item.id;$('sim-category').value=item.category||'';$('sim-title').value=item.title;$('sim-prompt').value=item.prompt;$('sim-options').value=item.options.join('\\n');$('sim-correct').value=String(item.correctIndex+1);$('sim-explanation').value=item.explanation;$('sim-add').textContent='Сохранить изменения';set('sim-form-status','Редактируется: '+item.title);window.scrollTo({top:0,behavior:'smooth'});});
+  const edit=document.createElement('button');edit.className='button button-ghost';edit.type='button';edit.textContent='Изменить';edit.addEventListener('click',()=>{editingId=item.id;$('sim-id').value=item.id;$('sim-category').value=item.category||'';$('sim-title').value=item.title;$('sim-prompt').value=item.prompt;$('sim-options').value=item.options.join('\n');$('sim-correct').value=String(item.correctIndex+1);$('sim-explanation').value=item.explanation;$('sim-add').textContent='Сохранить изменения';set('sim-form-status','Редактируется: '+item.title);window.scrollTo({top:0,behavior:'smooth'});});
   const remove=document.createElement('button');remove.className='button button-ghost';remove.type='button';remove.textContent='Удалить';remove.addEventListener('click',()=>{scenarios.splice(index,1);renderList();set('sim-status','Сценарий удалён из черновика. Нажми «Опубликовать», чтобы сохранить изменение в GitHub.');if(editingId===item.id)clearForm();});
   row.append(h,p,edit,remove);list.append(row);
  });
@@ -46,7 +46,7 @@ $('sim-connect').addEventListener('click',async()=>{
 });
 $('sim-add').addEventListener('click',()=>{
  try{
-  const options=$('sim-options').value.split('\\n').map(x=>x.trim()).filter(Boolean);
+  const options=$('sim-options').value.split('\n').map(x=>x.trim()).filter(Boolean);
   const title=$('sim-title').value.trim(),baseId=slug(title);let id=editingId||baseId;let suffix=2;while(!editingId&&scenarios.some(x=>x.id===id)){id=baseId+'-'+suffix++;}
   const item={id,category:$('sim-category').value.trim()||'ТРЕНАЖЁР',title,prompt:$('sim-prompt').value.trim(),options,correctIndex:Number($('sim-correct').value)-1,explanation:$('sim-explanation').value.trim()};
   const draft=scenarios.filter(x=>x.id!==editingId);draft.push(item);validate({version:1,scenarios:draft});scenarios=draft;renderList();clearForm();set('sim-form-status','Сценарий добавлен в черновик. Не забудь опубликовать изменения.');
