@@ -17,10 +17,11 @@ let articles=[
 ];
 let glossary=[{term:'Фишинг',definition:'Обман, при котором человека пытаются заставить раскрыть данные или выполнить небезопасное действие.'},{term:'MFA',definition:'Многофакторная аутентификация: вход с использованием нескольких независимых факторов проверки.'},{term:'Менеджер паролей',definition:'Программа для создания и хранения уникальных паролей.'},{term:'Утечка данных',definition:'Ситуация, когда сведения становятся доступны тем, кому они не предназначались.'},{term:'Цифровой след',definition:'Информация, которая остаётся о действиях человека в интернете.'},{term:'Сеанс',definition:'Период, в течение которого пользователь остаётся авторизованным в сервисе.'}];
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let customSimulators=[];
 let newsItems=[{title:'CISA — Secure Our World',text:'Практические рекомендации по паролям, MFA, обновлениям и распознаванию фишинга.',url:'https://www.cisa.gov/secure-our-world'},{title:'FTC — распознавание фишинга',text:'Материалы о признаках мошеннических сообщений и безопасных действиях.',url:'https://consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-scams'},{title:'Google — защита аккаунта',text:'Официальная инструкция для случаев подозрения на компрометацию аккаунта Google.',url:'https://support.google.com/accounts/answer/6294825'},{title:'Банк России — информационная безопасность',text:'Материалы о финансовом мошенничестве и безопасном поведении.',url:'https://cbr.ru/information_security/'}];
 function section(){return (location.hash.slice(1)||'practice').split('?')[0];}
 function card(title,desc,tag){return '<article class="hub-card"><span class="hub-kicker">'+tag+'</span><h2>'+title+'</h2><p>'+desc+'</p></article>';}
-function practice(){return '<div class="hub-kicker">ТРЕНАЖЁРЫ / УЧЕБНАЯ СРЕДА</div><h2 class="section-title">Практическая лаборатория</h2><p class="page-lead">Все примеры вымышлены. Не вводи реальные пароли, коды и персональные данные. Тренажёры работают локально в браузере.</p><div class="hub-grid"><section class="hub-card"><span class="hub-kicker">01 / ФИШИНГ</span><h2>Найди признаки подозрительного письма</h2><p>Письмо ниже — учебный пример. Выбери наиболее безопасное действие.</p><div class="hub-callout"><b>Тема:</b> Срочно подтвердите доступ<br><b>Отправитель:</b> Уведомления службы &lt;notice@example.invalid&gt;<br><b>Текст:</b> «Доступ будет ограничен. Перейдите по ссылке и сообщите код подтверждения».</div><div class="hub-options"><button class="hub-option" data-phish="0">Перейти по ссылке и проверить форму</button><button class="hub-option" data-phish="1">Не переходить по ссылке, открыть сервис самостоятельно и проверить уведомления</button><button class="hub-option" data-phish="2">Ответить и попросить прислать код повторно</button></div><div class="hub-feedback" id="phish-feedback" role="status">Выбери действие, чтобы увидеть разбор.</div></section><section class="hub-card"><span class="hub-kicker">02 / ПЕРЕПИСКА</span><h2>Как ответить на подозрительную просьбу?</h2><p>В чате незнакомый собеседник представляется сотрудником поддержки и просит код из SMS «для проверки аккаунта».</p><div class="hub-options"><button class="hub-option" data-chat="0">Отправить код, чтобы быстрее решить вопрос</button><button class="hub-option" data-chat="1">Не сообщать код и обратиться в поддержку через официальный канал</button><button class="hub-option" data-chat="2">Переслать код знакомому для проверки</button></div><div class="hub-feedback" id="chat-feedback" role="status">Выбери безопасное действие.</div></section></div><section class="hub-card"><span class="hub-kicker">03 / СЦЕНАРИЙ</span><h2>Ты заметил неизвестный вход в аккаунт</h2><p>Какой порядок действий лучше?</p><div class="hub-options"><button class="hub-option" data-scenario="0">Ничего не делать, если пароль ещё работает</button><button class="hub-option" data-scenario="1">Самостоятельно открыть официальный сервис, защитить почту, сменить пароль, завершить неизвестные сеансы и проверить MFA</button><button class="hub-option" data-scenario="2">Написать незнакомцу, который предлагает вернуть аккаунт</button></div><div class="hub-feedback" id="scenario-feedback" role="status">Выбери вариант.</div></section><p class="hub-small">Тренажёры предназначены для обучения и не проверяют реальные письма, аккаунты или сайты.</p>';}
+function practice(){return '<div class="hub-kicker">ТРЕНАЖЁРЫ / УЧЕБНАЯ СРЕДА</div><h2 class="section-title">Практическая лаборатория</h2><p class="page-lead">Все примеры вымышлены. Не вводи реальные пароли, коды и персональные данные. Тренажёры работают локально в браузере.</p><div class="hub-grid"><section class="hub-card"><span class="hub-kicker">01 / ФИШИНГ</span><h2>Найди признаки подозрительного письма</h2><p>Письмо ниже — учебный пример. Выбери наиболее безопасное действие.</p><div class="hub-callout"><b>Тема:</b> Срочно подтвердите доступ<br><b>Отправитель:</b> Уведомления службы &lt;notice@example.invalid&gt;<br><b>Текст:</b> «Доступ будет ограничен. Перейдите по ссылке и сообщите код подтверждения».</div><div class="hub-options"><button class="hub-option" data-phish="0">Перейти по ссылке и проверить форму</button><button class="hub-option" data-phish="1">Не переходить по ссылке, открыть сервис самостоятельно и проверить уведомления</button><button class="hub-option" data-phish="2">Ответить и попросить прислать код повторно</button></div><div class="hub-feedback" id="phish-feedback" role="status">Выбери действие, чтобы увидеть разбор.</div></section><section class="hub-card"><span class="hub-kicker">02 / ПЕРЕПИСКА</span><h2>Как ответить на подозрительную просьбу?</h2><p>В чате незнакомый собеседник представляется сотрудником поддержки и просит код из SMS «для проверки аккаунта».</p><div class="hub-options"><button class="hub-option" data-chat="0">Отправить код, чтобы быстрее решить вопрос</button><button class="hub-option" data-chat="1">Не сообщать код и обратиться в поддержку через официальный канал</button><button class="hub-option" data-chat="2">Переслать код знакомому для проверки</button></div><div class="hub-feedback" id="chat-feedback" role="status">Выбери безопасное действие.</div></section></div><section class="hub-card"><span class="hub-kicker">03 / СЦЕНАРИЙ</span><h2>Ты заметил неизвестный вход в аккаунт</h2><p>Какой порядок действий лучше?</p><div class="hub-options"><button class="hub-option" data-scenario="0">Ничего не делать, если пароль ещё работает</button><button class="hub-option" data-scenario="1">Самостоятельно открыть официальный сервис, защитить почту, сменить пароль, завершить неизвестные сеансы и проверить MFA</button><button class="hub-option" data-scenario="2">Написать незнакомцу, который предлагает вернуть аккаунт</button></div><div class="hub-feedback" id="scenario-feedback" role="status">Выбери вариант.</div></section><p class="hub-small">Тренажёры предназначены для обучения и не проверяют реальные письма, аккаунты или сайты.</p><div id="custom-simulators"></div>';}
 function knowledge(){return '<div class="hub-kicker">СПРАВОЧНИК / ПРОСТЫЕ ОБЪЯСНЕНИЯ</div><h2 class="section-title">База знаний</h2><p class="page-lead">Короткие материалы о повседневной цифровой безопасности. Используй поиск, чтобы найти нужную тему.</p><div class="hub-form"><label for="knowledge-search">Поиск по статьям и словарю</label><input id="knowledge-search" type="search" placeholder="Например: фишинг, пароль, приватность"></div><div class="hub-search-results" id="knowledge-results"></div><h2 class="hub-section-title">Словарь терминов</h2><div class="hub-grid">'+glossary.map(x=>'<article class="hub-card"><h3>'+escapeHtml(x.term)+'</h3><p>'+escapeHtml(x.definition)+'</p></article>').join('')+'</div>';}
 function tools(){return '<div class="hub-kicker">ИНСТРУМЕНТЫ / ЛОКАЛЬНАЯ РАБОТА</div><h2 class="section-title">Полезные инструменты</h2><p class="page-lead">Эти инструменты работают в браузере. Введённые данные не отправляются на сервер.</p><div class="hub-grid"><section class="hub-card"><span class="hub-kicker">01 / ПАРОЛИ</span><h2>Генератор паролей</h2><p>Создаёт случайную комбинацию с помощью криптографического генератора браузера.</p><div class="hub-form"><label for="password-length">Длина пароля: <output id="password-length-value">20</output></label><input id="password-length" type="range" min="12" max="48" value="20"><label><input id="password-symbols" type="checkbox" checked> Добавлять специальные символы</label><button class="button" id="generate-password" type="button">Создать пароль</button><div class="hub-tool-output" id="password-output" aria-live="polite">Нажми «Создать пароль».</div><button class="button button-ghost" id="copy-password" type="button" disabled>Копировать</button><p class="hub-small">Сохраняй сгенерированный пароль в надёжном менеджере паролей. Не используй его на нескольких сайтах.</p></div></section><section class="hub-card"><span class="hub-kicker">02 / ЧЕК-ЛИСТ</span><h2>Базовая проверка безопасности</h2><p>Отметь пункты, которые уже выполнил. Отметки сохраняются только в этом браузере.</p><div class="hub-checklist" id="security-checklist"><label><input type="checkbox" data-check="mail"> Для почты включена MFA</label><label><input type="checkbox" data-check="unique"> На важных сайтах используются уникальные пароли</label><label><input type="checkbox" data-check="updates"> Устройства и приложения обновлены</label><label><input type="checkbox" data-check="sessions"> Проверены активные сеансы важных аккаунтов</label><label><input type="checkbox" data-check="recovery"> Проверены способы восстановления доступа</label><label><input type="checkbox" data-check="privacy"> Проверены настройки приватности и разрешения приложений</label></div><p class="hub-feedback" id="checklist-progress" role="status">Выполнено 0 из 6 пунктов.</p><button class="button button-ghost" id="reset-checklist" type="button">Сбросить отметки</button></section></div>';}
 function help(){return '<div class="hub-kicker">ЦЕНТР ПОМОЩИ / ПЕРВЫЕ ШАГИ</div><h2 class="section-title">Что произошло?</h2><p class="page-lead">Выбери ситуацию и начни с безопасных действий. Если есть риск потери денег или доступа, используй официальную поддержку сервиса или банка.</p><div class="hub-grid"><article class="hub-card hub-emergency"><span class="hub-kicker">СИТУАЦИЯ 01</span><h2>Подозрительное письмо или сообщение</h2><ol><li>Не переходи по ссылкам и не открывай неожиданные вложения.</li><li>Не сообщай пароли и коды подтверждения.</li><li>Открой сервис самостоятельно через официальное приложение или закладку.</li><li>Пожалуйся на сообщение средствами самого сервиса.</li></ol></article><article class="hub-card hub-emergency"><span class="hub-kicker">СИТУАЦИЯ 02</span><h2>Неизвестный вход в аккаунт</h2><ol><li>Открой официальный сайт или приложение самостоятельно.</li><li>Защити связанную почту и смени затронутый пароль с доверенного устройства.</li><li>Заверши неизвестные сеансы и проверь способы восстановления.</li><li>Включи MFA и обратись в официальную поддержку, если доступ потерян.</li></ol></article><article class="hub-card"><span class="hub-kicker">СИТУАЦИЯ 03</span><h2>Подозрительное списание или платёж</h2><ol><li>Свяжись с банком через номер на карте или официальное приложение.</li><li>Следуй указаниям банка по блокировке карты или оспариванию операции.</li><li>Сохрани сведения об операции и переписку.</li><li>Не сообщай посторонним PIN, CVV и коды подтверждения.</li></ol></article><article class="hub-card"><span class="hub-kicker">СИТУАЦИЯ 04</span><h2>Возможная утечка данных</h2><ol><li>Уточни информацию на официальном сайте затронутого сервиса.</li><li>Если пароль использовался повторно, замени его и на других сервисах.</li><li>Проверь активные сеансы и MFA.</li><li>Остерегайся последующих сообщений, использующих сведения об утечке.</li></ol></article></div><div class="hub-callout"><b>Важно:</b> не отправляй на этот сайт настоящие пароли, коды, номера карт или документы. Материалы носят общий информационный характер и не заменяют обращение в банк, полицию или официальную поддержку.</div>';}
@@ -38,22 +39,46 @@ try{
  if(Array.isArray(data.news)&&data.news.length>0&&data.news.length<=100&&data.news.every(x=>x&&validText(x.title)&&validText(x.text)&&typeof x.url==='string'&&(()=>{try{return new URL(x.url).protocol==='https:';}catch(_){return false;}})()))newsItems=data.news;
 }catch(error){console.warn('Не удалось загрузить редакционные материалы; используются встроенные.',error);}
 }
-async function loadHubContent(){
-try{
- const response=await fetch('data/hub-content.json',{cache:'no-cache'});
- if(!response.ok)return;
- const data=await response.json();
- const validText=value=>typeof value==='string'&&value.trim().length>0&&value.length<=3000;
- if(!data||data.version!==1)return;
- if(Array.isArray(data.articles)&&data.articles.length>0&&data.articles.length<=100&&data.articles.every(x=>x&&validText(x.title)&&validText(x.category)&&validText(x.text)))articles=data.articles;
- if(Array.isArray(data.glossary)&&data.glossary.length>0&&data.glossary.length<=200&&data.glossary.every(x=>x&&validText(x.term)&&validText(x.definition)))glossary=data.glossary;
- if(Array.isArray(data.news)&&data.news.length>0&&data.news.length<=100&&data.news.every(x=>x&&validText(x.title)&&validText(x.text)&&typeof x.url==='string'&&(()=>{try{return new URL(x.url).protocol==='https:';}catch(_){return false;}})()))newsItems=data.news;
-}catch(error){console.warn('Не удалось загрузить редакционные материалы; используются встроенные.',error);}
+async function loadCustomSimulators(){
+ try{
+  const response=await fetch('data/simulators.json',{cache:'no-cache'});
+  if(!response.ok)return;
+  const data=await response.json();
+  const validText=value=>typeof value==='string'&&value.trim().length>0&&value.length<=1200;
+  if(!data||data.version!==1||!Array.isArray(data.scenarios)||data.scenarios.length>50)return;
+  const valid=data.scenarios.every(x=>x&&typeof x.id==='string'&&/^[a-z0-9-]{1,40}$/.test(x.id)&&validText(x.title)&&validText(x.prompt)&&Array.isArray(x.options)&&x.options.length>=2&&x.options.length<=5&&x.options.every(validText)&&Number.isInteger(x.correctIndex)&&x.correctIndex>=0&&x.correctIndex<x.options.length&&validText(x.explanation));
+  if(valid)customSimulators=data.scenarios;
+ }catch(error){console.warn('Дополнительные сценарии недоступны.',error);}
+}
+function renderCustomSimulators(){
+ const host=document.getElementById('custom-simulators');
+ if(!host)return;
+ host.replaceChildren();
+ if(!customSimulators.length)return;
+ const heading=document.createElement('h2');
+ heading.className='hub-section-title';
+ heading.textContent='Дополнительные учебные сценарии';
+ host.append(heading);
+ customSimulators.forEach((scenario,scenarioIndex)=>{
+  const article=document.createElement('section');
+  article.className='hub-card';
+  const tag=document.createElement('span');tag.className='hub-kicker';tag.textContent=scenario.category||'ТРЕНАЖЁР';
+  const title=document.createElement('h2');title.textContent=scenario.title;
+  const prompt=document.createElement('p');prompt.textContent=scenario.prompt;
+  const options=document.createElement('div');options.className='hub-options';
+  scenario.options.forEach((option,optionIndex)=>{
+   const button=document.createElement('button');button.type='button';button.className='hub-option';
+   button.textContent=option;button.dataset.customSim=scenarioIndex+':'+optionIndex;options.append(button);
+  });
+  const feedback=document.createElement('div');feedback.className='hub-feedback';feedback.id='custom-sim-feedback-'+scenarioIndex;feedback.setAttribute('role','status');feedback.textContent='Выбери наиболее безопасное действие.';
+  article.append(tag,title,prompt,options,feedback);host.append(article);
+ });
 }
 function render(){
 const page=section();const routes={practice,knowledge,tools,help,news,educators};const fn=routes[page]||practice;
 root.innerHTML=fn();
 document.querySelectorAll('.hub-tabs a').forEach(a=>{if(a.getAttribute('href')==='#'+(routes[page]?page:'practice'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+if(page==='practice')renderCustomSimulators();
 if(page==='knowledge')renderSearch('');
 if(page==='tools')restoreChecklist();
 }
@@ -97,6 +122,14 @@ document.getElementById('copy-password').disabled=false;
 }
 document.addEventListener('click',async e=>{
 const b=e.target.closest('button');if(!b)return;
+if(b.dataset.customSim){
+ const [scenarioValue,optionValue]=b.dataset.customSim.split(':');
+ const scenarioIndex=Number(scenarioValue),optionIndex=Number(optionValue),item=customSimulators[scenarioIndex];
+ if(item&&Number.isInteger(optionIndex)&&optionIndex>=0&&optionIndex<item.options.length){
+  const output=document.getElementById('custom-sim-feedback-'+scenarioIndex);
+  if(output)output.textContent=(optionIndex===item.correctIndex?'Верно. ':'Не совсем. ')+item.explanation;
+ }
+}
 if(b.dataset.phish){const out=document.getElementById('phish-feedback');const good=b.dataset.phish==='1';out.textContent=good?'Верно. Не переходи по ссылке и проверь уведомление через официальный сервис. Запрос кода подтверждения — серьёзный предупреждающий признак.':'Это небезопасно. Не используй ссылку из неожиданного сообщения и никогда не передавай коды подтверждения.';}
 if(b.dataset.chat){document.getElementById('chat-feedback').textContent=b.dataset.chat==='1'?'Верно. Коды подтверждения нельзя передавать собеседникам. Открой поддержку через официальный сайт или приложение.':'Неверно. Код подтверждения предназначен только для тебя. Не передавай его никому.';}
 if(b.dataset.scenario){document.getElementById('scenario-feedback').textContent=b.dataset.scenario==='1'?'Верно. Начни с официального сервиса, защити связанные способы восстановления и заверши неизвестные сеансы.':'Это может увеличить риск. Не игнорируй уведомление и не обращайся к незнакомым посредникам.';}
@@ -110,5 +143,5 @@ if(e.target.id==='password-length')document.getElementById('password-length-valu
 });
 document.addEventListener('change',e=>{if(e.target.matches('[data-check]'))updateChecklist();});
 window.addEventListener('hashchange',render);
-loadHubContent().then(render);
+Promise.all([loadHubContent(),loadCustomSimulators()]).then(render);
 })();
