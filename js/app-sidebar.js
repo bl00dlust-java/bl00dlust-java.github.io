@@ -14,9 +14,12 @@
     '<div class="app-sidebar__brand-row"><a class="app-sidebar__brand" href="'+root+'index.html"><span class="app-sidebar__mark">K</span><span>КИБЕРГИГИЕНА</span></a><button class="app-sidebar__mobile-close" type="button" aria-label="Закрыть меню">×</button></div>' +
     groups.map(group => '<section class="app-sidebar__group"><div class="app-sidebar__label">'+group.label+'</div>'+group.links.map(([icon,label,url])=>'<a class="app-sidebar__link" href="'+url+'"><span class="app-sidebar__icon">'+icon+'</span><span>'+label+'</span></a>').join("")+'</section>').join("") +
     '<div class="app-sidebar__bottom"><button class="app-sidebar__collapse" type="button" aria-label="Свернуть меню" title="Свернуть меню">‹</button></div>';
-  const trigger = document.createElement("button");
+  // Reuse the original header menu button instead of creating a duplicate.
+  const trigger = document.querySelector(".menu-toggle") || document.createElement("button");
   trigger.className = "app-sidebar-mobile-trigger";
   trigger.type = "button";
+  trigger.removeAttribute("data-action");
+  trigger.removeAttribute("aria-controls");
   trigger.setAttribute("aria-label","Открыть меню");
   trigger.setAttribute("aria-expanded","false");
   trigger.textContent = "☰";
