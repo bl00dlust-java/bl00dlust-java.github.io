@@ -2,6 +2,11 @@
 'use strict';
 const root=document.getElementById('hub-content');
 if(!root)return;
+const storedState=(()=>{try{return JSON.parse(localStorage.getItem('cyberhygiene-course-v2')||'{}');}catch(_){return {};}})();
+const themeButton=document.getElementById('hub-theme-toggle');
+function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedState.theme==='dark'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(themeButton)themeButton.textContent=mode==='dark'?'Светлая тема':'Тёмная тема';}
+applyHubTheme();
+if(themeButton)themeButton.addEventListener('click',()=>{const current=document.documentElement.dataset.theme;storedState.theme=current==='dark'?'light':'dark';try{localStorage.setItem('cyberhygiene-course-v2',JSON.stringify(storedState));}catch(_){}applyHubTheme();});
 const articles=[
 {title:'Как распознать фишинг',category:'Мошенничество',text:'Проверяй неожиданные просьбы, адрес отправителя, домен сайта, вложения и попытки заставить тебя торопиться. Самостоятельно открывай сервис через приложение или сохранённую закладку.'},
 {title:'Защита аккаунтов',category:'Аккаунты',text:'Используй уникальные пароли, менеджер паролей и многофакторную аутентификацию. Особенно внимательно защищай почту, через которую восстанавливается доступ к другим сервисам.'},
@@ -61,7 +66,7 @@ const b=e.target.closest('button');if(!b)return;
 if(b.dataset.phish){const out=document.getElementById('phish-feedback');const good=b.dataset.phish==='1';out.textContent=good?'Верно. Не переходи по ссылке и проверь уведомление через официальный сервис. Запрос кода подтверждения — серьёзный предупреждающий признак.':'Это небезопасно. Не используй ссылку из неожиданного сообщения и никогда не передавай коды подтверждения.';}
 if(b.dataset.chat){document.getElementById('chat-feedback').textContent=b.dataset.chat==='1'?'Верно. Коды подтверждения нельзя передавать собеседникам. Открой поддержку через официальный сайт или приложение.':'Неверно. Код подтверждения предназначен только для тебя. Не передавай его никому.';}
 if(b.dataset.scenario){document.getElementById('scenario-feedback').textContent=b.dataset.scenario==='1'?'Верно. Начни с официального сервиса, защити связанные способы восстановления и заверши неизвестные сеансы.':'Это может увеличить риск. Не игнорируй уведомление и не обращайся к незнакомым посредникам.';}
-if(b.id==='generate-password')generatePassword();
+if(b.id==='generate-password'){try{generatePassword();}catch(_){document.getElementById('password-output').textContent='Генератор недоступен в этом браузере. Открой сайт по HTTPS в современном браузере.';}}
 if(b.id==='copy-password'){const val=document.getElementById('password-output').textContent;if(val&&val!=='Нажми «Создать пароль».'){try{await navigator.clipboard.writeText(val);b.textContent='Скопировано';}catch{b.textContent='Копирование недоступно';}}}
 if(b.id==='reset-checklist'){localStorage.removeItem('cyberhygiene-security-checklist');restoreChecklist();}
 });
