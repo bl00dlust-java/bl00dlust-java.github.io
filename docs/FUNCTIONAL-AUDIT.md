@@ -116,3 +116,13 @@ Changes in commits `428902257de338462b66b2af4063b26482999d55`, `8e71209795a5370a
 
 These are static code changes. Manual verification is still required, including testing the stale-file warning with a second edit from another browser session and confirming that no write occurs when the editors have not loaded current data.
 
+### Fixed: empty editorial collections were ignored by the public site
+
+**File:** `js/hub.js`
+
+The admin editor accepts valid empty arrays for articles, glossary terms, and news sources. However, the public loader only replaced its built-in defaults when each array contained at least one item. As a result, publishing an intentionally empty collection did not take effect: visitors continued to see the old built-in entries.
+
+The loader now accepts empty arrays, matching the editor and build validator. The knowledge base and news page show clear empty-state messages instead of stale fallback content. Search distinguishes an empty knowledge base from a query with no matches.
+
+This is a static code fix; verify by temporarily testing empty arrays in a preview build before publishing any real content changes.
+
