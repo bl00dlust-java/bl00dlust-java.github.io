@@ -27,22 +27,51 @@
   backdrop.className = "app-sidebar-backdrop";
   backdrop.type = "button";
   backdrop.setAttribute("aria-label","Закрыть меню");
-  const close = () => {
+  nav.id = "app-sidebar-navigation";
+  trigger.setAttribute("aria-controls", nav.id);
+  const focusableItems = () => Array.from(nav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+  const close = (restoreFocus = true) => {
     document.body.classList.remove("app-sidebar-open");
     trigger.textContent = "☰";
     trigger.setAttribute("aria-label","Открыть меню");
     trigger.setAttribute("aria-expanded","false");
+    if (restoreFocus && trigger.isConnected) trigger.focus();
   };
   const open = () => {
     document.body.classList.add("app-sidebar-open");
     trigger.textContent = "×";
     trigger.setAttribute("aria-label","Закрыть меню");
     trigger.setAttribute("aria-expanded","true");
+    const firstLink = nav.querySelector("a[href]");
+    if (firstLink) firstLink.focus();
   };
-  trigger.addEventListener("click",()=>document.body.classList.contains("app-sidebar-open") ? close() : open());
-  backdrop.addEventListener("click",close);
-  nav.querySelector(".app-sidebar__mobile-close").addEventListener("click",close);
-  nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",close));
+  trigger.addEventListener("click",()=>document.body.classList.contains("app-sidebar-open") ? close(false) : open());
+  backdrop.addEventListener("click",() => close(true));
+  nav.querySelector(".app-sidebar__mobile-close").addEventListener("click",() => close(true));
+  nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",() => close(false)));
+  document.addEventListener("keydown", event => {
+    if (!document.body.classList.contains("app-sidebar-open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      close(true);
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const items = focusableItems();
+    if (!items.length) {
+      event.preventDefault();
+      return;
+    }
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !nav.contains(document.activeElement))) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !nav.contains(document.activeElement))) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
   nav.querySelector(".app-sidebar__collapse").addEventListener("click",()=>{
     const collapsed=document.body.classList.toggle("app-sidebar-collapsed");
     try { localStorage.setItem("cyber-sidebar-collapsed",collapsed ? "1" : "0"); } catch {}
