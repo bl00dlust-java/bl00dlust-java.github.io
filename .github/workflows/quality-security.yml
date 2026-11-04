@@ -33,8 +33,8 @@ jobs:
           find . -type f -name '*.mjs' -not -path './.git/*' -print0 | xargs -0 -r -n1 node --check
       - name: Validate published content and simulators
         run: node scripts/validate-content.mjs
-      - name: Check TypeScript
-        run: npx tsc --noEmit -p tsconfig.app.json
+      - name: Check legacy TypeScript without rewriting generated JavaScript
+        run: npm run typecheck:legacy
 
   codeql:
     name: CodeQL security analysis
