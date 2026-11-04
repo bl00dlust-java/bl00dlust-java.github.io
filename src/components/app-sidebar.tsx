@@ -16,7 +16,7 @@ const publicGroups = [
 ];
 const adminGroup = { label: "УПРАВЛЕНИЕ", links: [
   { label: "Обзор", href: "/admin/dashboard.html", icon: LayoutDashboard },
-  { label: "Оформление", href: "/admin/index.html", icon: SlidersHorizontal },
+  { label: "Оформление", href: "/admin/fonts.html", icon: SlidersHorizontal },
   { label: "Материалы", href: "/admin/content.html", icon: FileText },
   { label: "Тренажёры", href: "/admin/simulators.html", icon: PenSquare },
 ]};
