@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Конструктор тренажёров — Кибергигиена</title>
+<link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="site-header"><div class="header-inner"><a class="brand" href="../"><span class="brand-mark">К</span><span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span></a><a href="index.html">← Панель управления</a></div></header>
+<main class="wrap admin-wrap">
+<div class="page-kicker"><span class="eyebrow">ADMIN / SIMULATOR BUILDER</span></div>
+<h1 class="page-title">Конструктор <em>тренажёров.</em></h1>
+<p class="page-lead">Создавай безопасные учебные ситуации с вариантами ответа. Сценарии вымышлены и не собирают реальные данные.</p>
+<section class="admin-card">
+<h2>1. Подключение GitHub</h2>
+<label for="sim-token">Fine-grained GitHub token</label><input id="sim-token" type="password" autocomplete="off" placeholder="github_pat_…">
+<p>Нужен доступ Contents: Read and write только к репозиторию проекта. Токен хранится только в памяти этой вкладки.</p>
+<button class="button button-ghost" id="sim-connect" type="button">Проверить подключение</button><p id="sim-connect-status" role="status"></p>
+</section>
+<section class="admin-card">
+<h2>2. Редактор сценария</h2>
+<input id="sim-id" type="hidden">
+<label for="sim-category">Категория</label><input id="sim-category" maxlength="80" placeholder="Например, ФИШИНГ">
+<label for="sim-title">Название</label><input id="sim-title" maxlength="160" placeholder="Название ситуации">
+<label for="sim-prompt">Описание ситуации</label><textarea id="sim-prompt" rows="3" maxlength="1200" placeholder="Опиши вымышленную ситуацию без настоящих данных."></textarea>
+<label for="sim-options">Варианты ответа (каждый с новой строки, от 2 до 5)</label><textarea id="sim-options" rows="5" maxlength="1500" placeholder="Вариант ответа 1&#10;Вариант ответа 2"></textarea>
+<label for="sim-correct">Номер правильного варианта</label><select id="sim-correct"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+<label for="sim-explanation">Объяснение ответа</label><textarea id="sim-explanation" rows="3" maxlength="1200" placeholder="Почему это наиболее безопасное действие?"></textarea>
+<button class="button" id="sim-add" type="button">Добавить сценарий</button><button class="button button-ghost" id="sim-clear" type="button">Очистить форму</button>
+<p id="sim-form-status" role="status"></p>
+</section>
+<section class="admin-card">
+<h2>3. Список сценариев</h2><div id="sim-list" class="hub-article-list"><p>Сначала загрузи данные из GitHub.</p></div>
+<button class="button button-ghost" id="sim-load" type="button">Загрузить сценарии</button>
+<button class="button" id="sim-publish" type="button">Опубликовать сценарии →</button>
+<p id="sim-status" role="status"></p>
+</section>
+<p class="notice">Не добавляй реальные адреса, пароли, коды подтверждения, личные переписки или инструкции для причинения вреда. Публикация изменяет репозиторий и запускает автоматическую проверку.</p>
+</main>
+<script src="simulators-editor.js"></script>
+</body></html>
