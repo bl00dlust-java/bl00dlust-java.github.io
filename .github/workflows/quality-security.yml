@@ -1,0 +1,41 @@
+name: Quality and security checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  syntax:
+    name: JavaScript and TypeScript checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -r -n1 node --check
+      - name: Check TypeScript
+        run: npx --yes --package typescript@5.8.3 tsc --noEmit -p tsconfig.json
+
+  codeql:
+    name: CodeQL security analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-extended
+      - uses: github/codeql-action/analyze@v3
