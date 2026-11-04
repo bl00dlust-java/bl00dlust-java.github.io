@@ -101,3 +101,18 @@ This is a static code change. Manual testing on narrow screens, desktop keyboard
 - This review is static; the browser interactions above have not been executed by this audit.
 - No claim is made that every browser or device has been tested.
 - The public `main` branch was not changed. The work remains isolated in the audit branch and its open pull request.
+
+### Fixed: admin editors could publish empty or stale drafts
+
+**Files:** `admin/content-editor.js`, `admin/simulators-editor.js`, `admin/admin.js`
+
+The editors initially displayed empty local values while allowing publication. Publishing before loading the existing GitHub file could replace the current knowledge base, simulator list, or typography settings with an empty configuration. The content and simulator editors also fetched the latest SHA immediately before writing, which could silently overwrite changes made by another editor after the current draft had been loaded.
+
+Changes in commits `428902257de338462b66b2af4063b26482999d55`, `8e71209795a5370abd213bd3e45c52dba788adba`, `660fed7c32c6044470514489555fc3a329f29234`, and `f38be133f7961f838662b5a2daabdb8b2ac3a891`:
+- Content and simulator publishing now requires loading the existing GitHub data first.
+- Before publishing, both editors compare the current file SHA with the SHA captured at load time and stop if the file changed.
+- The typography editor now requires loading the existing settings and checks that they have not changed before publishing.
+- The content and simulator editors refresh their stored SHA after a successful publish.
+
+These are static code changes. Manual verification is still required, including testing the stale-file warning with a second edit from another browser session and confirming that no write occurs when the editors have not loaded current data.
+
