@@ -8,7 +8,7 @@ export default {
       foreground: "hsl(var(--foreground))",
       card: "hsl(var(--card))",
       primary: "hsl(var(--primary))",
-      muted: "hsl(var(--muted))",
+      muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted))" },
       border: "hsl(var(--border))"
     },
     fontFamily: { sans: ["Inter", "system-ui", "sans-serif"], display: ["Georgia", "serif"] },
