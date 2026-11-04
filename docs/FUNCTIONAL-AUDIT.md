@@ -57,6 +57,20 @@ Static observations:
 
 No additional confirmed routing or persistence defect was established during this pass.
 
+
+
+### Improved: return dialog keyboard accessibility
+
+**File:** `js/welcome.js`
+
+The dialog now:
+- Announces its description through `aria-describedby`.
+- Keeps Tab and Shift+Tab navigation within the dialog.
+- Closes with Escape and returns focus to the element that was focused before the dialog opened, when that element is still available.
+- Returns focus after dismissing with the stay button or clicking the backdrop. Navigation links close the dialog without forcing focus back to the previous page element.
+
+This is a static code change; keyboard and screen-reader behavior still needs manual verification in a browser.
+
 ## Manual verification still required
 
 1. With existing saved progress, open a direct URL to a specific module and confirm the URL and page remain unchanged behind the return dialog.
@@ -65,7 +79,8 @@ No additional confirmed routing or persistence defect was established during thi
 4. Open the course in a fresh browser session with no saved state and confirm the return dialog does not appear.
 5. Complete a quiz, refresh the page, and confirm the attempt and review remain available.
 6. On desktop and mobile, test the practice tabs, knowledge search, password generation/copying, and checklist persistence.
-7. Test keyboard navigation and screen-reader behavior of the return dialog, including whether focus remains within the modal while it is open.
+7. Test keyboard navigation and screen-reader behavior of the return dialog: Tab/Shift+Tab must stay inside it, Escape must close it, and focus should return appropriately.
+8. Verify the dialog description is announced by a screen reader and that focus restoration does not interfere with navigation links.
 
 ## Limits
 
