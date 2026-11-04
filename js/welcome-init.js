@@ -9,7 +9,6 @@ try {
   const state = raw ? JSON.parse(raw) : null;
   if (state && state.last && typeof state.last.id === 'string') {
     window.__cyberWelcomeReturn = true;
-    if (location.hash !== '#/') location.hash = '#/';
   }
 } catch (_) {}
 })();
