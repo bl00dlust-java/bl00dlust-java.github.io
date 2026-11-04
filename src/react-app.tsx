@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Fingerprint, LockKeyhole, Menu, Moon, ShieldCheck, Smartphone, Sun, X, Zap } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const modules = [
   ["01", "Основы кибергигиены", "Повседневные привычки, которые помогают защищать устройства и личную информацию.", ShieldCheck],
@@ -22,7 +23,7 @@ export default function App() {
     localStorage.setItem("cyberhygiene-theme", theme);
   }, [theme]);
 
-  return <div className="min-h-screen bg-background text-foreground">
+  return <div className="min-h-screen bg-background text-foreground"><AppSidebar/>
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#" className="brand"><span className="brand-mark"><ShieldCheck size={21}/></span>КИБЕР<span className="text-primary">ГИГИЕНА</span></a>
