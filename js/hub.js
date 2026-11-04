@@ -52,9 +52,23 @@ try{const data={};checks.forEach(c=>data[c.dataset.check]=c.checked);localStorag
 }
 function secureRandomIndex(max){const n=new Uint32Array(1);crypto.getRandomValues(n);return n[0]%max;}
 function generatePassword(){
-const length=Number(document.getElementById('password-length').value);const symbols=document.getElementById('password-symbols').checked;const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789'+(symbols?'!@#$%*+-_=?':'');let result='';
-const bytes=new Uint32Array(length);crypto.getRandomValues(bytes);for(let i=0;i<length;i++)result+=chars[bytes[i]%chars.length];
-const output=document.getElementById('password-output');output.textContent=result;document.getElementById('copy-password').disabled=false;
+const length=Number(document.getElementById('password-length').value);
+const symbols=document.getElementById('password-symbols').checked;
+const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789'+(symbols?'!@#$%*+-_=?':'');
+const limit=Math.floor(0x100000000/chars.length)*chars.length;
+let result='';
+while(result.length<length){
+ const bytes=new Uint32Array(Math.max(16,length-result.length));
+ crypto.getRandomValues(bytes);
+ for(const value of bytes){
+  if(value>=limit)continue;
+  result+=chars[value%chars.length];
+  if(result.length===length)break;
+ }
+}
+const output=document.getElementById('password-output');
+output.textContent=result;
+document.getElementById('copy-password').disabled=false;
 }
 document.addEventListener('click',async e=>{
 const b=e.target.closest('button');if(!b)return;
