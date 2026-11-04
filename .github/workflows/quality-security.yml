@@ -18,6 +18,8 @@ jobs:
   syntax:
     name: JavaScript and TypeScript checks
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -27,12 +29,36 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npm run build
-      - name: Export generated npm lockfile (temporary)
-        uses: actions/upload-artifact@v4
+      - name: Commit generated lockfile to the PR branch
+        uses: actions/github-script@v7
         with:
-          name: generated-package-lock
-          path: package-lock.json
-          if-no-files-found: error
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            const branch = context.payload.pull_request.head.ref;
+            const headRepo = context.payload.pull_request.head.repo.full_name;
+            if (headRepo !== `${owner}/${repo}`) {
+              throw new Error('Refusing to write a lockfile to a fork branch.');
+            }
+            const path = 'package-lock.json';
+            let sha;
+            try {
+              const current = await github.rest.repos.getContent({ owner, repo, path, ref: branch });
+              if (!Array.isArray(current.data)) sha = current.data.sha;
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+            const content = fs.readFileSync(path).toString('base64');
+            const result = await github.rest.repos.createOrUpdateFileContents({
+              owner, repo, path, branch, sha,
+              message: 'build: add npm dependency lockfile',
+              content
+            });
+            core.info(`Lockfile committed: ${result.data.commit.sha}`);
+      - name: Verify reproducible install from lockfile
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
       - name: Check JavaScript syntax
         run: |
           find . -type f -name '*.js' -not -path './.git/*' -not -path './node_modules/*' -not -path './dist/*' -print0 | xargs -0 -r -n1 node --check
