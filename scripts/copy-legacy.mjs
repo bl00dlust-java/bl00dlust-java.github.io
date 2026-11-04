@@ -5,7 +5,7 @@ for (const directory of ["assets", "css", "js", "data"]) {
   await cp(directory, `dist/${directory}`, { recursive: true });
 }
 await mkdir("dist/admin", { recursive: true });
-for (const file of ["index.html", "content.html", "simulators.html", "admin.css", "admin.js", "content-editor.js", "simulators-editor.js"]) {
+for (const file of ["index.html", "fonts.html", "content.html", "simulators.html", "admin.css", "admin.js", "content-editor.js", "simulators-editor.js"]) {
   try { await copyFile(`admin/${file}`, `dist/admin/${file}`); }
   catch (error) { if (error.code !== "ENOENT") throw error; }
 }
