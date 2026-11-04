@@ -1,15 +1,62 @@
 <!doctype html>
 <html lang="ru" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0f1018" />
-    <meta name="description" content="Бесплатный практический курс по кибергигиене: обучение, интерактивные задания и полезные инструменты цифровой безопасности." />
-    <title>Кибергигиена — практический курс цифровой безопасности</title>
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f1011">
+  <meta name="description" content="Бесплатный практический курс по кибергигиене: пароли, фишинг, приватность, защита устройств и восстановление доступа.">
+  <meta property="og:title" content="Кибергигиена — курс цифровой безопасности">
+  <meta property="og:description" content="Шесть модулей, интерактивные уроки и тесты. Бесплатно, без регистрации, с сохранением прогресса в браузере.">
+  <title>Кибергигиена — курс цифровой безопасности</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/welcome.css">
+
+  <script defer src="js/font-settings.js"></script>
+  <script defer src="js/welcome-init.js"></script>
+  <script defer src="js/app.js"></script>
+  <script defer src="js/welcome.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#app">Перейти к содержанию</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="Кибергигиена — главная">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44" focusable="false"><path d="M17 13v18m0-9 12-9M17 22l12 9" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="brand-gradient" x1="7" y1="3" x2="37" y2="41"><stop stop-color="#9b94ff"/><stop offset="1" stop-color="#00b3dd"/></linearGradient></defs></svg></span>
+        <span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#/course">Программа</a>
+        <a href="hub.html#practice">Практика</a>
+        <a href="hub.html#knowledge">База знаний</a>
+        <a href="hub.html#tools">Инструменты</a>
+        <a href="hub.html#help">Помощь</a>
+        <a href="#/project">О проекте</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-action="theme" aria-label="Переключить тему"><span class="theme-icon">☼</span><span class="theme-label">Тема</span></button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню" data-action="menu">☰</button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация" hidden>
+      <a href="#/course">Программа</a><a href="#/about">О курсе</a><a href="#/results">Результаты</a><a href="#/project">О проекте</a><a href="#/faq">Вопросы и ответы</a><a href="#/privacy">Конфиденциальность</a><a href="hub.html#practice">Практика</a><a href="hub.html#knowledge">База знаний</a><a href="hub.html#tools">Инструменты</a><a href="hub.html#help">Центр помощи</a>
+    </nav>
+  </header>
+  <main id="app" tabindex="-1"><div class="loading-state">Подготавливаем учебные материалы…</div></main>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand-block">
+        <a class="brand" href="#/" aria-label="Кибергигиена — главная"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44" focusable="false"><path d="M22 3 37 9v11c0 10-6 16-15 21C13 36 7 30 7 20V9Z" fill="none" stroke="url(#brand-gradient)" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 13v18m0-9 12-9M17 22l12 9" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="brand-gradient" x1="7" y1="3" x2="37" y2="41"><stop stop-color="#9b94ff"/><stop offset="1" stop-color="#00b3dd"/></linearGradient></defs></svg></span><span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span></a>
+        <p>Цифровая безопасность начинается<br>с повседневных привычек.</p>
+      </div>
+      <div class="footer-links"><a href="#/course">Программа</a><a href="hub.html#practice">Практика</a><a href="hub.html#knowledge">База знаний</a><a href="hub.html#tools">Инструменты</a><a href="hub.html#help">Центр помощи</a><a href="#/faq">Вопросы и ответы</a><a href="#/privacy">Конфиденциальность</a><a href="bug-report.html">Сообщить об ошибке ↗</a><a href="mailto:jeleshkasus@gmail.com">Связаться →</a></div>
+      <div class="footer-note"><span class="eyebrow">ОТКРЫТЫЙ УЧЕБНЫЙ ПРОЕКТ</span><p>Бесплатно.<br>Без регистрации.<br>В своём темпе.</p></div>
+    </div>
+    <div class="footer-bottom"><span>© Учебный проект · 2026</span><span>Материалы курса — для повседневной цифровой безопасности.</span></div>
+  </footer>
+  <noscript><div class="noscript">Для работы интерактивных уроков и сохранения прогресса включите JavaScript.</div></noscript>
+</body>
 </html>
