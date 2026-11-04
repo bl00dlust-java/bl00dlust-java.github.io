@@ -6,5 +6,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   base: "/",
-  build: { outDir: "dist", emptyOutDir: true },
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL("./index.html", import.meta.url)),
+        adminDashboard: fileURLToPath(new URL("./admin-dashboard.html", import.meta.url)),
+      },
+    },
+  },
 });
