@@ -70,5 +70,6 @@ if(e.target.id==='knowledge-search')renderSearch(e.target.value);
 if(e.target.id==='password-length')document.getElementById('password-length-value').textContent=e.target.value;
 });
 document.addEventListener('change',e=>{if(e.target.matches('[data-check]'))updateChecklist();});
-window.addEventListener('hashchange',render);\nloadHubContent().then(render);
+window.addEventListener('hashchange',render);
+render();
 })();
