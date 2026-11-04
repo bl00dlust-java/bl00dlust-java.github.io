@@ -26,7 +26,7 @@ function validate(value){
 function clearForm(){
  editingId='';$('sim-id').value='';$('sim-category').value='';$('sim-title').value='';$('sim-prompt').value='';$('sim-options').value='';$('sim-correct').value='1';$('sim-explanation').value='';$('sim-add').textContent='Добавить сценарий';
 }
-function slug(value){return value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)||'scenario';}
+function slug(value){const map={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya'};return Array.from(value.toLowerCase()).map(ch=>map[ch]!==undefined?map[ch]:ch).join('').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)||'scenario';}
 function renderList(){
  const list=$('sim-list');list.replaceChildren();
  if(!scenarios.length){const p=document.createElement('p');p.textContent='Сценариев пока нет.';list.append(p);return;}
@@ -47,7 +47,7 @@ $('sim-connect').addEventListener('click',async()=>{
 $('sim-add').addEventListener('click',()=>{
  try{
   const options=$('sim-options').value.split('\\n').map(x=>x.trim()).filter(Boolean);
-  const title=$('sim-title').value.trim(),baseId=slug(title),id=editingId||baseId;
+  const title=$('sim-title').value.trim(),baseId=slug(title);let id=editingId||baseId;let suffix=2;while(!editingId&&scenarios.some(x=>x.id===id)){id=baseId+'-'+suffix++;}
   const item={id,category:$('sim-category').value.trim()||'ТРЕНАЖЁР',title,prompt:$('sim-prompt').value.trim(),options,correctIndex:Number($('sim-correct').value)-1,explanation:$('sim-explanation').value.trim()};
   const draft=scenarios.filter(x=>x.id!==editingId);draft.push(item);validate({version:1,scenarios:draft});scenarios=draft;renderList();clearForm();set('sim-form-status','Сценарий добавлен в черновик. Не забудь опубликовать изменения.');
  }catch(error){set('sim-form-status','Проверь данные: '+error.message);}
