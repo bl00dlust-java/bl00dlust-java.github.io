@@ -41,7 +41,11 @@ if (simulators) {
   } else {
     const ids = new Set();
     simulators.scenarios.forEach((item, index) => {
-      if (!item || !text(item.id, 40) || !/^[a-z0-9-]+$/.test(item.id) || ids.has(item.id)) {
+      if (!item || typeof item !== 'object') {
+        fail('simulators.json: scenario ' + index + ' must be an object');
+        return;
+      }
+      if (!text(item.id, 40) || !/^[a-z0-9-]+$/.test(item.id) || ids.has(item.id)) {
         fail('simulators.json: invalid or duplicate ID at scenario ' + index);
       } else ids.add(item.id);
       if (!text(item.title, 160) || !text(item.prompt, 1200) || !text(item.explanation, 1200)) {
