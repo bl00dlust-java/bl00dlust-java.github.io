@@ -19,3 +19,17 @@ body.app-sidebar-collapsed .app-sidebar__brand{justify-content:center;padding-in
 .app-sidebar-backdrop{display:none}
 @media(max-width:820px){body.has-app-sidebar{padding-left:0}body.has-app-sidebar .site-header{left:auto;width:100%;padding-left:54px}.app-sidebar{transform:translateX(-105%);width:260px!important;box-shadow:18px 0 50px rgba(0,0,0,.28)}body.app-sidebar-open .app-sidebar{transform:translateX(0)}.app-sidebar-mobile-trigger{display:grid;place-items:center}.app-sidebar-backdrop{position:fixed;z-index:79;inset:0;background:rgba(4,6,12,.55);backdrop-filter:blur(3px)}body.app-sidebar-open .app-sidebar-backdrop{display:block}body.app-sidebar-collapsed{--app-side-width:0}}
 @media(prefers-reduced-motion:reduce){.app-sidebar,body.has-app-sidebar{transition:none}}
+
+/* Mobile sidebar controls: the close action remains visible while the drawer is open. */
+.app-sidebar__brand-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.app-sidebar__mobile-close{display:none;flex:none;width:36px;height:36px;place-items:center;border:1px solid var(--app-side-line);border-radius:10px;background:transparent;color:inherit;font-size:23px;cursor:pointer}
+.app-sidebar-backdrop{border:0;padding:0;cursor:pointer}
+@media(max-width:820px){
+  .app-sidebar{z-index:100}
+  .app-sidebar-mobile-trigger{z-index:110}
+  .app-sidebar-backdrop{z-index:99}
+  body.app-sidebar-open .app-sidebar{transform:translateX(0)}
+  .app-sidebar__mobile-close{display:grid}
+  .app-sidebar__bottom{margin-top:auto}
+  .app-sidebar__collapse{display:none}
+}
