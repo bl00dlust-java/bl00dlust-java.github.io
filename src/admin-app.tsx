@@ -8,7 +8,7 @@ const stats = [
   { label: "Инструменты", value: "03", detail: "Редакторы управления", icon: SlidersHorizontal, trend: "Панель администратора" },
 ];
 const sections = [
-  { title: "Настройки оформления", desc: "Шрифты, начертания и визуальные параметры сайта", href: "index.html", label: "Открыть настройки", icon: SlidersHorizontal },
+  { title: "Настройки оформления", desc: "Шрифты, начертания и визуальные параметры сайта", href: "fonts.html", label: "Открыть настройки", icon: SlidersHorizontal },
   { title: "Редактор материалов", desc: "Статьи базы знаний, словарь и полезные источники", href: "content.html", label: "Редактировать", icon: FileText },
   { title: "Конструктор тренажёров", desc: "Создание безопасных учебных сценариев", href: "simulators.html", label: "Открыть конструктор", icon: PenSquare },
 ];
