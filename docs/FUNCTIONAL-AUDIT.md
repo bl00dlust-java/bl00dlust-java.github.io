@@ -71,6 +71,19 @@ The dialog now:
 
 This is a static code change; keyboard and screen-reader behavior still needs manual verification in a browser.
 
+
+### Improved: mobile sidebar keyboard accessibility
+
+**File:** `js/app-sidebar.js`
+
+The mobile navigation drawer now:
+- Receives focus on its first navigation link when opened.
+- Keeps Tab and Shift+Tab navigation inside the drawer.
+- Closes with Escape and restores focus to the menu trigger.
+- Restores focus to the trigger when closed with the backdrop or close button; following a navigation link does not force focus back to the old page.
+
+This is a static code change. Manual testing on narrow screens, desktop keyboard navigation, and assistive technology remains required.
+
 ## Manual verification still required
 
 1. With existing saved progress, open a direct URL to a specific module and confirm the URL and page remain unchanged behind the return dialog.
@@ -81,6 +94,7 @@ This is a static code change; keyboard and screen-reader behavior still needs ma
 6. On desktop and mobile, test the practice tabs, knowledge search, password generation/copying, and checklist persistence.
 7. Test keyboard navigation and screen-reader behavior of the return dialog: Tab/Shift+Tab must stay inside it, Escape must close it, and focus should return appropriately.
 8. Verify the dialog description is announced by a screen reader and that focus restoration does not interfere with navigation links.
+9. On a phone-sized viewport, open the sidebar, cycle through links with Tab/Shift+Tab, close with Escape, and confirm focus returns to the menu trigger.
 
 ## Limits
 
