@@ -16,6 +16,8 @@
   "include": [
     "src/main.tsx",
     "src/react-app.tsx",
-    "src/components/**/*.tsx"
+    "src/components/**/*.tsx",
+    "src/admin-main.tsx",
+    "src/admin-app.tsx"
   ]
 }
