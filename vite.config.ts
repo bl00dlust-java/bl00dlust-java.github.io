@@ -12,7 +12,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
-        adminDashboard: fileURLToPath(new URL("./admin-dashboard.html", import.meta.url)),
+        "admin/dashboard": fileURLToPath(new URL("./admin-dashboard.html", import.meta.url)),
       },
     },
   },
