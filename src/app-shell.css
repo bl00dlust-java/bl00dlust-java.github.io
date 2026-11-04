@@ -58,3 +58,14 @@ body{min-width:320px;overflow-x:hidden}
 .admin-footer{border-color:var(--line);color:var(--muted,#6a6b6b)}
 @media(max-width:820px){body.has-app-sidebar{padding-left:0}.admin-main{width:100%}.admin-content{max-width:100%}}
 @media(max-width:620px){.admin-topbar{padding-left:66px}}
+
+.admin-app .app-sidebar{background:var(--canvas-deep,#090a0b);border-right:1px solid var(--line);color:var(--text)}
+.admin-app .app-sidebar__brand{color:var(--heading)}
+.admin-app .app-sidebar__mark{border-color:rgba(132,125,255,.35);color:var(--color-iris-gleam);background:rgba(132,125,255,.09)}
+.admin-app .app-sidebar__label{color:var(--muted)}
+.admin-app .app-sidebar__link{color:var(--body)}
+.admin-app .app-sidebar__link:hover{background:rgba(132,125,255,.09);border-color:rgba(132,125,255,.18);color:var(--text)}
+.admin-app .app-sidebar__link[aria-current="page"]{background:rgba(132,125,255,.14);border-color:rgba(132,125,255,.24);color:var(--heading)}
+.admin-app .app-sidebar__bottom{border-color:var(--line)}
+.admin-app .app-sidebar__collapse,.admin-app .app-sidebar__mobile-close{border-color:var(--line-strong);color:var(--text)}
+.admin-app .app-sidebar-mobile-trigger{border-color:var(--line-strong);background:var(--canvas-deep);color:var(--text)}
