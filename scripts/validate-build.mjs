@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { dirname, extname, join, normalize, resolve, sep } from "node:path";
+import { dirname, extname, join, resolve, sep } from "node:path";
 
 const root = resolve("dist");
 const required = [
