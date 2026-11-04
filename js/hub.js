@@ -37,6 +37,18 @@ try{
  if(Array.isArray(data.news)&&data.news.length>0&&data.news.length<=100&&data.news.every(x=>x&&validText(x.title)&&validText(x.text)&&typeof x.url==='string'&&(()=>{try{return new URL(x.url).protocol==='https:';}catch(_){return false;}})()))newsItems=data.news;
 }catch(error){console.warn('Не удалось загрузить редакционные материалы; используются встроенные.',error);}
 }
+async function loadHubContent(){
+try{
+ const response=await fetch('data/hub-content.json',{cache:'no-cache'});
+ if(!response.ok)return;
+ const data=await response.json();
+ const validText=value=>typeof value==='string'&&value.trim().length>0&&value.length<=3000;
+ if(!data||data.version!==1)return;
+ if(Array.isArray(data.articles)&&data.articles.length>0&&data.articles.length<=100&&data.articles.every(x=>x&&validText(x.title)&&validText(x.category)&&validText(x.text)))articles=data.articles;
+ if(Array.isArray(data.glossary)&&data.glossary.length>0&&data.glossary.length<=200&&data.glossary.every(x=>x&&validText(x.term)&&validText(x.definition)))glossary=data.glossary;
+ if(Array.isArray(data.news)&&data.news.length>0&&data.news.length<=100&&data.news.every(x=>x&&validText(x.title)&&validText(x.text)&&typeof x.url==='string'&&(()=>{try{return new URL(x.url).protocol==='https:';}catch(_){return false;}})()))newsItems=data.news;
+}catch(error){console.warn('Не удалось загрузить редакционные материалы; используются встроенные.',error);}
+}
 function render(){
 const page=section();const routes={practice,knowledge,tools,help,news,educators};const fn=routes[page]||practice;
 root.innerHTML=fn();
