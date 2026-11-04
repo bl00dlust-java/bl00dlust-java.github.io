@@ -2,7 +2,7 @@
 'use strict';
 const repo='bl00dlust-java/bl00dlust-java.github.io',branch='main',path='contents/data/simulators.json?ref='+branch;
 const $=id=>document.getElementById(id);
-let token='',scenarios=[],editingId='',fileSha='';
+let token='',scenarios=[],editingId='',fileSha='',hasLoaded=false;
 const set=(id,value)=>{$(id).textContent=value;};
 const encode=value=>btoa(unescape(encodeURIComponent(value)));
 const decode=value=>decodeURIComponent(escape(atob(value.replace(/\\s/g,''))));
@@ -55,16 +55,18 @@ $('sim-add').addEventListener('click',()=>{
 $('sim-clear').addEventListener('click',clearForm);
 $('sim-load').addEventListener('click',async()=>{
  if(!token){set('sim-status','Сначала подключись к GitHub.');return;}
- try{const file=await api(path);fileSha=file.sha;const data=validate(JSON.parse(decode(file.content)));scenarios=data.scenarios;renderList();set('sim-status','Загружено сценариев: '+scenarios.length+'.');}
+ try{const file=await api(path);fileSha=file.sha;const data=validate(JSON.parse(decode(file.content)));scenarios=data.scenarios;hasLoaded=true;renderList();set('sim-status','Загружено сценариев: '+scenarios.length+'.');}
  catch(error){set('sim-status','Не удалось загрузить: '+error.message);}
 });
 $('sim-publish').addEventListener('click',async()=>{
  if(!token){set('sim-status','Сначала подключись к GitHub.');return;}
+ if(!hasLoaded){set('sim-status','Сначала загрузи текущие сценарии из GitHub. Это защитит от случайной публикации пустого списка.');return;}
  try{
   const data=validate({version:1,scenarios});
-  let current;try{current=await api(path);}catch(error){if(error.status!==404)throw error;}
-  const url=current?'contents/data/simulators.json':'contents/data/simulators.json';
-  await api(url,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'Update interactive learning scenarios',content:encode(JSON.stringify(data,null,2)),branch,...(current?{sha:current.sha}:{})})});
+  const current=await api(path);
+  if(current.sha!==fileSha)throw new Error('Файл сценариев изменился после загрузки. Загрузите актуальную версию и повторите изменения.');
+  const result=await api('contents/data/simulators.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'Update interactive learning scenarios',content:encode(JSON.stringify(data,null,2)),branch,sha:current.sha})});
+  fileSha=result.content?.sha||'';
   set('sim-status','Опубликовано. GitHub Pages обновит тренажёры после публикации сайта.');
  }catch(error){set('sim-status','Не удалось опубликовать: '+error.message);}
 });
