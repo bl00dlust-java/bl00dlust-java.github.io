@@ -42,10 +42,12 @@ if(page==='tools')restoreChecklist();
 function renderSearch(query){
 const box=document.getElementById('knowledge-results');if(!box)return;
 const q=query.trim().toLocaleLowerCase('ru');
-const found=articles.filter(a=>(a.title+' '+a.category+' '+a.text).toLocaleLowerCase('ru').includes(q));
+const found=articles.filter(a=>(a.title+' '+a.category+' '+a.text).toLocaleLowerCase('ru').includes(q)).map(a=>({title:a.title,category:a.category,text:a.text}));
+const terms=glossary.filter(a=>(a[0]+' '+a[1]).toLocaleLowerCase('ru').includes(q)).map(a=>({title:a[0],category:'Словарь терминов',text:a[1]}));
+const results=found.concat(terms);
 box.replaceChildren();
-if(!found.length){const p=document.createElement('p');p.className='hub-muted';p.textContent='Ничего не найдено. Попробуй другой запрос.';box.append(p);return;}
-found.forEach(a=>{const el=document.createElement('article');el.className='hub-article';const h=document.createElement('h3');h.textContent=a.title;const tag=document.createElement('span');tag.className='hub-kicker';tag.textContent=a.category;const p=document.createElement('p');p.textContent=a.text;el.append(tag,h,p);box.append(el);});
+if(!results.length){const p=document.createElement('p');p.className='hub-muted';p.textContent='Ничего не найдено. Попробуй другой запрос.';box.append(p);return;}
+results.forEach(a=>{const el=document.createElement('article');el.className='hub-article';const h=document.createElement('h3');h.textContent=a.title;const tag=document.createElement('span');tag.className='hub-kicker';tag.textContent=a.category;const p=document.createElement('p');p.textContent=a.text;el.append(tag,h,p);box.append(el);});
 }
 function restoreChecklist(){
 const checks=[...document.querySelectorAll('[data-check]')];let saved={};try{saved=JSON.parse(localStorage.getItem('cyberhygiene-security-checklist')||'{}')||{};}catch{}
@@ -68,7 +70,7 @@ if(b.dataset.chat){document.getElementById('chat-feedback').textContent=b.datase
 if(b.dataset.scenario){document.getElementById('scenario-feedback').textContent=b.dataset.scenario==='1'?'Верно. Начни с официального сервиса, защити связанные способы восстановления и заверши неизвестные сеансы.':'Это может увеличить риск. Не игнорируй уведомление и не обращайся к незнакомым посредникам.';}
 if(b.id==='generate-password'){try{generatePassword();}catch(_){document.getElementById('password-output').textContent='Генератор недоступен в этом браузере. Открой сайт по HTTPS в современном браузере.';}}
 if(b.id==='copy-password'){const val=document.getElementById('password-output').textContent;if(val&&val!=='Нажми «Создать пароль».'){try{await navigator.clipboard.writeText(val);b.textContent='Скопировано';}catch{b.textContent='Копирование недоступно';}}}
-if(b.id==='reset-checklist'){localStorage.removeItem('cyberhygiene-security-checklist');restoreChecklist();}
+if(b.id==='reset-checklist'){try{localStorage.removeItem('cyberhygiene-security-checklist');}catch(_){}restoreChecklist();}
 });
 document.addEventListener('input',e=>{
 if(e.target.id==='knowledge-search')renderSearch(e.target.value);
