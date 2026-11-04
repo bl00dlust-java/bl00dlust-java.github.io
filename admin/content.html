@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Редактор материалов — Кибергигиена</title>
+<link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="site-header"><div class="header-inner"><a class="brand" href="../"><span class="brand-mark">К</span><span class="brand-name">КИБЕР<span>ГИГИЕНА</span></span></a><a href="index.html">← Панель управления</a></div></header>
+<main class="wrap admin-wrap">
+<div class="page-kicker"><span class="eyebrow">ADMIN / CONTENT EDITOR</span></div>
+<h1 class="page-title">Редактор <em>материалов.</em></h1>
+<p class="page-lead">Управляй статьями базы знаний, словарём и официальными источниками. Изменения публикуются в репозитории GitHub.</p>
+<section class="admin-card">
+<h2>1. Подключение</h2>
+<label for="content-token">Fine-grained GitHub token</label>
+<input id="content-token" type="password" autocomplete="off" placeholder="github_pat_…">
+<p>Требуется доступ только к этому репозиторию и Contents: Read and write. Токен хранится только в памяти вкладки и не сохраняется.</p>
+<button class="button button-ghost" id="content-connect" type="button">Проверить подключение</button>
+<p id="content-connect-status" role="status"></p>
+</section>
+<section class="admin-card">
+<h2>2. Материалы</h2>
+<p>Формат JSON. Можно редактировать, добавлять и удалять записи. Перед публикацией редактор проверит структуру и ссылки.</p>
+<label for="content-json">Содержимое data/hub-content.json</label>
+<textarea id="content-json" rows="22" spellcheck="false" style="width:100%;padding:14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--canvas);color:var(--text);font:13px/1.6 var(--mono,monospace)"></textarea>
+<button class="button button-ghost" id="content-load" type="button">Загрузить из GitHub</button>
+<button class="button button-ghost" id="content-validate" type="button">Проверить JSON</button>
+<button class="button" id="content-publish" type="button">Опубликовать материалы →</button>
+<p id="content-status" role="status"></p>
+</section>
+<section class="admin-card">
+<h2>Структура файла</h2>
+<ul>
+<li><b>articles:</b> title, category, text.</li>
+<li><b>glossary:</b> term, definition.</li>
+<li><b>news:</b> title, text, url (только HTTPS).</li>
+</ul>
+<p class="notice">Не добавляй персональные данные, реальные пароли, коды, закрытые переписки или непроверенные утверждения. После публикации GitHub Pages обновит материалы автоматически.</p>
+</section>
+</main>
+<script src="content-editor.js"></script>
+</body></html>
