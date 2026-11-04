@@ -34,7 +34,7 @@ jobs:
       - name: Validate published content and simulators
         run: node scripts/validate-content.mjs
       - name: Check TypeScript
-        run: npx --yes --package typescript@5.8.3 tsc --noEmit -p tsconfig.json
+        run: npx tsc --noEmit -p tsconfig.app.json
 
   codeql:
     name: CodeQL security analysis
