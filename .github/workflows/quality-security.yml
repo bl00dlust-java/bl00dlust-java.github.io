@@ -23,6 +23,10 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+      - name: Install React dependencies and build
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
       - name: Check JavaScript syntax
         run: |
           find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -r -n1 node --check
@@ -30,7 +34,7 @@ jobs:
       - name: Validate published content and simulators
         run: node scripts/validate-content.mjs
       - name: Check TypeScript
-        run: npx --yes --package typescript@5.8.3 tsc --noEmit -p tsconfig.json
+        run: npx tsc --noEmit -p tsconfig.app.json
 
   codeql:
     name: CodeQL security analysis

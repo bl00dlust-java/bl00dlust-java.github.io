@@ -1,0 +1,21 @@
+:root{--app-side-width:252px;--app-side-bg:var(--surface,#12141b);--app-side-line:var(--line,rgba(150,160,190,.15));}
+.app-sidebar{position:fixed;z-index:80;inset:0 auto 0 0;width:var(--app-side-width);display:flex;flex-direction:column;padding:20px 14px;background:var(--app-side-bg);border-right:1px solid var(--app-side-line);color:var(--text,#edf0f8);transition:width .22s,transform .22s;overflow:hidden}
+.app-sidebar__brand{display:flex;align-items:center;gap:11px;padding:3px 9px 22px;text-decoration:none;color:inherit;font-weight:800;letter-spacing:.12em;font-size:12px;white-space:nowrap}
+.app-sidebar__mark{display:grid;place-items:center;width:36px;height:36px;flex:none;border:1px solid rgba(150,140,255,.35);border-radius:12px;color:#a69cff;background:rgba(150,140,255,.09)}
+.app-sidebar__group{padding:14px 0 7px}.app-sidebar__label{padding:0 12px 9px;color:var(--muted,#8990a2);font:600 9px/1.4 ui-monospace,monospace;letter-spacing:.16em}
+.app-sidebar__link{display:flex;align-items:center;gap:12px;min-height:42px;padding:0 12px;border:1px solid transparent;border-radius:11px;color:var(--body,var(--text,#edf0f8));text-decoration:none;font-size:12px;white-space:nowrap;transition:background .16s,border-color .16s,color .16s}
+.app-sidebar__link:hover{background:rgba(140,135,255,.08);border-color:rgba(140,135,255,.12)}.app-sidebar__link[aria-current="page"]{background:rgba(140,135,255,.13);border-color:rgba(140,135,255,.2);color:#b7afff}
+.app-sidebar__icon{width:18px;height:18px;flex:none;display:grid;place-items:center;font-size:16px}.app-sidebar__bottom{margin-top:auto;border-top:1px solid var(--app-side-line);padding:14px 7px 2px}
+.app-sidebar__collapse{display:flex;align-items:center;justify-content:center;width:100%;height:37px;border:1px solid var(--app-side-line);border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+body.has-app-sidebar{padding-left:var(--app-side-width);transition:padding-left .22s}
+body.has-app-sidebar .site-header{left:auto;width:100%;}
+body.has-app-sidebar .site-footer{margin-left:0}
+body.app-sidebar-collapsed{--app-side-width:76px}
+body.app-sidebar-collapsed .app-sidebar{width:76px}
+body.app-sidebar-collapsed .app-sidebar__brand span:last-child,body.app-sidebar-collapsed .app-sidebar__label,body.app-sidebar-collapsed .app-sidebar__link span:last-child{display:none}
+body.app-sidebar-collapsed .app-sidebar__link{justify-content:center;padding:0}
+body.app-sidebar-collapsed .app-sidebar__brand{justify-content:center;padding-inline:0}
+.app-sidebar-mobile-trigger{display:none;position:fixed;z-index:95;left:12px;top:12px;width:42px;height:42px;border:1px solid var(--app-side-line);border-radius:12px;background:var(--app-side-bg);color:var(--text);font-size:20px}
+.app-sidebar-backdrop{display:none}
+@media(max-width:820px){body.has-app-sidebar{padding-left:0}body.has-app-sidebar .site-header{left:auto;width:100%;padding-left:54px}.app-sidebar{transform:translateX(-105%);width:260px!important;box-shadow:18px 0 50px rgba(0,0,0,.28)}body.app-sidebar-open .app-sidebar{transform:translateX(0)}.app-sidebar-mobile-trigger{display:grid;place-items:center}.app-sidebar-backdrop{position:fixed;z-index:79;inset:0;background:rgba(4,6,12,.55);backdrop-filter:blur(3px)}body.app-sidebar-open .app-sidebar-backdrop{display:block}body.app-sidebar-collapsed{--app-side-width:0}}
+@media(prefers-reduced-motion:reduce){.app-sidebar,body.has-app-sidebar{transition:none}}
