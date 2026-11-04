@@ -19,13 +19,15 @@ jobs:
     name: JavaScript and TypeScript checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Check JavaScript syntax
         run: |
-          find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -r -n1 node --check
+          find . -type f \\( -name '*.js' -o -name '*.mjs' \\) -not -path './.git/*' -print0 | xargs -0 -r -n1 node --check
+      - name: Validate published content and simulators
+        run: node scripts/validate-content.mjs
       - name: Check TypeScript
         run: npx --yes --package typescript@5.8.3 tsc --noEmit -p tsconfig.json
 
@@ -34,8 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@v4
         with:
           languages: javascript-typescript
           queries: security-extended
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@v4
