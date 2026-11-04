@@ -29,7 +29,7 @@
   backdrop.setAttribute("aria-label","Закрыть меню");
   nav.id = "app-sidebar-navigation";
   trigger.setAttribute("aria-controls", nav.id);
-  const focusableItems = () => Array.from(nav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+  const focusableItems = () => Array.from(nav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(item => item.getClientRects().length > 0);
   const close = (restoreFocus = true) => {
     document.body.classList.remove("app-sidebar-open");
     trigger.textContent = "☰";
