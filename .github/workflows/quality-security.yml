@@ -27,6 +27,12 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npm run build
+      - name: Export generated npm lockfile (temporary)
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-package-lock
+          path: package-lock.json
+          if-no-files-found: error
       - name: Check JavaScript syntax
         run: |
           find . -type f -name '*.js' -not -path './.git/*' -not -path './node_modules/*' -not -path './dist/*' -print0 | xargs -0 -r -n1 node --check
