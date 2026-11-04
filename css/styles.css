@@ -994,32 +994,35 @@ html { scroll-behavior: smooth; }
   .hero-panel::after { animation: none !important; }
 }
 
-
-/* Subtle emphasis for key digital-safety vocabulary */
-.security-term {
-  display: inline;
+/* Gentle emphasis for phrases already italicized in body copy */
+main p em, main p i,
+main li em, main li i,
+main blockquote em, main blockquote i,
+main dd em, main dd i {
+  font-style: italic;
+  font-weight: 600;
   color: var(--heading);
-  font-weight: 650;
-  text-decoration: underline;
-  text-decoration-color: rgba(132, 125, 255, .38);
-  text-decoration-thickness: 1px;
-  text-underline-offset: .18em;
-  background-image: linear-gradient(105deg, var(--heading) 0%, var(--heading) 38%, #a9a2ff 48%, #76d9ed 53%, var(--heading) 64%, var(--heading) 100%);
-  background-size: 260% 100%;
-  background-position: 100% 0;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: security-term-sweep 6.5s ease-in-out infinite;
+  animation: italic-focus-glow 5.8s ease-in-out infinite;
 }
-:root[data-theme="light"] .security-term {
-  background-image: linear-gradient(105deg, #171819 0%, #171819 38%, #6258c9 48%, #087f9b 53%, #171819 64%, #171819 100%);
-  text-decoration-color: rgba(98, 88, 201, .35);
-}
-@keyframes security-term-sweep {
-  0%, 72%, 100% { background-position: 100% 0; }
-  38% { background-position: 0 0; }
+@keyframes italic-focus-glow {
+  0%, 100% { text-shadow: 0 0 1px rgba(132, 125, 255, .08); }
+  42% {
+    text-shadow: 0 0 3px rgba(132, 125, 255, .30),
+      1px 0 7px rgba(132, 125, 255, .22),
+      -1px 0 11px rgba(118, 217, 237, .13);
+  }
+  72% {
+    text-shadow: 0 0 2px rgba(118, 217, 237, .22),
+      -1px 0 8px rgba(118, 217, 237, .17),
+      1px 0 12px rgba(132, 125, 255, .12);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .security-term { animation: none; background-position: 50% 0; }
+  main p em, main p i,
+  main li em, main li i,
+  main blockquote em, main blockquote i,
+  main dd em, main dd i {
+    animation: none;
+    text-shadow: 0 0 3px rgba(132, 125, 255, .18);
+  }
 }
