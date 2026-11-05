@@ -177,3 +177,10 @@ This is a static code fix. Manual testing should confirm that a duplicate filena
 **File:** `admin/admin.js`
 
 The typography editor now checks each loaded font's family, local asset path, supported format, and weight, and verifies that each role assignment is empty or references a font present in the list. This prevents malformed settings from silently turning an unknown assignment into a blank selection on the next publish. This remains a static fix; test with an unknown family assignment and a valid configuration in a browser.
+
+
+### Fixed: temporary font previews are removed from the browser font set
+
+**File:** `admin/admin.js`
+
+The typography editor now tracks the temporary `FontFace` created for preview and removes it when the preview is cleared or a different file/preview is selected. Once settings are successfully published, the face is no longer treated as temporary. This prevents discarded preview fonts from lingering in the page's font registry. Browser testing is still needed for preview switching and clearing.
