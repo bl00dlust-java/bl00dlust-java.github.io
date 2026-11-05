@@ -240,3 +240,9 @@ No confirmed injection issue was found in the reviewed renderer paths. This does
 **File:** `admin/admin.js`
 
 The typography settings loader now rejects font records with paths outside the expected `/assets/fonts/<filename>` shape, path traversal segments, extensions that do not match the declared format, and duplicate family names. This avoids ambiguous font-role selections and prevents malformed settings from pointing the browser at unexpected asset paths. This is a static validation change; browser testing with malformed settings remains outstanding.
+
+### Fixed: malformed content files cannot be marked as loaded
+
+**File:** `admin/content-editor.js`
+
+The content editor previously set its loaded flag and stored the remote file SHA before decoding the downloaded content. If decoding failed, the editor could retain an older textarea draft while treating it as loaded against the new SHA. A later publish could then overwrite the remote file with stale content. Loading now decodes, parses, and validates the downloaded content before replacing the editor draft, recording its SHA, or enabling publication. This is a static code fix; browser testing should still simulate malformed Base64/JSON and confirm publication remains blocked after a failed reload.
