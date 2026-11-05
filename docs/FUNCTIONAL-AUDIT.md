@@ -161,3 +161,12 @@ This is a static code fix. Manual browser verification should cover preview → 
 The typography editor previously marked a JSON file as loaded before checking its structure. A syntactically valid but malformed file (for example, `null`, or an object without the expected `fonts` array and `assignments` object) could leave the editor in an inconsistent state and allow a subsequent publish to replace the file. Loading now validates the top-level structure and font entries before setting the loaded flag or enabling publication. Empty `fonts` arrays remain valid so an intentionally cleared font collection is supported.
 
 This is a static code fix; manually verify malformed JSON structures are rejected and a valid empty font list can still be loaded and published.
+
+
+### Fixed: typography publishing cannot silently replace an existing font asset
+
+**File:** `admin/admin.js`
+
+The font editor previously updated an existing asset when the uploaded file resolved to a path already present in `assets/fonts/`. Because the asset upload happens before the typography settings are saved, a later settings-write failure could leave the currently published configuration pointing to a changed font file. The editor now refuses to upload to an existing asset path and asks the editor to rename the file, avoiding an implicit replacement of a live asset.
+
+This is a static code fix. Manual testing should confirm that a duplicate filename is rejected before any write, while a unique filename can still be uploaded and referenced by the settings.
