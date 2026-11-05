@@ -48,7 +48,7 @@ $('content-connect').addEventListener('click',async()=>{
 $('content-load').addEventListener('click',async()=>{
  hasLoaded=false;
  if(!token){status('content-status','Сначала подключись к GitHub.');return;}
- try{const file=await api(path);fileSha=file.sha;hasLoaded=true;$('content-json').value=decode(file.content);status('content-status','Материалы загружены из GitHub.');}
+ try{const file=await api(path);const decoded=decode(file.content);const data=validate(JSON.parse(decoded));$('content-json').value=JSON.stringify(data,null,2);fileSha=file.sha;hasLoaded=true;status('content-status','Материалы загружены из GitHub.');}
  catch(error){status('content-status','Не удалось загрузить файл: '+error.message);}
 });
 $('content-validate').addEventListener('click',()=>{
