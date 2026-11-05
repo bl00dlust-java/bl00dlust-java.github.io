@@ -134,3 +134,11 @@ This is a static code fix; verify by temporarily testing empty arrays in a previ
 The practice page reads the course state from `localStorage` to determine its theme. Previously, valid JSON values such as `null`, a string, or an array were accepted without checking their shape. A stored `null` could cause the page initialization to fail when reading the theme; a primitive value could also fail when the theme toggle tried to update it.
 
 The loader now accepts only a non-null, non-array object and falls back to an empty state for other values or invalid JSON. This protects the page from malformed or unexpected saved data. The change is covered by static inspection; browser testing with deliberately altered local storage remains outstanding.
+
+### Fixed: failed admin reloads no longer leave an old draft publishable
+
+**Files:** `admin/content-editor.js`, `admin/simulators-editor.js`, `admin/admin.js`
+
+The editors previously kept their `hasLoaded` / `configLoaded` flag after a later attempt to reload the current GitHub file failed. That could leave an earlier draft marked as freshly loaded even though the user had explicitly requested a reload and it had not succeeded. Each reload now invalidates the loaded-state flag before starting; only a fully successful load enables publication again. The existing SHA comparison remains in place as a separate protection against concurrent edits.
+
+This is a static code fix. Manual verification should include loading successfully, making a local draft, forcing a subsequent reload failure, and confirming that publishing is blocked until a successful reload.
