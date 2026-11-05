@@ -126,3 +126,11 @@ The loader now accepts empty arrays, matching the editor and build validator. Th
 
 This is a static code fix; verify by temporarily testing empty arrays in a preview build before publishing any real content changes.
 
+
+### Fixed: malformed saved theme state could stop the practice page
+
+**File:** `js/hub.js`
+
+The practice page reads the course state from `localStorage` to determine its theme. Previously, valid JSON values such as `null`, a string, or an array were accepted without checking their shape. A stored `null` could cause the page initialization to fail when reading the theme; a primitive value could also fail when the theme toggle tried to update it.
+
+The loader now accepts only a non-null, non-array object and falls back to an empty state for other values or invalid JSON. This protects the page from malformed or unexpected saved data. The change is covered by static inspection; browser testing with deliberately altered local storage remains outstanding.
