@@ -170,3 +170,10 @@ This is a static code fix; manually verify malformed JSON structures are rejecte
 The font editor previously updated an existing asset when the uploaded file resolved to a path already present in `assets/fonts/`. Because the asset upload happens before the typography settings are saved, a later settings-write failure could leave the currently published configuration pointing to a changed font file. The editor now refuses to upload to an existing asset path and asks the editor to rename the file, avoiding an implicit replacement of a live asset.
 
 This is a static code fix. Manual testing should confirm that a duplicate filename is rejected before any write, while a unique filename can still be uploaded and referenced by the settings.
+
+
+### Fixed: typography settings validate font references and assignments
+
+**File:** `admin/admin.js`
+
+The typography editor now checks each loaded font's family, local asset path, supported format, and weight, and verifies that each role assignment is empty or references a font present in the list. This prevents malformed settings from silently turning an unknown assignment into a blank selection on the next publish. This remains a static fix; test with an unknown family assignment and a valid configuration in a browser.
