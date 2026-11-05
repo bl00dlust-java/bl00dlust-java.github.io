@@ -72,11 +72,20 @@
       first.focus();
     }
   });
-  nav.querySelector(".app-sidebar__collapse").addEventListener("click",()=>{
-    const collapsed=document.body.classList.toggle("app-sidebar-collapsed");
-    try { localStorage.setItem("cyber-sidebar-collapsed",collapsed ? "1" : "0"); } catch {}
+  const collapseButton = nav.querySelector(".app-sidebar__collapse");
+  const syncCollapseButton = () => {
+    const collapsed = document.body.classList.contains("app-sidebar-collapsed");
+    collapseButton.textContent = collapsed ? "›" : "‹";
+    collapseButton.setAttribute("aria-label", collapsed ? "Раскрыть меню" : "Свернуть меню");
+    collapseButton.title = collapsed ? "Раскрыть меню" : "Свернуть меню";
+  };
+  collapseButton.addEventListener("click",()=>{
+    document.body.classList.toggle("app-sidebar-collapsed");
+    syncCollapseButton();
+    try { localStorage.setItem("cyber-sidebar-collapsed",document.body.classList.contains("app-sidebar-collapsed") ? "1" : "0"); } catch {}
   });
   document.body.classList.add("has-app-sidebar");
   document.body.prepend(nav,trigger,backdrop);
   try { if(localStorage.getItem("cyber-sidebar-collapsed")==="1") document.body.classList.add("app-sidebar-collapsed"); } catch {}
+  syncCollapseButton();
 })();
