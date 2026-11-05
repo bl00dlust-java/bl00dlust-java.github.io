@@ -60,5 +60,25 @@
   </footer>
   <noscript><div class="noscript">Для работы интерактивных уроков и сохранения прогресса включите JavaScript.</div></noscript>
 <script defer src="js/app-sidebar.js"></script>
+<script>
+(() => {
+  const isBeta = location.pathname === "/beta/" || location.pathname.startsWith("/beta/");
+  const hasBetaAccess = new URLSearchParams(location.search).get("beta-access") === "1";
+  if (!isBeta && !hasBetaAccess) return;
+
+  const link = document.createElement("a");
+  link.href = isBeta ? "/" : "/beta/";
+  link.textContent = isBeta ? "← Основная версия" : "Открыть бета-версию ↗";
+  link.setAttribute("aria-label", isBeta ? "Вернуться на основную версию сайта" : "Открыть бета-версию сайта");
+  link.style.cssText = [
+    "position:fixed", "right:22px", "bottom:22px", "z-index:10000",
+    "display:inline-flex", "align-items:center", "padding:12px 17px",
+    "border:1px solid rgba(150,140,255,.45)", "border-radius:999px",
+    "background:#171923", "color:#f3f1ff", "font:600 13px/1.2 Inter, sans-serif",
+    "text-decoration:none", "box-shadow:0 8px 28px rgba(0,0,0,.28)"
+  ].join(";");
+  document.body.append(link);
+})();
+</script>
 </body>
 </html>
