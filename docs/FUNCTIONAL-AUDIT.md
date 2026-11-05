@@ -215,3 +215,11 @@ No confirmed injection defect was established in these paths during static revie
 The admin forms use password-type token fields. The font editor keeps its token in a module-local variable; the content and simulator editors likewise keep their connection token in page memory. The reviewed pages do not intentionally persist these tokens in localStorage or sessionStorage. The token is sent to GitHub's API in the Authorization header from the browser. This means the token is exposed to the browser environment and any script executing in that page; it is not server-side secret storage or a hardened authentication boundary. The UI's least-privilege guidance (fine-grained token, repository-only access, Contents read/write) is important and should remain explicit. Users should revoke the token after use if it was created only for a temporary editing session.
 
 This is a static source review, not a runtime network inspection or a guarantee against malicious browser extensions, injected scripts, or compromised dependencies.
+
+### Reviewed: remaining static HTML template builders
+
+**Files:** `js/hub.js`, `js/app-sidebar.js`
+
+The hub uses `root.innerHTML` to render page templates, and the sidebar uses `nav.innerHTML` to build navigation. These are HTML sinks, so their inputs matter. In the reviewed code, the sidebar's labels/icons/links come from fixed source constants and a fixed relative root path. Hub page templates are source-authored; the few editorial values interpolated into the knowledge/news templates are HTML-escaped. Search results and custom simulator data are rendered later with DOM nodes and `textContent`. The generic hub card helper is currently called with fixed source-authored strings.
+
+No user-controlled or fetched editorial field was found flowing unescaped into these two template builders during this review. Keep these builders restricted to fixed markup and escaped values; if future admin-editable fields are added to them, prefer DOM construction with `textContent` or escape every interpolated value. This is a focused static review, not a runtime proof or a review of every HTML sink in the repository.
