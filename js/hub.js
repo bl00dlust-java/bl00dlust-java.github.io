@@ -2,7 +2,7 @@
 'use strict';
 const root=document.getElementById('hub-content');
 if(!root)return;
-const storedState=(()=>{try{return JSON.parse(localStorage.getItem('cyberhygiene-course-v2')||'{}');}catch(_){return {};}})();
+const storedState=(()=>{try{const value=JSON.parse(localStorage.getItem('cyberhygiene-course-v2')||'{}');return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}catch(_){return {};}})();
 const themeButton=document.getElementById('hub-theme-toggle');
 function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedState.theme==='dark'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(themeButton)themeButton.textContent=mode==='dark'?'Светлая тема':'Тёмная тема';}
 applyHubTheme();
