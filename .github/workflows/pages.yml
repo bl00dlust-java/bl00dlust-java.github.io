@@ -46,7 +46,7 @@ jobs:
       - name: Build beta site
         working-directory: beta-source
         env:
-          VITE_BASE_PATH: /beta/
+          VITE_BASE_PATH: ./
         run: |
           npm install --no-audit --no-fund
           npm run build
