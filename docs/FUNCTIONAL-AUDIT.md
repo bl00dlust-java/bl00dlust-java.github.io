@@ -233,3 +233,10 @@ The course renderer uses HTML templates for repository-authored lesson material 
 The local progress loader rejects malformed top-level state, catches invalid JSON, restricts theme values, clamps lesson positions and scores, and limits stored attempt history to the latest 100 entries per module. Since localStorage is controlled by the visitor, it must not be treated as proof of course completion or as authoritative assessment data. The project is a local demonstration and does not issue independently verifiable credentials.
 
 No confirmed injection issue was found in the reviewed renderer paths. This does not replace review of every source-authored HTML fragment or browser-based testing; keep lesson HTML and external links under source review rather than treating them as trusted admin input.
+
+
+### Hardened: typography font paths and duplicate families
+
+**File:** `admin/admin.js`
+
+The typography settings loader now rejects font records with paths outside the expected `/assets/fonts/<filename>` shape, path traversal segments, extensions that do not match the declared format, and duplicate family names. This avoids ambiguous font-role selections and prevents malformed settings from pointing the browser at unexpected asset paths. This is a static validation change; browser testing with malformed settings remains outstanding.
