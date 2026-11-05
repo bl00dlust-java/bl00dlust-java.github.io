@@ -184,3 +184,12 @@ The typography editor now checks each loaded font's family, local asset path, su
 **File:** `admin/admin.js`
 
 The typography editor now tracks the temporary `FontFace` created for preview and removes it when the preview is cleared or a different file/preview is selected. Once settings are successfully published, the face is no longer treated as temporary. This prevents discarded preview fonts from lingering in the page's font registry. Browser testing is still needed for preview switching and clearing.
+
+
+### Improved: font upload recovery checks references before cleanup
+
+**File:** `admin/admin.js`
+
+If uploading a new font asset succeeds but saving `font-settings.json` fails, the editor now fetches the latest settings before attempting cleanup. If the latest valid settings reference the uploaded asset, it leaves the file in place. If the settings are readable and do not reference it, the editor removes the unreferenced asset using its returned blob SHA. If the follow-up read is ambiguous, malformed, or unavailable, it leaves the asset untouched and tells the editor to review it manually. This handles the case where GitHub accepted a settings update but the browser did not receive a successful response, without risking deletion of a live font.
+
+This recovery path is statically reviewed but still requires browser/API fault-injection testing. In particular, test a definite settings-write failure, a lost/ambiguous response after a successful write, and a failed follow-up read; confirm that a referenced asset is never deleted.
