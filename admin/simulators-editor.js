@@ -54,6 +54,7 @@ $('sim-add').addEventListener('click',()=>{
 });
 $('sim-clear').addEventListener('click',clearForm);
 $('sim-load').addEventListener('click',async()=>{
+ hasLoaded=false;
  if(!token){set('sim-status','Сначала подключись к GitHub.');return;}
  try{const file=await api(path);fileSha=file.sha;const data=validate(JSON.parse(decode(file.content)));scenarios=data.scenarios;hasLoaded=true;renderList();set('sim-status','Загружено сценариев: '+scenarios.length+'.');}
  catch(error){set('sim-status','Не удалось загрузить: '+error.message);}
