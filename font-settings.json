@@ -1,16 +1,9 @@
 {
   "version": 1,
-  "fonts": [
-    {
-      "family": "JetBrainsMono-Regular",
-      "src": "/assets/fonts/JetBrainsMono-Regular.ttf",
-      "weight": "400",
-      "format": "ttf"
-    }
-  ],
+  "fonts": [],
   "assignments": {
     "heading": "",
-    "body": "JetBrainsMono-Regular",
+    "body": "",
     "ui": "",
     "mono": ""
   }
