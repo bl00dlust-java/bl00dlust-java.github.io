@@ -46,6 +46,7 @@ $('content-connect').addEventListener('click',async()=>{
  catch(error){status('content-connect-status','Ошибка подключения: '+error.message);}
 });
 $('content-load').addEventListener('click',async()=>{
+ hasLoaded=false;
  if(!token){status('content-status','Сначала подключись к GitHub.');return;}
  try{const file=await api(path);fileSha=file.sha;hasLoaded=true;$('content-json').value=decode(file.content);status('content-status','Материалы загружены из GitHub.');}
  catch(error){status('content-status','Не удалось загрузить файл: '+error.message);}
