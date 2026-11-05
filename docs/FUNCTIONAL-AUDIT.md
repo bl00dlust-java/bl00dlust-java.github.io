@@ -142,3 +142,13 @@ The loader now accepts only a non-null, non-array object and falls back to an em
 The editors previously kept their `hasLoaded` / `configLoaded` flag after a later attempt to reload the current GitHub file failed. That could leave an earlier draft marked as freshly loaded even though the user had explicitly requested a reload and it had not succeeded. Each reload now invalidates the loaded-state flag before starting; only a fully successful load enables publication again. The existing SHA comparison remains in place as a separate protection against concurrent edits.
 
 This is a static code fix. Manual verification should include loading successfully, making a local draft, forcing a subsequent reload failure, and confirming that publishing is blocked until a successful reload.
+
+### Fixed: clearing a font preview no longer leaves an unpublished font in the configuration
+
+**File:** `admin/admin.js`
+
+Previewing a font temporarily adds it to the in-memory font list. Previously, clearing the preview removed the file selection and object URL but left that temporary font entry in the list. Publishing afterward could therefore write a font configuration that referenced a file that had never been uploaded. Selecting another file after previewing could produce the same mismatch.
+
+The editor now keeps a snapshot of the saved font list while a preview is pending, restores it when the preview is cleared or a different file is selected, and retains the previewed entry only when its file and settings are successfully published. Multiple previews before publication replace the pending preview instead of accumulating unuploaded entries.
+
+This is a static code fix. Manual browser verification should cover preview → clear → publish, preview A → select B → publish, and preview A → preview B → publish.
