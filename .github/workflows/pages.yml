@@ -1,8 +1,10 @@
-name: Build and deploy React site
+name: Build and deploy production plus beta preview
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - work/audit-fixes-2026-11-05
   workflow_dispatch:
 
 permissions:
@@ -18,20 +20,47 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout production source
         uses: actions/checkout@v5
+        with:
+          ref: main
+          path: production
+
+      - name: Checkout beta source
+        uses: actions/checkout@v5
+        with:
+          ref: work/audit-fixes-2026-11-05
+          path: beta-source
+
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-      - name: Build React app and legacy pages
-        run: npm run build
-      - name: Upload Pages artifact
+
+      - name: Build production site
+        working-directory: production
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+
+      - name: Build beta site
+        working-directory: beta-source
+        env:
+          VITE_BASE_PATH: /beta/
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+
+      - name: Add beta site under /beta/
+        run: |
+          mkdir -p production/dist/beta
+          cp -a beta-source/dist/. production/dist/beta/
+
+      - name: Upload combined Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: production/dist
+
   deploy:
     environment:
       name: github-pages
