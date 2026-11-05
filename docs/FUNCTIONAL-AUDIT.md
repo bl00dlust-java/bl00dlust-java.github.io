@@ -223,3 +223,13 @@ This is a static source review, not a runtime network inspection or a guarantee 
 The hub uses `root.innerHTML` to render page templates, and the sidebar uses `nav.innerHTML` to build navigation. These are HTML sinks, so their inputs matter. In the reviewed code, the sidebar's labels/icons/links come from fixed source constants and a fixed relative root path. Hub page templates are source-authored; the few editorial values interpolated into the knowledge/news templates are HTML-escaped. Search results and custom simulator data are rendered later with DOM nodes and `textContent`. The generic hub card helper is currently called with fixed source-authored strings.
 
 No user-controlled or fetched editorial field was found flowing unescaped into these two template builders during this review. Keep these builders restricted to fixed markup and escaped values; if future admin-editable fields are added to them, prefer DOM construction with `textContent` or escape every interpolated value. This is a focused static review, not a runtime proof or a review of every HTML sink in the repository.
+
+### Reviewed: course renderer and locally stored progress
+
+**File:** `js/app.js`
+
+The course renderer uses HTML templates for repository-authored lesson material and fixed interface fragments. Module titles/descriptions and user-selected quiz answers are escaped before insertion; quiz feedback and saved progress are reconstructed from a bounded, validated subset of localStorage data. The renderer's lesson theory and explanation fragments are intentionally authored HTML in the source file, not content supplied by the current admin editors. External lesson-source links are also repository-authored constants and currently include HTTPS URLs.
+
+The local progress loader rejects malformed top-level state, catches invalid JSON, restricts theme values, clamps lesson positions and scores, and limits stored attempt history to the latest 100 entries per module. Since localStorage is controlled by the visitor, it must not be treated as proof of course completion or as authoritative assessment data. The project is a local demonstration and does not issue independently verifiable credentials.
+
+No confirmed injection issue was found in the reviewed renderer paths. This does not replace review of every source-authored HTML fragment or browser-based testing; keep lesson HTML and external links under source review rather than treating them as trusted admin input.
