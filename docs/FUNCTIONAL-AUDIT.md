@@ -206,3 +206,12 @@ Static review found these insertion patterns:
 - The reviewed content and simulator admin editors do not use `innerHTML`.
 
 No confirmed injection defect was established in these paths during static review. This is not a sanitizer audit of every authored lesson fragment or every script in the repository; repository-authored HTML must remain trusted and reviewed before publication.
+
+
+### Reviewed: browser-side GitHub token handling in admin editors
+
+**Files:** `admin/fonts.html`, `admin/admin.js`, `admin/content.html`, `admin/content-editor.js`, `admin/simulators.html`, `admin/simulators-editor.js`
+
+The admin forms use password-type token fields. The font editor keeps its token in a module-local variable; the content and simulator editors likewise keep their connection token in page memory. The reviewed pages do not intentionally persist these tokens in localStorage or sessionStorage. The token is sent to GitHub's API in the Authorization header from the browser. This means the token is exposed to the browser environment and any script executing in that page; it is not server-side secret storage or a hardened authentication boundary. The UI's least-privilege guidance (fine-grained token, repository-only access, Contents read/write) is important and should remain explicit. Users should revoke the token after use if it was created only for a temporary editing session.
+
+This is a static source review, not a runtime network inspection or a guarantee against malicious browser extensions, injected scripts, or compromised dependencies.
