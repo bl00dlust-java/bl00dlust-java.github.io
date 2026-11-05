@@ -152,3 +152,12 @@ Previewing a font temporarily adds it to the in-memory font list. Previously, cl
 The editor now keeps a snapshot of the saved font list while a preview is pending, restores it when the preview is cleared or a different file is selected, and retains the previewed entry only when its file and settings are successfully published. Multiple previews before publication replace the pending preview instead of accumulating unuploaded entries.
 
 This is a static code fix. Manual browser verification should cover preview → clear → publish, preview A → select B → publish, and preview A → preview B → publish.
+
+
+### Fixed: malformed typography settings are not treated as loaded
+
+**File:** `admin/admin.js`
+
+The typography editor previously marked a JSON file as loaded before checking its structure. A syntactically valid but malformed file (for example, `null`, or an object without the expected `fonts` array and `assignments` object) could leave the editor in an inconsistent state and allow a subsequent publish to replace the file. Loading now validates the top-level structure and font entries before setting the loaded flag or enabling publication. Empty `fonts` arrays remain valid so an intentionally cleared font collection is supported.
+
+This is a static code fix; manually verify malformed JSON structures are rejected and a valid empty font list can still be loaded and published.
