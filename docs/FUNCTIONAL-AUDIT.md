@@ -193,3 +193,16 @@ The typography editor now tracks the temporary `FontFace` created for preview an
 If uploading a new font asset or saving `font-settings.json` returns an ambiguous error, the editor now fetches the latest settings to reconcile whether the uploaded path is referenced. If the latest valid settings reference the uploaded asset, it reports that the file is in use. If the settings are readable and do not reference it, it reports the apparent orphan but still leaves it in place. If the follow-up read is ambiguous, malformed, or unavailable, it also leaves the asset untouched. The editor does not automatically delete the asset: a separate GitHub file deletion cannot be made atomic with a concurrent settings update, so automatic cleanup could race with another editor publishing a reference to that font. This handles ambiguous upload and settings-write responses without risking deletion of a live font.
 
 This recovery path is statically reviewed but still requires browser/API fault-injection testing. In particular, test a definite settings-write failure, a lost/ambiguous response after an asset upload or successful settings write, and a failed follow-up read; confirm that the editor reports the state accurately and never automatically deletes the uploaded asset.
+
+
+### Reviewed: HTML insertion points in the course and hub
+
+**Files:** `js/app.js`, `js/hub.js`, `admin/content-editor.js`, `admin/simulators-editor.js`
+
+Static review found these insertion patterns:
+- The course shell replaces the app root with page templates assembled by the course renderer. Module titles/descriptions and visible labels are escaped where inserted as text. Lesson body HTML and the extended theory snippets are intentionally rendered as authored markup from the repository's course data; they are not fields exposed by the current browser admin editors.
+- The demo tab swaps between two fixed, source-authored HTML fragments.
+- The hub root is populated from its page-rendering functions. Custom simulator scenarios and search results are subsequently created with DOM nodes and `textContent`, rather than treating scenario or editorial text as HTML.
+- The reviewed content and simulator admin editors do not use `innerHTML`.
+
+No confirmed injection defect was established in these paths during static review. This is not a sanitizer audit of every authored lesson fragment or every script in the repository; repository-authored HTML must remain trusted and reviewed before publication.
