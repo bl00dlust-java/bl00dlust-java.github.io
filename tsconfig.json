@@ -10,7 +10,8 @@
     "outFile": "js/app.js",
     "noEmitOnError": true,
     "removeComments": true,
-    "strict": false
+    "strict": false,
+    "types": []
   },
   "files": [
     "src/app.ts"

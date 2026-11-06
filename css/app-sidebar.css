@@ -65,3 +65,12 @@ body.has-app-sidebar .desktop-nav,body.has-app-sidebar .mobile-nav,body.has-app-
   .app-sidebar-mobile-trigger{top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));}
   body.has-app-sidebar .site-header{padding-left:58px}
 }
+
+
+/* Keep desktop sidebar group headings in place while collapsed to prevent vertical jumps. */
+@media (min-width:821px){
+  body.app-sidebar-collapsed .app-sidebar__label{
+    display:block;
+    visibility:hidden;
+  }
+}

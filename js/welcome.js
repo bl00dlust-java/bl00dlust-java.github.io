@@ -27,6 +27,7 @@ dialog.className = 'welcome-dialog';
 dialog.setAttribute('role', 'dialog');
 dialog.setAttribute('aria-modal', 'true');
 dialog.setAttribute('aria-labelledby', 'welcome-title');
+dialog.setAttribute('aria-describedby', 'welcome-description');
 
 const eyebrow = document.createElement('span');
 eyebrow.className = 'eyebrow';
@@ -35,6 +36,7 @@ const heading = document.createElement('h2');
 heading.id = 'welcome-title';
 heading.textContent = 'Продолжим обучение?';
 const description = document.createElement('p');
+description.id = 'welcome-description';
 description.textContent = 'Твой прогресс сохранён в этом браузере. Можешь вернуться к последнему занятию или открыть главную страницу.';
 const actions = document.createElement('div');
 actions.className = 'welcome-actions';
@@ -59,13 +61,39 @@ dialog.append(eyebrow, heading, description, actions, stayButton);
 overlay.append(dialog);
 document.body.append(overlay);
 
-const close = () => {
+const previouslyFocused = document.activeElement;
+const close = (restoreFocus = false) => {
   try { sessionStorage.setItem('cyberhygiene-welcome-dismissed', '1'); } catch (_) {}
   overlay.remove();
+  if (restoreFocus && previouslyFocused instanceof HTMLElement && previouslyFocused !== document.body && previouslyFocused.isConnected) {
+    previouslyFocused.focus();
+  }
 };
-stayButton.addEventListener('click', close);
-homeLink.addEventListener('click', close);
-continueLink.addEventListener('click', close);
-overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+stayButton.addEventListener('click', () => close(true));
+homeLink.addEventListener('click', () => close());
+continueLink.addEventListener('click', () => close());
+overlay.addEventListener('click', e => { if (e.target === overlay) close(true); });
+dialog.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    close(true);
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  const focusable = Array.from(dialog.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+  if (!focusable.length) {
+    e.preventDefault();
+    return;
+  }
+  const first = focusable[0];
+  const lastFocusable = focusable[focusable.length - 1];
+  if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+    e.preventDefault();
+    lastFocusable.focus();
+  } else if (!e.shiftKey && (document.activeElement === lastFocusable || !dialog.contains(document.activeElement))) {
+    e.preventDefault();
+    first.focus();
+  }
+});
 continueLink.focus();
 })();

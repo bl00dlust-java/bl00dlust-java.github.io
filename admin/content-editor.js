@@ -6,6 +6,7 @@ const path='contents/data/hub-content.json?ref='+branch;
 const $=id=>document.getElementById(id);
 let token='';
 let fileSha='';
+let hasLoaded=false;
 const status=(id,message)=>{$(id).textContent=message;};
 const api=async(url,options={})=>{
  const response=await fetch('https://api.github.com/repos/'+repo+'/'+url,{
@@ -45,8 +46,9 @@ $('content-connect').addEventListener('click',async()=>{
  catch(error){status('content-connect-status','Ошибка подключения: '+error.message);}
 });
 $('content-load').addEventListener('click',async()=>{
+ hasLoaded=false;
  if(!token){status('content-status','Сначала подключись к GitHub.');return;}
- try{const file=await api(path);fileSha=file.sha;$('content-json').value=decode(file.content);status('content-status','Материалы загружены из GitHub.');}
+ try{const file=await api(path);const decoded=decode(file.content);const data=validate(JSON.parse(decoded));$('content-json').value=JSON.stringify(data,null,2);fileSha=file.sha;hasLoaded=true;status('content-status','Материалы загружены из GitHub.');}
  catch(error){status('content-status','Не удалось загрузить файл: '+error.message);}
 });
 $('content-validate').addEventListener('click',()=>{
@@ -55,9 +57,11 @@ $('content-validate').addEventListener('click',()=>{
 });
 $('content-publish').addEventListener('click',async()=>{
  if(!token){status('content-status','Сначала подключись к GitHub.');return;}
+ if(!hasLoaded){status('content-status','Сначала загрузи текущие материалы из GitHub. Это защитит от случайной публикации пустого файла.');return;}
  try{
   const data=validate(JSON.parse($('content-json').value));
   const current=await api(path);
+  if(current.sha!==fileSha)throw new Error('Файл изменился после загрузки. Загрузите актуальную версию и повторите изменения.');
   const result=await api('contents/data/hub-content.json',{
    method:'PUT',
    headers:{'Content-Type':'application/json'},
