@@ -42,7 +42,7 @@ export function AppSidebar({ admin = false }: Props) {
   return <>
     <button className="app-sidebar-mobile-trigger" onClick={() => setOpen(value => !value)} aria-label="Открыть меню" aria-expanded={open}><Menu/></button>
     {!collapsed && <button className="app-sidebar-desktop-backdrop" type="button" onClick={() => setCollapsed(true)} aria-label="Свернуть боковое меню"/>}
-    {open && <button className="app-sidebar-backdrop react-sidebar-backdrop" onClick={() => setOpen(false)} aria-label="Закрыть меню"/>}
+    {open && <button className={`app-sidebar-backdrop react-sidebar-backdrop ${open ? "is-visible" : ""}`} onClick={() => setOpen(false)} aria-label="Закрыть меню" aria-hidden={!open} tabIndex={open ? 0 : -1}/>}
     <aside className={`app-sidebar ${open ? "is-open" : ""}`} aria-label="Основная навигация">
       <div className="app-sidebar__brand-row">
         <a className="app-sidebar__brand" href="/"><span className="app-sidebar__mark"><ShieldCheck size={20}/></span><span>КИБЕРГИГИЕНА</span></a>
