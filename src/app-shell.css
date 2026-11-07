@@ -86,3 +86,10 @@ body{min-width:320px;overflow-x:hidden}
 }
 
 .theme-toggle-icon{display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));color:hsl(var(--foreground));cursor:pointer}.theme-toggle-icon .theme-icon{font-size:19px;line-height:1}.admin-topbar-actions{display:flex;align-items:center;gap:12px}
+
+
+/* Desktop expanded sidebar overlay: gently dim and blur the page content to its right. */
+.app-sidebar-desktop-backdrop{display:none;position:fixed;z-index:79;inset:0 0 0 var(--app-side-width,252px);padding:0;border:0;background:rgba(5,7,14,.24);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;animation:app-sidebar-overlay-in .18s ease-out both}
+body.has-app-sidebar:not(.app-sidebar-collapsed) .app-sidebar-desktop-backdrop{display:block}
+@keyframes app-sidebar-overlay-in{from{opacity:0}to{opacity:1}}
+@media(max-width:820px){.app-sidebar-desktop-backdrop{display:none!important}}
