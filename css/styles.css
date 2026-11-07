@@ -1037,3 +1037,6 @@ main dd em, main dd i {
 .quiz-progress-track>span{display:block;width:0;height:100%;border-radius:inherit;background:var(--color-iris-gleam,#847dff);transition:width .2s ease}
 .quiz-option:focus-within{outline:2px solid var(--color-iris-gleam,#847dff);outline-offset:2px}
 #quiz-submit:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;filter:none}
+
+.theme-toggle-icon{display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid var(--line-strong);border-radius:12px;background:var(--control-bg);color:var(--text);cursor:pointer}
+.theme-toggle-icon .theme-icon{font-size:19px;line-height:1}
