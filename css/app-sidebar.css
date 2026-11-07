@@ -81,7 +81,7 @@ body.has-app-sidebar{transition:padding-left var(--app-sidebar-duration) var(--a
 .app-sidebar__brand span:last-child,.app-sidebar__label,.app-sidebar__link span:last-child,.app-sidebar__collapse span{max-width:180px;opacity:1;visibility:visible;transform:translateX(0);overflow:hidden;transition:max-width 300ms var(--app-sidebar-ease),opacity 180ms ease,transform 240ms var(--app-sidebar-ease),visibility 0s}
 body.app-sidebar-collapsed .app-sidebar__brand span:last-child,body.app-sidebar-collapsed .app-sidebar__link span:last-child,body.app-sidebar-collapsed .app-sidebar__collapse span{display:inline-block;max-width:0;opacity:0;visibility:hidden;transform:translateX(-8px);transition-delay:0s,0s,0s,220ms}
 body.app-sidebar-collapsed .app-sidebar__label{display:block;max-width:0;opacity:0;visibility:hidden;transform:translateX(-8px);padding-left:0;padding-right:0;overflow:hidden;transition-delay:0s,0s,0s,220ms}
-.app-sidebar-desktop-backdrop{display:block;opacity:0;visibility:hidden;pointer-events:none;animation:none;transition:opacity 280ms ease,visibility 0s linear 280ms}
+.app-sidebar-desktop-backdrop{display:block;opacity:0;visibility:hidden;pointer-events:none;animation:none;transition:left var(--app-sidebar-duration) var(--app-sidebar-ease),opacity 280ms ease,visibility 0s linear 280ms}
 body.has-app-sidebar:not(.app-sidebar-collapsed) .app-sidebar-desktop-backdrop{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s}
 @media(max-width:820px){
   .app-sidebar{transition:transform 360ms var(--app-sidebar-ease),box-shadow 360ms var(--app-sidebar-ease);will-change:transform}
@@ -92,4 +92,9 @@ body.has-app-sidebar:not(.app-sidebar-collapsed) .app-sidebar-desktop-backdrop{o
 }
 @media(prefers-reduced-motion:reduce){
   .app-sidebar,body.has-app-sidebar,.app-sidebar-backdrop,.app-sidebar-desktop-backdrop,.app-sidebar__brand span:last-child,.app-sidebar__label,.app-sidebar__link span:last-child,.app-sidebar__collapse span{transition:none!important;animation:none!important;will-change:auto}
+}
+
+@media(min-width:821px){
+  .app-sidebar__brand,.app-sidebar__link{transition:gap 300ms var(--app-sidebar-ease),justify-content 300ms var(--app-sidebar-ease)}
+  body.app-sidebar-collapsed .app-sidebar__brand,body.app-sidebar-collapsed .app-sidebar__link{gap:0}
 }
