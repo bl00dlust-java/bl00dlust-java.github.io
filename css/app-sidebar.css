@@ -65,3 +65,10 @@ body.has-app-sidebar .desktop-nav,body.has-app-sidebar .mobile-nav,body.has-app-
   .app-sidebar-mobile-trigger{top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));}
   body.has-app-sidebar .site-header{padding-left:58px}
 }
+
+
+/* Desktop expanded sidebar overlay: gently dim and blur the page content to its right. */
+.app-sidebar-desktop-backdrop{display:none;position:fixed;z-index:79;inset:0 0 0 var(--app-side-width,252px);padding:0;border:0;background:rgba(5,7,14,.24);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;animation:app-sidebar-overlay-in .18s ease-out both}
+body.has-app-sidebar:not(.app-sidebar-collapsed) .app-sidebar-desktop-backdrop{display:block}
+@keyframes app-sidebar-overlay-in{from{opacity:0}to{opacity:1}}
+@media(max-width:820px){.app-sidebar-desktop-backdrop{display:none!important}}
