@@ -13,7 +13,7 @@ export default function AdminApp() {
     <div className="admin-main">
       <header className="admin-topbar">
         <div><div className="admin-breadcrumb">КИБЕРГИГИЕНА <span>/</span> УПРАВЛЕНИЕ</div><h1>Панель управления</h1></div>
-        <a className="admin-avatar" href="/" aria-label="Перейти на сайт">К</a>
+        <div className="admin-topbar-actions"><button className="theme-toggle theme-toggle-icon" type="button" data-admin-theme aria-label="Переключить тему"><span className="theme-icon" aria-hidden="true">☼</span></button><a className="admin-avatar" href="/" aria-label="Перейти на сайт">К</a></div>
       </header>
       <main className="admin-content">
         <section className="admin-welcome">

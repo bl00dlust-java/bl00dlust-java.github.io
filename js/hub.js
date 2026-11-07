@@ -4,7 +4,7 @@ const root=document.getElementById('hub-content');
 if(!root)return;
 const storedState=(()=>{try{return JSON.parse(localStorage.getItem('cyberhygiene-course-v2')||'{}');}catch(_){return {};}})();
 const themeButton=document.getElementById('hub-theme-toggle');
-function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedState.theme==='dark'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(themeButton)themeButton.textContent=mode==='dark'?'Светлая тема':'Тёмная тема';}
+function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedState.theme==='dark'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(themeButton){const icon=themeButton.querySelector('.theme-icon');if(icon)icon.textContent=mode==='dark'?'☼':'◐';themeButton.setAttribute('aria-label',mode==='dark'?'Включить светлую тему':'Включить тёмную тему');}}
 applyHubTheme();
 if(themeButton)themeButton.addEventListener('click',()=>{const current=document.documentElement.dataset.theme;storedState.theme=current==='dark'?'light':'dark';try{localStorage.setItem('cyberhygiene-course-v2',JSON.stringify(storedState));}catch(_){}applyHubTheme();});
 let articles=[
