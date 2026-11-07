@@ -1028,3 +1028,12 @@ main dd em, main dd i {
     text-shadow: 0 0 3px rgba(132, 125, 255, .18);
   }
 }
+
+
+/* Module quiz interaction: visible completion state and accessible progress. */
+.quiz-progress{display:grid;gap:9px;margin:0 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--canvas-deep)}
+.quiz-progress>span{font-size:12px;font-weight:600;color:var(--heading)}
+.quiz-progress-track{display:block;height:6px;overflow:hidden;border-radius:99px;background:var(--line)}
+.quiz-progress-track>span{display:block;width:0;height:100%;border-radius:inherit;background:var(--color-iris-gleam,#847dff);transition:width .2s ease}
+.quiz-option:focus-within{outline:2px solid var(--color-iris-gleam,#847dff);outline-offset:2px}
+#quiz-submit:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;filter:none}
