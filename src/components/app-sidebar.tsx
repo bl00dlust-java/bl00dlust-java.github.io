@@ -41,6 +41,7 @@ export function AppSidebar({ admin = false }: Props) {
   const groups = admin ? [...publicGroups, adminGroup] : publicGroups;
   return <>
     <button className="app-sidebar-mobile-trigger" onClick={() => setOpen(value => !value)} aria-label="Открыть меню" aria-expanded={open}><Menu/></button>
+    {!collapsed && <button className="app-sidebar-desktop-backdrop" type="button" onClick={() => setCollapsed(true)} aria-label="Свернуть боковое меню"/>}
     {open && <button className="app-sidebar-backdrop react-sidebar-backdrop" onClick={() => setOpen(false)} aria-label="Закрыть меню"/>}
     <aside className={`app-sidebar ${open ? "is-open" : ""}`} aria-label="Основная навигация">
       <div className="app-sidebar__brand-row">
