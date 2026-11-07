@@ -10,7 +10,7 @@
 body.has-app-sidebar{padding-left:252px;transition:none}
 body.has-app-sidebar .site-header{left:auto;width:100%;}
 body.has-app-sidebar .site-footer{margin-left:0}
-body.app-sidebar-collapsed{--app-side-width:76px;padding-left:252px}
+body.app-sidebar-collapsed{--app-side-width:76px;padding-left:76px}
 body.app-sidebar-collapsed .app-sidebar{width:76px}
 body.app-sidebar-collapsed .app-sidebar__brand span:last-child,body.app-sidebar-collapsed .app-sidebar__label,body.app-sidebar-collapsed .app-sidebar__link span:last-child{display:none}
 body.app-sidebar-collapsed .app-sidebar__link{justify-content:center;padding:0}
