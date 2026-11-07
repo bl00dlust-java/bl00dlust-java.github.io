@@ -84,3 +84,5 @@ body{min-width:320px;overflow-x:hidden}
   .app-sidebar-mobile-trigger{top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));}
   body.has-app-sidebar .site-header,body.app-sidebar-collapsed .site-header{padding-left:58px}
 }
+
+.theme-toggle-icon{display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));color:hsl(var(--foreground));cursor:pointer}.theme-toggle-icon .theme-icon{font-size:19px;line-height:1}.admin-topbar-actions{display:flex;align-items:center;gap:12px}
