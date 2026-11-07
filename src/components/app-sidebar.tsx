@@ -40,7 +40,7 @@ export function AppSidebar({ admin = false }: Props) {
   }, [open]);
   const groups = admin ? [...publicGroups, adminGroup] : publicGroups;
   return <>
-    <button className="app-sidebar-mobile-trigger" onClick={() => setOpen(value => !value)} aria-label={open ? "Закрыть меню" : "Открыть меню"} aria-expanded={open}>{open ? <X/> : <Menu/>}</button>
+    <button className="app-sidebar-mobile-trigger" onClick={() => setOpen(value => !value)} aria-label="Открыть меню" aria-expanded={open}><Menu/></button>
     {open && <button className="app-sidebar-backdrop react-sidebar-backdrop" onClick={() => setOpen(false)} aria-label="Закрыть меню"/>}
     <aside className={`app-sidebar ${open ? "is-open" : ""}`} aria-label="Основная навигация">
       <div className="app-sidebar__brand-row">
