@@ -25,6 +25,6 @@
     if(mono)style.textContent+='\n.eyebrow,.brand-name,.module-number-label{font-family:"'+mono+'",monospace;}';
     document.head.appendChild(style);
   } catch(error) {
-    console.warn("Custom font settings unavailable",error);
+    // Custom fonts are optional; the built-in system font stack remains available offline.
   }
 })();

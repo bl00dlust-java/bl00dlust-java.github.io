@@ -51,6 +51,12 @@ if (simulators) {
       if (!text(item.title, 160) || !text(item.prompt, 1200) || !text(item.explanation, 1200)) {
         fail('simulators.json: missing or oversized text at scenario ' + index);
       }
+      if (item.moduleTitle !== undefined && !text(item.moduleTitle, 120)) {
+        fail('simulators.json: invalid moduleTitle at scenario ' + index);
+      }
+      if (item.moduleId !== undefined && !/^[a-z0-9-]{1,40}$/.test(item.moduleId)) {
+        fail('simulators.json: invalid moduleId at scenario ' + index);
+      }
       if (!Array.isArray(item.options) || item.options.length < 2 || item.options.length > 5 ||
           !item.options.every(option => text(option, 300)) ||
           !Number.isInteger(item.correctIndex) || item.correctIndex < 0 || item.correctIndex >= item.options.length) {
