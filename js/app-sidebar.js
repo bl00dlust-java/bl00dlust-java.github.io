@@ -27,6 +27,10 @@
   backdrop.className = "app-sidebar-backdrop";
   backdrop.type = "button";
   backdrop.setAttribute("aria-label","Закрыть меню");
+  const desktopBackdrop = document.createElement("button");
+  desktopBackdrop.className = "app-sidebar-desktop-backdrop";
+  desktopBackdrop.type = "button";
+  desktopBackdrop.setAttribute("aria-label","Свернуть боковое меню");
   const close = () => {
     document.body.classList.remove("app-sidebar-open");
     trigger.textContent = "☰";
@@ -43,6 +47,11 @@
   nav.querySelector(".app-sidebar__mobile-close").addEventListener("click",close);
   nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",close));
   const collapseButton=nav.querySelector(".app-sidebar__collapse");
+  desktopBackdrop.addEventListener("click",()=>{
+    document.body.classList.add("app-sidebar-collapsed");
+    try { localStorage.setItem("cyber-sidebar-collapsed","1"); } catch {}
+    syncCollapseButton();
+  });
   const syncCollapseButton=()=>{
     const collapsed=document.body.classList.contains("app-sidebar-collapsed");
     collapseButton.textContent=collapsed?"›":"‹";
@@ -55,7 +64,7 @@
     syncCollapseButton();
   });
   document.body.classList.add("has-app-sidebar");
-  document.body.prepend(nav,trigger,backdrop);
+  document.body.prepend(nav,trigger,backdrop,desktopBackdrop);
   try { if(localStorage.getItem("cyber-sidebar-collapsed")==="1") document.body.classList.add("app-sidebar-collapsed"); } catch {}
   syncCollapseButton();
 })();
