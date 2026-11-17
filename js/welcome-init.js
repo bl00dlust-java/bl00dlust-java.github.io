@@ -9,7 +9,7 @@ try {
   const state = raw ? JSON.parse(raw) : null;
   if (state && state.last && typeof state.last.id === 'string') {
     window.__cyberWelcomeReturn = true;
-    if (location.hash !== '#/') location.hash = '#/';
+    // Preserve explicit deep links; app.js restores the saved lesson when no route is selected.
   }
 } catch (_) {}
 })();
