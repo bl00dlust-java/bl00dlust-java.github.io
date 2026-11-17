@@ -39,7 +39,8 @@
   };
   const open = () => {
     document.body.classList.add("app-sidebar-open");
-    trigger.setAttribute("aria-label","Открыть меню");
+    trigger.textContent = "×";
+    trigger.setAttribute("aria-label","Закрыть меню");
     trigger.setAttribute("aria-expanded","true");
   };
   trigger.addEventListener("click",()=>document.body.classList.contains("app-sidebar-open") ? close() : open());
