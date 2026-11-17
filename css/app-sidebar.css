@@ -30,6 +30,7 @@ body.app-sidebar-collapsed .app-sidebar__brand{justify-content:center;padding-in
   .app-sidebar-backdrop{z-index:99}
   body.app-sidebar-open .app-sidebar{transform:translateX(0)}
   .app-sidebar__mobile-close{display:grid}
+  body.app-sidebar-open .app-sidebar-mobile-trigger{visibility:hidden;pointer-events:none}
   .app-sidebar__bottom{margin-top:auto}
   .app-sidebar__collapse{display:none}
 }
