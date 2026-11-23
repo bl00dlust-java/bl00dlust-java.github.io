@@ -439,7 +439,13 @@
     }
     else if (type === 'reset') {
         if (confirm('Сбросить весь прогресс и историю попыток в этом браузере? Это действие нельзя отменить.')) {
-            localStorage.removeItem(STORAGE_KEY);
+            try {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+            catch {
+                toast('Не удалось сбросить прогресс. Проверь настройки хранения браузера.');
+                return;
+            }
             state = loadState();
             toast('Локальный прогресс сброшен.');
             render();
