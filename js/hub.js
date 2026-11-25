@@ -6,6 +6,8 @@ const storedState=(()=>{try{const value=JSON.parse(localStorage.getItem('cyberhy
 const themeButton=document.getElementById('hub-theme-toggle');
 function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedState.theme==='dark'?'dark':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=mode;if(themeButton){const icon=themeButton.querySelector('.theme-icon');if(icon)icon.textContent=mode==='dark'?'☼':'◐';themeButton.setAttribute('aria-label',mode==='dark'?'Включить светлую тему':'Включить тёмную тему');}}
 applyHubTheme();
+const systemTheme=matchMedia('(prefers-color-scheme: dark)');
+systemTheme.addEventListener?.('change',()=>{if(!['light','dark'].includes(storedState.theme))applyHubTheme();});
 if(themeButton)themeButton.addEventListener('click',()=>{const current=document.documentElement.dataset.theme;storedState.theme=current==='dark'?'light':'dark';try{localStorage.setItem('cyberhygiene-course-v2',JSON.stringify(storedState));}catch(_){}applyHubTheme();});
 let articles=[
 {title:'Как распознать фишинг',category:'Мошенничество',text:'Проверяй неожиданные просьбы, адрес отправителя, домен сайта, вложения и попытки заставить тебя торопиться. Самостоятельно открывай сервис через приложение или сохранённую закладку.'},
