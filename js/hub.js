@@ -8,7 +8,7 @@ function applyHubTheme(){const mode=storedState.theme==='light'?'light':storedSt
 applyHubTheme();
 const systemTheme=matchMedia('(prefers-color-scheme: dark)');
 systemTheme.addEventListener?.('change',()=>{if(!['light','dark'].includes(storedState.theme))applyHubTheme();});
-if(themeButton)themeButton.addEventListener('click',()=>{const current=document.documentElement.dataset.theme;storedState.theme=current==='dark'?'light':'dark';try{localStorage.setItem('cyberhygiene-course-v2',JSON.stringify(storedState));}catch(_){}applyHubTheme();});
+if(themeButton)themeButton.addEventListener('click',()=>{const current=document.documentElement.dataset.theme;const nextTheme=current==='dark'?'light':'dark';storedState.theme=nextTheme;try{const latest=JSON.parse(localStorage.getItem('cyberhygiene-course-v2')||'{}');if(latest&&typeof latest==='object'&&!Array.isArray(latest)){latest.theme=nextTheme;localStorage.setItem('cyberhygiene-course-v2',JSON.stringify(latest));}}catch(_){}applyHubTheme();});
 let articles=[
 {title:'Как распознать фишинг',category:'Мошенничество',text:'Проверяй неожиданные просьбы, адрес отправителя, домен сайта, вложения и попытки заставить тебя торопиться. Самостоятельно открывай сервис через приложение или сохранённую закладку.'},
 {title:'Защита аккаунтов',category:'Аккаунты',text:'Используй уникальные пароли, менеджер паролей и многофакторную аутентификацию. Особенно внимательно защищай почту, через которую восстанавливается доступ к другим сервисам.'},
